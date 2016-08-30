@@ -16,3 +16,7 @@ export default function login(email: string, password: string) : Promise<boolean
       return response.url.indexOf('login.php') === -1;
     });
 }
+
+export default function logout() : Promise {
+  return doMsmRequest(METHODS.GET, '/login.php?m=1', {});
+}
