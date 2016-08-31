@@ -28,25 +28,37 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   monday: {
-    backgroundColor: '#00BCD4'
+    backgroundColor: '#ffc400' //Cyan and amber
   },
   tuesday: {
-    backgroundColor: '#009688'
+    backgroundColor: '#00E676'
   },
   wednesday: {
-    backgroundColor: '#3F51B5'
+    backgroundColor: '#F50057'
   },
   thursday: {
-    backgroundColor: '#673AB7'
+    backgroundColor: '#3F51B5'
   },
   friday: {
-    backgroundColor: '#E91E61'
+    backgroundColor: '#673AB7'
   }
 });
 
+const colors = [
+  "#006064",
+  "#00838F",
+  "#0097A7",
+  "#00ACC1",
+  "#00BCD4",
+  "#26C6DA",
+  "#4DD0E1",
+  "#80DEEA",
+  ""
+]
+
 function Course({ course }) {
-  const oneHourHeight = (screenSize.width - 64) / 5;
-  const oneMinuteHeight = (screenSize.width - 64) / 5 / 60;
+  const oneHourHeight = (screenSize.width - 64) / 5.5;
+  const oneMinuteHeight = (screenSize.width - 64) / 5.5 / 60;
   // Get rid of the naughty Z at the end that messes with Moment
   const start = moment(course.start.substring(0, course.start.length - 1));
   const end = moment(course.end.substring(0, course.end.length - 1));
@@ -54,27 +66,34 @@ function Course({ course }) {
   const style = {
     course: {
       position: 'absolute',
-       left: 0,
-       width: screenSize.width,
+      left: 16,
+      width: screenSize.width - 32,
       top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
       height: 45 * oneMinuteHeight,
-       backgroundColor: course.color,
-       flexDirection: 'row',
-       justifyContent: 'space-between'
+      backgroundColor: '#00BCD4',
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      marginRight: 16,
+      borderRadius: 2,
+      padding: 8,
+      elevation: 1
     },
-    label: {
-      fontSize: 19
+    labelLevel1: {
+      fontSize: 16
+    },
+    labelLevel2: {
+      fontSize: 12
     }
   };
   return (
     <View style={style.course}>
       <View style={{flexDirection: 'column'}}>
-        <Text style={style.label}>{course.title}</Text>
-        <Text style={style.label}>{course.teacher_name_list}</Text>
+        <Text style={style.labelLevel1}>{course.title}</Text>
+        <Text style={style.labelLevel2}>{course.teacher_name_list}</Text>
       </View>
-      <View style={{flexDirection: 'column', marginRight: 32}}>
-        <Text style={style.label}>{course.param_1}</Text>
-        <Text style={style.label}>{course.param_2.replace(/          -/, '')}</Text>
+      <View style={{flexDirection: 'column'}}>
+        <Text style={style.labelLevel1}>{course.param_1}</Text>
+        <Text style={style.labelLevel2}>{course.param_2.replace(/          -/, '')}</Text>
       </View>
     </View>
   );
