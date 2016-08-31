@@ -7,7 +7,7 @@ import {
   TextInput,
   StyleSheet,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
 } from 'react-native';
 import { MKButton, MKProgress, MKColor } from 'react-native-material-kit';
 import { login } from '../lib/msm/login';
@@ -17,7 +17,7 @@ const loginStates = {
   IN_PROGRESS: 1,
   SUCCESS: 2,
   FAILURE: 3,
-  NETWORK_ERROR: 4
+  NETWORK_ERROR: 4,
 };
 
 export default class Login extends Component {
@@ -26,38 +26,38 @@ export default class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      loginState: 0
-    }
+      loginState: 0,
+    };
   }
 
   onInputChange(key: string, value: string) {
-      let state = Object.assign({}, this.state);
-      state[key] = value;
-      this.setState(state);
+    const state = Object.assign({}, this.state);
+    state[key] = value;
+    this.setState(state);
   }
 
   doLogin() {
-    this.setState({loginState: 1});
+    this.setState({ loginState: 1 });
     login(this.state.email, this.state.password)
       .then((success) => {
-        if(success) {
+        if (success) {
           this.props.loginCallback();
         } else {
-          this.setState({loginState: loginStates.FAILURE})
+          this.setState({ loginState: loginStates.FAILURE });
         }
       })
       .catch(() => {
-        this.setState({loginState: loginStates.NETWORK_ERROR})
+        this.setState({ loginState: loginStates.NETWORK_ERROR });
       });
   }
 
   render() {
-    const LoginButton =  MKButton
+    const LoginButton = MKButton
                           .coloredButton()
                           .withBackgroundColor(MKColor.Blue)
-                          .withText("LOG IN")
+                          .withText('LOG IN')
                           .withOnPress(this.doLogin.bind(this))
-                          .build()
+                          .build();
     return (
       <View>
         <Image source={require('../assets/images/LoginBackdrop.png')} style={styles.bg} />
@@ -66,18 +66,18 @@ export default class Login extends Component {
           <Text style={[styles.subheading, styles.greyFont]}>Please log in with your SMS account.</Text>
           <View style={styles.inputs}>
               <TextInput
-                  placeholder="Email"
-                  style={styles.whiteFont}
-                  placeholderTextColor="#FFF"
-                  onChangeText={(text) => this.onInputChange('email', text)}
+                placeholder="Email"
+                style={styles.whiteFont}
+                placeholderTextColor="#FFF"
+                onChangeText={(text) => this.onInputChange('email', text)}
                   // value={this.state.username}
               />
               <TextInput
-                  secureTextEntry={true}
-                  style={styles.whiteFont}
-                  placeholder="Password"
-                  placeholderTextColor="#FFF"
-                  onChangeText={(text) => this.onInputChange('password', text)}
+                secureTextEntry
+                style={styles.whiteFont}
+                placeholder="Password"
+                placeholderTextColor="#FFF"
+                onChangeText={(text) => this.onInputChange('password', text)}
                   // value={this.state.password}
               />
               <LoginButton />
@@ -85,12 +85,12 @@ export default class Login extends Component {
               {(() => {
                 return this.state.loginState == loginStates.FAILURE
                   ? <Text style={styles.failureText}>Something went wrong. Please check your email and password.</Text>
-                  : null
+                  : null;
               })()}
               {(() => {
                 return this.state.loginState == loginStates.NETWORK_ERROR
                   ? <Text style={styles.failureText}>Something went wrong. Please check your Internet connectivity.</Text>
-                  : null
+                  : null;
               })()}
 
             </View>
@@ -108,21 +108,21 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     width: windowSize.width,
-    height: windowSize.height
+    height: windowSize.height,
   },
   mainText: {
-    fontSize: 48
+    fontSize: 48,
   },
   subheading: {
-    fontSize: 30
+    fontSize: 30,
   },
   greyFont: {
-    color: '#D8D8D8'
+    color: '#D8D8D8',
   },
   whiteFont: {
-    color: '#FFF'
+    color: '#FFF',
   },
   failureText: {
-    color: '#f44336'
-  }
+    color: '#f44336',
+  },
 });

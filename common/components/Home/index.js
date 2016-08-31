@@ -3,13 +3,15 @@ import {
   StyleSheet,
   Text,
   View,
-  Image
+  Image,
 } from 'react-native';
+
+import Schedule from '../Schedule';
 
 export default class Home extends Component {
   render() {
     return (
-      <Text>nothing to see here</Text>
+      <Schedule />
     );
   }
 }

@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-import Startup from './common/Startup';
+import Startup from './common/Startup/Startup';
 
 class Euroschool extends Component {
   render() {
