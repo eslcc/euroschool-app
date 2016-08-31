@@ -21,12 +21,19 @@ export function serialize(obj : {[key: string]: string}, prefix : string) : stri
 }
 
 export function doMsmRequest(method : string, path : string, params : {[key: string]: string}) : Promise<object | string> {
-  return fetch(URL_BASE + path, {
+  const args = {
     credentials: 'same-origin',
     method: method,
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded'
-    },
-    body: serialize(params)
-  });
+    }
+  };
+  switch(method) {
+    case METHODS.GET:
+      return fetch(URL_BASE + path, args);
+    case METHODS.POST:
+      return fetch(URL_BASE + path, {body: serialize(params), ...args})
+    default:
+      throw "wat";
+  }
 }
