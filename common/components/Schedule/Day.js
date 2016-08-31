@@ -83,15 +83,21 @@ function Course({ course }) {
     },
     labelLevel2: {
       fontSize: 12
+    },
+    innerLeft: {
+      flexDirection: 'column'
+    },
+    innerRight: {
+      flexDirection: 'column'
     }
   };
   return (
     <View style={style.course}>
-      <View style={{flexDirection: 'column'}}>
+      <View style={style.innerLeft}>
         <Text style={style.labelLevel1}>{course.title}</Text>
         <Text style={style.labelLevel2}>{course.teacher_name_list}</Text>
       </View>
-      <View style={{flexDirection: 'column'}}>
+      <View style={style.innerRight}>
         <Text style={style.labelLevel1}>{course.param_1}</Text>
         <Text style={style.labelLevel2}>{course.param_2.replace(/          -/, '')}</Text>
       </View>
