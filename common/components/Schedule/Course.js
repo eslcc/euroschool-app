@@ -23,13 +23,14 @@ const styles = StyleSheet.create({
 // #ffc400 #00bcd4
 const colors = [
   gradientize('#ffc400', '#00bcd4', 9),
+  gradientize('#FF9800', '#00bcd4', 9),
+  gradientize('#4CAF50', '00bcd4', 9),
   gradientize('#00E676', '#00bcd4', 9),
-  gradientize('#8BC34A', '00bcd4', 9),
-  gradientize('#F50057', '#00bcd4', 9),
-  gradientize('#9C27B0', '#00bcd4', 9),
+  gradientize('#8BC34A', '#00bcd4', 9),
 ];
 
 export default function Course ({ course, day }) {
+  console.log(course);
   const oneHourHeight = (screenSize.width - 64) / 5.5;
   const oneMinuteHeight = (screenSize.width - 64) / 5.5 / 60;
   // Get rid of the naughty Z at the end that messes with Moment

@@ -60,8 +60,8 @@ export default class Schedule extends Component {
   componentDidMount() {
     // TODO get rid of this shit when school starts
     getSchedule(
-      moment().set({ month: 8, isoWeekday: 1, hour: 0, minute: 0, second: 0 }),
-      moment().set({ month: 8, isoWeekday: 1, hour: 0, minute: 0, second: 0 }).add(1, 'w').subtract(1, 'd')
+      moment().set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 }).isoWeekday(1),
+      moment().set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 }).isoWeekday(1).add(1, 'w').subtract(1, 'd')
     ).then((schedule) => {
       this.setState({ schedule });
     });

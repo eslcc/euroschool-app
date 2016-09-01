@@ -9,6 +9,8 @@ import {
 import moment from 'moment';
 import { capitalize } from 'lodash';
 
+import Course from './Course';
+
 const screenSize = Dimensions.get('window');
 
 const days = [
@@ -28,86 +30,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   monday: {
-    backgroundColor: '#ffc400' //Cyan and amber
+    backgroundColor: '#ffc400' // Amber
   },
   tuesday: {
-    backgroundColor: '#00E676'
+    backgroundColor: '#FF9800' // orange
   },
   wednesday: {
-    backgroundColor: '#F50057'
+    backgroundColor: '#4CAF50' // green
   },
   thursday: {
-    backgroundColor: '#3F51B5'
+    backgroundColor: '#00E676' // light green
   },
   friday: {
-    backgroundColor: '#673AB7'
+    backgroundColor: '#8BC34A' // cyan
   }
 });
 
-const colors = [
-  "#006064",
-  "#00838F",
-  "#0097A7",
-  "#00ACC1",
-  "#00BCD4",
-  "#26C6DA",
-  "#4DD0E1",
-  "#80DEEA",
-  ""
-]
-
-function Course({ course }) {
-  const oneHourHeight = (screenSize.width - 64) / 5.5;
-  const oneMinuteHeight = (screenSize.width - 64) / 5.5 / 60;
-  // Get rid of the naughty Z at the end that messes with Moment
-  const start = moment(course.start.substring(0, course.start.length - 1));
-  const end = moment(course.end.substring(0, course.end.length - 1));
-  const duration = moment(end.diff(start));
-  const style = {
-    course: {
-      position: 'absolute',
-      left: 16,
-      width: screenSize.width - 32,
-      top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
-      height: 45 * oneMinuteHeight,
-      backgroundColor: '#00BCD4',
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      marginRight: 16,
-      borderRadius: 2,
-      padding: 8,
-      elevation: 1
-    },
-    labelLevel1: {
-      fontSize: 16
-    },
-    labelLevel2: {
-      fontSize: 12
-    },
-    innerLeft: {
-      flexDirection: 'column'
-    },
-    innerRight: {
-      flexDirection: 'column'
-    }
-  };
-  return (
-    <View style={style.course}>
-      <View style={style.innerLeft}>
-        <Text style={style.labelLevel1}>{course.title}</Text>
-        <Text style={style.labelLevel2}>{course.teacher_name_list}</Text>
-      </View>
-      <View style={style.innerRight}>
-        <Text style={style.labelLevel1}>{course.param_1}</Text>
-        <Text style={style.labelLevel2}>{course.param_2.replace(/          -/, '')}</Text>
-      </View>
-    </View>
-  );
-}
 
 export default function Day({ schedule, day }) {
   const courses = schedule
-                  .filter((thing) => thing.entry_type == 'Course' && moment(thing.start).isoWeekday() == day)
+                  .filter((thing) => thing.entry_type == 'Course' && moment(thing.start).isoWeekday() == day);
   const dayName = days[day];
 
   return (
@@ -117,8 +59,22 @@ export default function Day({ schedule, day }) {
       </View>
 
       {courses.map((course) =>
-        <Course key={course.start} course={course} />
+        <Course key={course.start} course={course} day={day} />
       )}
+
+      {["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"]
+        .map((hour, index) => {
+          const oneHourHeight = (screenSize.width - 64) / 5.5;
+          const top = 64 + (oneHourHeight * (index));
+          const style = {
+            fontSize: 24,
+            position: 'absolute',
+            top: top,
+            left: 0
+          }
+          return <Text key={hour} style={style}>{hour}</Text>;
+        })}
+
     </View>
   );
 }

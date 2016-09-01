@@ -15,5 +15,5 @@ export default function getSchedule(start = (moment().isoWeekday(0).hour(0).minu
     start: start.unix(),
     end: end.unix(),
   })
-  .then((response) => response.json());
+  .then((response) => { return response.json()});
 }
