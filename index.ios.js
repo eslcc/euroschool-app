@@ -14,12 +14,10 @@ import {
 
 import Startup from './common/Startup/Startup';
 
-class Euroschool extends Component {
-  render() {
-    return (
-      <Startup />
-    );
-  }
+function Euroschool() {
+  return (
+    <Startup />
+  );
 }
 
 

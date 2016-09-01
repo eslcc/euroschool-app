@@ -7,6 +7,7 @@ export const METHODS = {
 
 export const URL_BASE : string = 'https://es.msm.io';
 
+/* eslint-disable */
 export function serialize(obj : {[key: string]: string}, prefix : string) : string {
   var str = [];
   for (var p in obj) {
@@ -19,8 +20,13 @@ export function serialize(obj : {[key: string]: string}, prefix : string) : stri
   }
   return str.join('&');
 }
+/* eslint-enable */
 
-export function doMsmRequest(method : string, path : string, params : {[key: string]: string}) : Promise<object | string> {
+export function doMsmRequest(
+    method : string,
+    path : string,
+    params : {[key: string]: string}
+    ): Promise<any | string> {
   const args = {
     credentials: 'same-origin',
     method,
@@ -34,6 +40,6 @@ export function doMsmRequest(method : string, path : string, params : {[key: str
     case METHODS.POST:
       return fetch(URL_BASE + path, { body: serialize(params), ...args });
     default:
-      throw 'wat';
+      throw new Error('wat');
   }
 }

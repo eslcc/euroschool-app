@@ -10,5 +10,8 @@ module.exports = {
       "global-require": "off",
       "no-global-assign": "off",
       "no-unsafe-negation": "off"
+    },
+    "globals": {
+        "fetch": false
     }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable */ // this file is enough of a cesspit as it is
 import React, { Component } from 'react';
 import {
   StyleSheet,

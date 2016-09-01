@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
@@ -6,9 +6,8 @@ import {
   Dimensions,
   ScrollView,
 } from 'react-native';
-import getSchedule from '../../lib/msm/schedule';
 import moment from 'moment';
-import { capitalize } from 'lodash';
+import getSchedule from '../../lib/msm/schedule';
 
 import Day from './Day';
 
@@ -29,25 +28,30 @@ const styles = StyleSheet.create({
 
 function PortraitSchedule({ schedule }) {
   return (
-      <View>
-        <ScrollView
-          horizontal
-          pagingEnabled
-          style={styles.topBar}
-        >
-        {[1, 2, 3, 4, 5].map((num) =>
-          <Day key={num} schedule={schedule} day={num} />
-        )}
-        </ScrollView>
-      </View>
+    <View>
+      <ScrollView
+        horizontal
+        pagingEnabled
+        style={styles.topBar}>
+      {[1, 2, 3, 4, 5].map((num) =>
+        <Day key={num} schedule={schedule} day={num} />
+      )}
+      </ScrollView>
+    </View>
     );
 }
+PortraitSchedule.propTypes = {
+  schedule: PropTypes.array,
+};
 
-class LandscapeSchedule extends Component {
-  constructor(props) {
-    super(props); // TODO implement this shit
-  }
+function LandscapeSchedule({ schedule }) { // eslint-disable-line
+  return (
+    <Text>TODO</Text>
+  );
 }
+LandscapeSchedule.propTypes = {
+  schedule: PropTypes.array,
+};
 
 export default class Schedule extends Component {
   constructor(props) {
@@ -60,8 +64,14 @@ export default class Schedule extends Component {
   componentDidMount() {
     // TODO get rid of this shit when school starts
     getSchedule(
-      moment().set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 }).isoWeekday(1),
-      moment().set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 }).isoWeekday(1).add(1, 'w').subtract(1, 'd')
+      moment()
+          .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
+          .isoWeekday(1),
+      moment()
+          .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
+          .isoWeekday(1)
+          .add(1, 'w')
+          .subtract(1, 'd')
     ).then((schedule) => {
       this.setState({ schedule });
     });
@@ -70,7 +80,11 @@ export default class Schedule extends Component {
   render() {
     return (
       <View>
-        {(() => this.state.schedule == null ? (<Text>Loading</Text>) : <PortraitSchedule schedule={this.state.schedule} />)()}
+        {(() => // eslint-disable-line
+           this.state.schedule == null
+              ? (<Text>Loading</Text>)
+              : <PortraitSchedule schedule={this.state.schedule} />
+        )()}
       </View>
     );
   }

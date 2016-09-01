@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
+import React, { PropTypes } from 'react';
 import {
   StyleSheet,
   Text,
   View,
   Dimensions,
-  ScrollView
 } from 'react-native';
 import moment from 'moment';
 import { capitalize } from 'lodash';
@@ -19,7 +18,7 @@ const days = [
   'tuesday',
   'wednesday',
   'thursday',
-  'friday'
+  'friday',
 ];
 
 const styles = StyleSheet.create({
@@ -27,29 +26,30 @@ const styles = StyleSheet.create({
     width: screenSize.width,
     height: 64,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   monday: {
-    backgroundColor: '#ffc400' // Amber
+    backgroundColor: '#ffc400', // Amber
   },
   tuesday: {
-    backgroundColor: '#FF9800' // orange
+    backgroundColor: '#FF9800', // orange
   },
   wednesday: {
-    backgroundColor: '#4CAF50' // green
+    backgroundColor: '#4CAF50', // green
   },
   thursday: {
-    backgroundColor: '#00E676' // light green
+    backgroundColor: '#00E676', // light green
   },
   friday: {
-    backgroundColor: '#8BC34A' // cyan
-  }
+    backgroundColor: '#8BC34A', // cyan
+  },
 });
 
 
 export default function Day({ schedule, day }) {
-  const courses = schedule
-                  .filter((thing) => thing.entry_type == 'Course' && moment(thing.start).isoWeekday() == day);
+  const courses = schedule.filter(
+      (thing) => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
+  );
   const dayName = days[day];
 
   return (
@@ -62,7 +62,7 @@ export default function Day({ schedule, day }) {
         <Course key={course.start} course={course} day={day} />
       )}
 
-      {["08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"]
+      {['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
         .map((hour, index) => {
           const oneHourHeight = (screenSize.width - 64) / 5.5;
           const top = 64 + (oneHourHeight * (index));
@@ -71,10 +71,15 @@ export default function Day({ schedule, day }) {
             position: 'absolute',
             top: top,
             left: 0
-          }
+          };
           return <Text key={hour} style={style}>{hour}</Text>;
         })}
 
     </View>
   );
 }
+Day.propTypes = {
+  schedule: PropTypes.array,
+  day: PropTypes.number,
+};
+
