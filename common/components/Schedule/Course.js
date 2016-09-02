@@ -8,7 +8,7 @@ import moment from 'moment';
 
 import gradientize from '../../lib/utils/gradientize';
 
-const screenSize = Dimensions.get('window');
+import ScreenService from '../../lib/utils/screenService';
 
 const colors = [
   gradientize('#ffc400', '#00bcd4', 9),
@@ -18,9 +18,9 @@ const colors = [
   gradientize('#8BC34A', '#00bcd4', 9),
 ];
 
-export default function Course({ course, day }) {
-  const oneHourHeight = (screenSize.width - 64) / 5.5;
-  const oneMinuteHeight = (screenSize.width - 64) / 5.5 / 60;
+export function PortraitCourse({ course, day }) {
+  const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 16) / 9;
+  const oneMinuteHeight = oneHourHeight / 60;
   // Get rid of the naughty Z at the end that messes with Moment
   const start = moment(course.start.substring(0, course.start.length - 1));
   const period = parseInt(course.param_2.replace(/Period ([1-9]) {10}-/, '$1'), 10);
@@ -28,7 +28,7 @@ export default function Course({ course, day }) {
     course: {
       position: 'absolute',
       left: 80,
-      width: screenSize.width - 16 - 80 - 8,
+      width: ScreenService.getScreenSize().width - 16 - 80 - 8,
       top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
       height: 45 * oneMinuteHeight,
       backgroundColor: colors[day - 1][period - 1],
@@ -60,12 +60,46 @@ export default function Course({ course, day }) {
       </View>
       <View style={style.innerRight}>
         <Text style={style.labelLevel1}>{course.param_1}</Text>
-        <Text style={style.labelLevel2}>{course.param_2.replace(/ {10}-/, '')}</Text>
+        <Text style={style.labelLevel2}>{`Period ${period}`}</Text>
       </View>
     </View>
   );
 }
-Course.propTypes = {
+PortraitCourse.propTypes = {
   course: PropTypes.object,
   day: PropTypes.number,
 };
+
+export function LandscapeCourse({ course, day }) {
+  const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
+  const oneMinuteHeight = oneHourHeight / 60;
+  const oneDayWidth = ((ScreenService.getScreenSize().width - 80) / 5);
+  const start = moment(course.start.substring(0, course.start.length - 1));
+  const period = parseInt(course.param_2.replace(/Period ([1-9]) {10}-/, '$1'), 10);
+  const style = {
+    course: {
+      position: 'absolute',
+      left: 80 + ((day - 1) * oneDayWidth),
+      width: oneDayWidth,
+      top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
+      height: (45 * oneMinuteHeight),
+      backgroundColor: colors[day - 1][period - 1],
+      marginRight: 16,
+      borderRadius: 2,
+      paddingLeft: 8,
+      paddingTop: 0,
+      elevation: 1,
+      marginBottom: 16,
+    },
+  };
+  return (
+    <View style={style.course}>
+      <Text>{course.title}</Text>
+    </View>
+  );
+}
+LandscapeCourse.propTypes = {
+  course: PropTypes.object,
+  day: PropTypes.number,
+};
+

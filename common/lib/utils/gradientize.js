@@ -1,10 +1,10 @@
 // @flow
 
-import { rgbToString, hexToRgb } from './colors'
+import { rgbToString, hexToRgb } from './colors';
 
 function lerp(a, b, f)
 {
-    return a + f * (b - a);
+  return a + f * (b - a);
 }
 
 export default function gradientize(color1 : string | {r : number, g : number, b : number},
@@ -12,20 +12,20 @@ export default function gradientize(color1 : string | {r : number, g : number, b
                             stops : number) {
   var c1 = color1;
   var c2 = color2;
-  if(typeof c1 == 'string') {
+  if (typeof c1 == 'string') {
     c1 = hexToRgb(c1);
   }
-  if(typeof c2 == 'string') {
+  if (typeof c2 == 'string') {
     c2 = hexToRgb(c2);
   }
   console.log(c1);
   var result = [];
-  for(var i = 0; i < stops; i++) {
+  for (var i = 0; i < stops; i++) {
     var point = (1 / stops) * (i + 1);
     var out = {
       r: lerp(c1.r, c2.r, point).toFixed(0),
       g: lerp(c1.g, c2.g, point).toFixed(0),
-      b: lerp(c1.b, c2.b, point).toFixed(0)
+      b: lerp(c1.b, c2.b, point).toFixed(0),
     };
     result.push(rgbToString(out));
   }

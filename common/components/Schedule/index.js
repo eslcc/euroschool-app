@@ -7,34 +7,31 @@ import {
   ScrollView,
 } from 'react-native';
 import moment from 'moment';
+import Orientation from 'react-native-orientation';
 import getSchedule from '../../lib/msm/schedule';
+import ScreenService from '../../lib/utils/screenService';
 
 import Day from './Day';
 
-const screenSize = Dimensions.get('window');
-
-const styles = StyleSheet.create({
-  topBar: {
+function PortraitSchedule({ schedule }) {
+  const style = {
     position: 'absolute',
     top: 0,
     left: 0,
-    height: screenSize.height,
-    width: screenSize.width,
+    height: ScreenService.getScreenSize().height,
+    width: ScreenService.getScreenSize().width,
     flex: 1,
     flexDirection: 'row',
-  },
-});
-
-
-function PortraitSchedule({ schedule }) {
+  };
   return (
     <View>
       <ScrollView
         horizontal
         pagingEnabled
-        style={styles.topBar}>
+        style={style}
+      >
       {[1, 2, 3, 4, 5].map((num) =>
-        <Day key={num} schedule={schedule} day={num} />
+        <Day key={`${num}-portrait`} schedule={schedule} day={num} />
       )}
       </ScrollView>
     </View>
@@ -46,7 +43,11 @@ PortraitSchedule.propTypes = {
 
 function LandscapeSchedule({ schedule }) { // eslint-disable-line
   return (
-    <Text>TODO</Text>
+    <View>
+      {[1, 2, 3, 4, 5].map((num) =>
+        <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape />
+      )}
+    </View>
   );
 }
 LandscapeSchedule.propTypes = {
@@ -56,8 +57,10 @@ LandscapeSchedule.propTypes = {
 export default class Schedule extends Component {
   constructor(props) {
     super(props);
+    const initial = Orientation.getInitialOrientation();
     this.state = {
       schedule: null,
+      landscape: initial === 'LANDSCAPE',
     };
   }
 
@@ -75,6 +78,17 @@ export default class Schedule extends Component {
     ).then((schedule) => {
       this.setState({ schedule });
     });
+
+    Orientation.addOrientationListener((orientation) => {
+      this.setState({ landscape: orientation === 'LANDSCAPE', key: Math.random() });
+    });
+  }
+
+  getScheduleForOrientation() {
+    const props = {schedule: this.state.schedule, landscape: this.state.landscape};
+    return this.state.landscape
+      ? <LandscapeSchedule {...props} />
+      : <PortraitSchedule {...props} />;
   }
 
   render() {
@@ -83,7 +97,7 @@ export default class Schedule extends Component {
         {(() => // eslint-disable-line
            this.state.schedule == null
               ? (<Text>Loading</Text>)
-              : <PortraitSchedule schedule={this.state.schedule} />
+              : this.getScheduleForOrientation()
         )()}
       </View>
     );
