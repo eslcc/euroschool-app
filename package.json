@@ -6,11 +6,13 @@
     "start": "node node_modules/react-native/local-cli/cli.js start"
   },
   "dependencies": {
+    "deep-assign": "^2.0.0",
     "lodash": "^4.15.0",
     "moment": "^2.14.1",
     "react": "15.3.1",
     "react-native": "0.32.0",
     "react-native-material-kit": "^0.3.2",
+    "react-native-orientation": "^1.17.0",
     "react-native-router-flux": "^3.35.0",
     "react-redux": "^4.4.5",
     "redux": "^3.5.2"

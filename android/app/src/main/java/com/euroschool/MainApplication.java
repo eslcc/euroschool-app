@@ -6,7 +6,10 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
+
+// from package.json
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
+import com.github.yamill.orientation.OrientationPackage;
 
 import com.facebook.react.modules.network.ReactCookieJarContainer;
 import com.facebook.stetho.Stetho;
@@ -30,7 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
           new MainReactPackage(),
-            new ReactMaterialKitPackage()
+            new ReactMaterialKitPackage(),
+              new OrientationPackage()
       );
     }
   };

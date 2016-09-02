@@ -10,7 +10,7 @@ import moment from 'moment';
  * @return {Promise<array<object>>} The schedule entries.
  */
 export default function getSchedule(
-    start = (moment().isoWeekday(0).set({hour: 0, minute: 0, second: 0})),
+    start = (moment().isoWeekday(0).set({ hour: 0, minute: 0, second: 0 })),
     end = (start.add(1, 'w').subtract(1, 'd'))) {
   return doMsmRequest(METHODS.POST, '/data/common_handler.php?action=Contact::AJAX_U_GetSchedule', {
     inc_appointment: true,
