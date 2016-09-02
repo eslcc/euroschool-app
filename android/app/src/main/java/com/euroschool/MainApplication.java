@@ -5,21 +5,21 @@ import android.app.Application;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
+import com.facebook.react.modules.network.OkHttpClientProvider;
+import com.facebook.react.modules.network.ReactCookieJarContainer;
 import com.facebook.react.shell.MainReactPackage;
-
-// from package.json
+import com.facebook.stetho.Stetho;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.github.yamill.orientation.OrientationPackage;
 
-import com.facebook.react.modules.network.ReactCookieJarContainer;
-import com.facebook.stetho.Stetho;
-import okhttp3.OkHttpClient;
-import com.facebook.react.modules.network.OkHttpClientProvider;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
-import java.util.concurrent.TimeUnit;
-
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
+
+// from package.json
 
 public class MainApplication extends Application implements ReactApplication {
 
@@ -32,8 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
-          new MainReactPackage(),
-            new ReactMaterialKitPackage(),
+              new MainReactPackage(),
+              new ReactMaterialKitPackage(),
               new OrientationPackage()
       );
     }
