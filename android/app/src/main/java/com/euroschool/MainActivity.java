@@ -1,15 +1,9 @@
 package com.euroschool;
 
-import com.facebook.react.ReactActivity;
-import com.github.yamill.orientation.OrientationPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.github.yamill.orientation.OrientationPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-import com.github.xinthink.rnmk.ReactMaterialKitPackage;
-
 import android.content.Intent;
 import android.content.res.Configuration;
+
+import com.facebook.react.ReactActivity;
 
 public class MainActivity extends ReactActivity {
 

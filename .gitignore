@@ -32,7 +32,10 @@ android/
 
 # node.js
 #
-node_modules/
+node_modules/*
+!node_modules/react-native-material-kit/
+!node_modules/react-native-orientation/
+
 npm-debug.log
 
 # BUCK
