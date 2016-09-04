@@ -9,7 +9,8 @@ module.exports = {
       "react/jsx-filename-extension": "off",
       "global-require": "off",
       "no-global-assign": "off",
-      "no-unsafe-negation": "off"
+      "no-unsafe-negation": "off",
+	  "linebreak-style": "off"
     },
     "globals": {
         "fetch": false
