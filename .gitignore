@@ -25,15 +25,28 @@ project.xcworkspace
 # Android/IJ
 #
 *.iml
-.idea
-.gradle
+.idea/libraries
+.gradle/
+
+# Local configuration file (sdk path, etc)
 local.properties
 
 # node.js
 #
 node_modules/*
+
 !node_modules/react-native-material-kit/
+node_modules/react-native-material-kit/*
+!node_modules/react-native-material-kit/android/
+node_modules/react-native-material-kit/android/*
+!node_modules/react-native-material-kit/android/build.gradle
+!node_modules/react-native-material-kit/android/gradle.properties
+
 !node_modules/react-native-orientation/
+node_modules/react-native-orientation/*
+!node_modules/react-native-orientation/android/
+node_modules/react-native-orientation/android/*
+!node_modules/react-native-orientation/android/build.gradle
 
 npm-debug.log
 
