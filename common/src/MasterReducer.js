@@ -1,13 +1,12 @@
-"use strict";
+'use strict';
 
 import { combineReducers } from 'redux';
 
-//import 
+// import
 
-const MasterReducer = combineReducers
-({
-    //every modules reducer should be defined here
-    //[app.NAME]: app.reducer
+const MasterReducer = combineReducers({
+    // every modules reducer should be defined here
+    // [app.NAME]: app.reducer
 });
 
 export default MasterReducer;

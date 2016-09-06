@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 // @flow
 import React, { Component } from 'react';
 import {

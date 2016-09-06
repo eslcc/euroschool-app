@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
-    "lint": "node node_modules/eslint/bin/eslint.js common || true"
+    "lint": "node node_modules/eslint/bin/eslint.js common || true",
+	"lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true"
   },
   "dependencies": {
     "deep-assign": "^2.0.0",

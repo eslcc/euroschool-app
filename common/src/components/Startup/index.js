@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import React, { Component } from 'react';
 import {
@@ -18,13 +18,13 @@ const loadApp = () =>
 
 const startupReducer = (state, action) =>
 {
-	switch (action.type)
+	                    switch (action.type)
 	{
-		case 'LOAD_APP':
-			return state;
-			
-		default:
-			return state;
+		                    case 'LOAD_APP':
+			                                        return state;
+
+		                    default:
+			                                        return state;
 	}
 };
 
@@ -39,22 +39,22 @@ export default class Startup extends Component
       needsLogin: false,
     };
   }
-  
+
   render()
   {
     let component;
-    
+
     if (this.state.ready)
     {
       component = this.state.needsLogin ? Login : Home;
     }
-    
+
     else
     {
       component = StartupMessage;
     }
-    
-    return
+
+    return;
     (
       <View>
       { React.createElement(component, { loginCallback: this.loginComplete.bind(this) }) }
@@ -69,16 +69,14 @@ export default class Startup extends Component
 
   componentDidMount()
   {
-    window.setTimeout
-    (
+    window.setTimeout(
         () =>
         {
-            getLoginStatus().then
-            (
+          getLoginStatus().then(
                 (loggedIn) =>
                 {
-                    const base = { ready: true };
-                    this.setState({ needsLogin: !loggedIn, ...base });
+                  const base = { ready: true };
+                  this.setState({ needsLogin: !loggedIn, ...base });
                 }
             );
         },

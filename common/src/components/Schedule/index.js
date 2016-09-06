@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import React, { Component, PropTypes } from 'react';
 import {
@@ -87,7 +87,7 @@ export default class Schedule extends Component {
   }
 
   getScheduleForOrientation() {
-    const props = {schedule: this.state.schedule, landscape: this.state.landscape};
+    const props = { schedule: this.state.schedule, landscape: this.state.landscape };
     return this.state.landscape
       ? <LandscapeSchedule {...props} />
       : <PortraitSchedule {...props} />;

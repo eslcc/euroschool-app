@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 import React, { PropTypes } from 'react';
 import {
@@ -90,7 +90,7 @@ export default function Day({ schedule, day, landscape }) {
     styles.day,
     styles[dayName],
     landscape ? styles.landscapeDay : {},
-    landscape ? {left: landscapeLeft} : {}
+    landscape ? { left: landscapeLeft } : {},
   ];
 
   return (

@@ -8,7 +8,7 @@ import Orientation from 'react-native-orientation';
 let screen = {};
 
 const setScreenSize = orientation => {
-  const {height, width} = Dimensions.get('window');
+  const { height, width } = Dimensions.get('window');
   const min = Math.min(height, width);
   const max = Math.max(height, width);
   const isLandscape = orientation === 'LANDSCAPE';

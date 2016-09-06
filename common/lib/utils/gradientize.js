@@ -10,8 +10,8 @@ function lerp(a, b, f)
 export default function gradientize(color1 : string | {r : number, g : number, b : number},
                             color2 : string | {r : number, g : number, b : number},
                             stops : number) {
-  var c1 = color1;
-  var c2 = color2;
+  let c1 = color1;
+  let c2 = color2;
   if (typeof c1 == 'string') {
     c1 = hexToRgb(c1);
   }
@@ -19,10 +19,10 @@ export default function gradientize(color1 : string | {r : number, g : number, b
     c2 = hexToRgb(c2);
   }
   console.log(c1);
-  var result = [];
-  for (var i = 0; i < stops; i++) {
-    var point = (1 / stops) * (i + 1);
-    var out = {
+  const result = [];
+  for (let i = 0; i < stops; i++) {
+    const point = (1 / stops) * (i + 1);
+    const out = {
       r: lerp(c1.r, c2.r, point).toFixed(0),
       g: lerp(c1.g, c2.g, point).toFixed(0),
       b: lerp(c1.b, c2.b, point).toFixed(0),
