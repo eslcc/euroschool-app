@@ -1,24 +1,22 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
+import { Component }   from 'react';
+import { AppRegistry } from 'react-native';
+import { createStore } from 'redux';
+import { Provider }    from 'react-redux';
 
-import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
-} from 'react-native';
+import MasterReducer   from './common/MasterReducer';
+import MasterComponent from './common/MasterComponent';
 
-import Startup from './common/Startup/Startup';
-
-function Euroschool() {
-  return (
-    <Startup />
-  );
+class Euroschool extends Component
+{
+	render()
+	{
+		return
+		(
+			<Provider store = { createStore({ MasterReducer }) }>
+				<MasterComponent />
+			</Provider>
+		)
+	}
 }
-
 
 AppRegistry.registerComponent('Euroschool', () => Euroschool);
