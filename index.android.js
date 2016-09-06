@@ -1,22 +1,7 @@
-import { Component }   from 'react';
+"use strict";
+
 import { AppRegistry } from 'react-native';
-import { createStore } from 'redux';
-import { Provider }    from 'react-redux';
 
-import MasterReducer   from './common/MasterReducer';
-import MasterComponent from './common/MasterComponent';
-
-class Euroschool extends Component
-{
-	render()
-	{
-		return
-		(
-			<Provider store = { createStore({ MasterReducer }) }>
-				<MasterComponent />
-			</Provider>
-		)
-	}
-}
+import Euroschool from './common/src';
 
 AppRegistry.registerComponent('Euroschool', () => Euroschool);

@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component } from 'react';
 import {
   StyleSheet,
@@ -6,7 +8,7 @@ import {
   Image,
 } from 'react-native';
 
-import { getLoginStatus } from '../../lib/msm/login';
+import { getLoginStatus } from '../../../lib/msm/login';
 /*
 const loadApp = () =>
 ({

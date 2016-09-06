@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component, PropTypes } from 'react';
 import {
   StyleSheet,
@@ -8,8 +10,8 @@ import {
 } from 'react-native';
 import moment from 'moment';
 import Orientation from 'react-native-orientation';
-import getSchedule from '../../lib/msm/schedule';
-import ScreenService from '../../lib/utils/screenService';
+import getSchedule from '../../../lib/msm/schedule';
+import ScreenService from '../../../lib/utils/screenService';
 
 import Day from './Day';
 

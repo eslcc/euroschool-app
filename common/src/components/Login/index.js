@@ -1,3 +1,4 @@
+"use strict";
 // @flow
 import React, { Component } from 'react';
 import {
@@ -10,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { MKButton, MKProgress, MKColor } from 'react-native-material-kit';
-import { login } from '../../lib/msm/login';
+import { login } from '../../../lib/msm/login';
 
 const loginStates = {
   WAITING: 0,

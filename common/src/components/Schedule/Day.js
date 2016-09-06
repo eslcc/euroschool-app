@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { PropTypes } from 'react';
 import {
   Text,
@@ -8,7 +10,7 @@ import moment from 'moment';
 import { capitalize } from 'lodash';
 
 import { PortraitCourse, LandscapeCourse } from './Course';
-import ScreenService from '../../lib/utils/screenService';
+import ScreenService from '../../../lib/utils/screenService';
 
 
 const days = [

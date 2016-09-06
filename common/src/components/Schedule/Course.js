@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { PropTypes } from 'react';
 import {
   Text,
@@ -6,9 +8,9 @@ import {
 } from 'react-native';
 import moment from 'moment';
 
-import gradientize from '../../lib/utils/gradientize';
+import gradientize from '../../../lib/utils/gradientize';
 
-import ScreenService from '../../lib/utils/screenService';
+import ScreenService from '../../../lib/utils/screenService';
 
 const colors = [
   gradientize('#ffc400', '#00bcd4', 9),

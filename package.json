@@ -16,7 +16,8 @@
     "react-native-orientation": "git+https://github.com/yamill/react-native-orientation.git",
     "react-native-router-flux": "git+https://github.com/aksonov/react-native-router-flux.git",
     "react-redux": "^4.4.5",
-    "redux": "^3.6.0"
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",

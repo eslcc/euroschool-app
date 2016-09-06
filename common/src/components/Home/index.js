@@ -1,4 +1,5 @@
-/* eslint-disable */ // this file is enough of a cesspit as it is
+"use strict";
+
 import React, { Component } from 'react';
 
 import Schedule from '../Schedule';
