@@ -1,20 +1,17 @@
-'use strict';
-
-import { Component } from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
-import createStore from './CreateStore';
+import createStore from './Store';
 import MasterComponent from './MasterComponent';
 
 export default class Euroschool extends Component
 {
-	                    render()
-	{
-		                    return;
-		                    (
-			<Provider store={createStore()}>
-				<MasterComponent />
-			</Provider>
-		);
-	}
+    render()
+    {
+        return (
+            <Provider store = { createStore() }>
+                <MasterComponent />
+            </Provider>
+        );
+    }
 }
