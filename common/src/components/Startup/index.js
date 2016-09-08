@@ -2,22 +2,6 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 
 import { getLoginStatus } from '../../../lib/msm/login';
-/*
-const loadApp = () =>
-({
-type: 'LOAD_APP',
-});
-*/
-
-const startupReducer = (state, action) => {
-    switch (action.type) {
-    case 'LOAD_APP':
-        return state;
-
-    default:
-        return state;
-    }
-};
 
 export default class Startup extends Component {
     constructor(props) {

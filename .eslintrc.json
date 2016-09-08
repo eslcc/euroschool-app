@@ -15,7 +15,7 @@
     "plugins": ["react"],
     "rules":
     {
-        "max-len": ["warn", 80, 4],
+        "max-len": ["warn", 200, 4],
         "curly": ["error", "multi-or-nest"],
         "indent": ["warn", 4],
         "react/jsx-indent" : ["warn", 4],
