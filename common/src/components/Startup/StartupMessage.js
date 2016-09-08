@@ -1,6 +1,5 @@
 import React from 'react';
-import
-{
+import {
     StyleSheet,
     Text,
     View,
@@ -15,8 +14,7 @@ const styles = StyleSheet.create({
     },
 });
 
-export default function ()
-{
+export default () => {
     return (
         <View style = { styles.container }>
             <Image source = { require('../../../assets/images/StunningPicture.jpg') } />
@@ -24,4 +22,4 @@ export default function ()
             <MKSpinner />
         </View>
     );
-}
+};

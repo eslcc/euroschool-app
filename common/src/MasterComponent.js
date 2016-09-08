@@ -13,10 +13,8 @@ const scenes = Actions.create
 );
 */
 
-export default class MasterComponent extends Component
-{
-    render()
-    {
+export default class MasterComponent extends Component {
+    render() {
         return (
             <Router>
                 <Scene key = "root">

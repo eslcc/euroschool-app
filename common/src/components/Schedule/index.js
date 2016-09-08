@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import
-{
+import {
     Text,
     View,
     ScrollView,
@@ -12,8 +11,7 @@ import ScreenService from '../../../lib/utils/screenService';
 
 import Day from './Day';
 
-function PortraitSchedule({ schedule })
-{
+function PortraitSchedule({ schedule }) {
     const style = {
         position: 'absolute',
         top: 0,
@@ -37,11 +35,12 @@ function PortraitSchedule({ schedule })
         </View>
     );
 }
+
 PortraitSchedule.propTypes = {
     schedule: PropTypes.array,
 };
 
-function LandscapeSchedule({ schedule }) { // eslint-disable-line
+function LandscapeSchedule({ schedule }) {
     return (
         <View>
         {[1, 2, 3, 4, 5].map((num) =>
@@ -50,13 +49,13 @@ function LandscapeSchedule({ schedule }) { // eslint-disable-line
         </View>
     );
 }
+
 LandscapeSchedule.propTypes = {
     schedule: PropTypes.array,
 };
 
 export default class Schedule extends Component {
-    constructor(props)
-    {
+    constructor(props) {
         super(props);
         const initial = Orientation.getInitialOrientation();
         this.state = {
@@ -65,8 +64,7 @@ export default class Schedule extends Component {
         };
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         // TODO get rid of this shit when school starts
         getSchedule(
             moment()
@@ -77,27 +75,23 @@ export default class Schedule extends Component {
             .isoWeekday(1)
             .add(1, 'w')
             .subtract(1, 'd')
-        ).then((schedule) =>
-        {
+        ).then((schedule) => {
             this.setState({ schedule });
         });
 
-        Orientation.addOrientationListener((orientation) =>
-        {
+        Orientation.addOrientationListener((orientation) => {
             this.setState({ landscape: orientation === 'LANDSCAPE', key: Math.random() });
         });
     }
 
-    getScheduleForOrientation()
-    {
+    getScheduleForOrientation() {
         const props = { schedule: this.state.schedule, landscape: this.state.landscape };
         return this.state.landscape
         ? <LandscapeSchedule { ...props } />
         : <PortraitSchedule { ...props } />;
     }
 
-    render()
-    {
+    render() {
         return (
             <View>
             {(() => // eslint-disable-line

@@ -10,8 +10,7 @@ import { doMsmRequest, METHODS } from './helpers';
 *  Params: user_email, user_password
 *  Resulting-Http-Codes: 302 with Location / in success, Location /login.php on failure
 */
-export function login(email: string, password: string) : Promise<boolean>
-{
+export function login(email: string, password: string) : Promise<boolean> {
     return doMsmRequest(METHODS.POST, '/', {
         user_email: email,
         user_password: password,
@@ -21,13 +20,11 @@ export function login(email: string, password: string) : Promise<boolean>
     );
 }
 
-export function logout() : Promise
-{
+export function logout() : Promise {
     return doMsmRequest(METHODS.GET, '/login.php?m=1', {});
 }
 
-export function getLoginStatus() : Promise<Boolean>
-{
+export function getLoginStatus() : Promise<Boolean> {
     return doMsmRequest(METHODS.GET, '/', {})
     .then(
         (response) => response.url.indexOf('login.php') === -1

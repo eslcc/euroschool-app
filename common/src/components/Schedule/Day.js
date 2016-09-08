@@ -17,11 +17,9 @@ const days = [
 ];
 
 
-function getHours()
-{
+function getHours() {
     return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
-    .map((hour, index) =>
-    {
+    .map((hour, index) => {
         const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
         const top = 64 + (oneHourHeight * (index));
         const style = {
@@ -34,16 +32,14 @@ function getHours()
     });
 }
 
-function getCourse(course, day, landscape)
-{
+function getCourse(course, day, landscape) {
     if (landscape)
         return <LandscapeCourse key = { `${course.start}-portrait` } course = { course } day = { day } />;
 
     return <PortraitCourse key = { `${course.start}-landscape` } course = { course } day = { day } />;
 }
 
-export default function Day({ schedule, day, landscape })
-{
+export default function Day({ schedule, day, landscape }) {
     const courses = schedule.filter(
         (thing) => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
@@ -102,8 +98,8 @@ export default function Day({ schedule, day, landscape })
         </View>
     );
 }
-Day.propTypes =
-{
+
+Day.propTypes = {
     schedule: PropTypes.array,
     day: PropTypes.number,
     landscape: PropTypes.bool,

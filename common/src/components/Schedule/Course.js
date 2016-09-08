@@ -17,8 +17,7 @@ const colors = [
     gradientize('#8BC34A', '#00bcd4', 9),
 ];
 
-export function PortraitCourse({ course, day })
-{
+export function PortraitCourse({ course, day }) {
     const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 16) / 9;
     const oneMinuteHeight = oneHourHeight / 60;
     // Get rid of the naughty Z at the end that messes with Moment
@@ -65,22 +64,20 @@ export function PortraitCourse({ course, day })
         </View>
     );
 }
-PortraitCourse.propTypes =
-{
+
+PortraitCourse.propTypes = {
     course: PropTypes.object,
     day: PropTypes.number,
 };
 
-export function LandscapeCourse({ course, day })
-{
+export function LandscapeCourse({ course, day }) {
     const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
     const oneMinuteHeight = oneHourHeight / 60;
     const oneDayWidth = ((ScreenService.getScreenSize().width - 80) / 5);
     const start = moment(course.start.substring(0, course.start.length - 1));
     const period = parseInt(course.param_2.replace(/Period ([1-9]) {10}-/, '$1'), 10);
     const style = {
-        course:
-        {
+        course: {
             position: 'absolute',
             left: 80 + ((day - 1) * oneDayWidth),
             width: oneDayWidth,
@@ -101,6 +98,7 @@ export function LandscapeCourse({ course, day })
         </View>
     );
 }
+
 LandscapeCourse.propTypes = {
     course: PropTypes.object,
     day: PropTypes.number,

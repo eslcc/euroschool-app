@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import
-{
+import {
     Text,
     View,
     Image,
@@ -47,47 +46,39 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Login extends Component
-{
-    constructor(props)
-    {
+export default class Login extends Component {
+    constructor(props) {
         super(props);
 
-        this.state =
-        {
+        this.state = {
             email: '',
             password: '',
             loginState: 0,
         };
     }
 
-    onInputChange(key: string, value: string)
-    {
+    onInputChange(key: string, value: string) {
         const state = Object.assign({}, this.state);
         state[key] = value;
         this.setState(state);
     }
 
-    doLogin()
-    {
+    doLogin() {
         this.setState({ loginState: 1 });
         login(this.state.email, this.state.password)
-        .then((success) =>
-        {
+        .then((success) => {
             if (success)
                 this.props.loginCallback();
 
             else
                 this.setState({ loginState: loginStates.FAILURE });
         })
-        .catch(() =>
-        {
+        .catch(() => {
             this.setState({ loginState: loginStates.NETWORK_ERROR });
         });
     }
 
-    render()
-    {
+    render() {
         const LoginButton = MKButton
         .coloredButton()
         .withBackgroundColor(MKColor.Blue)

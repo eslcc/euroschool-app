@@ -26,8 +26,7 @@ export function doMsmRequest(
     method : string,
     path : string,
     params : {[key: string]: string}
-): Promise<any | string>
-{
+): Promise<any | string> {
     const args = {
         credentials: 'same-origin',
         method,
@@ -36,8 +35,7 @@ export function doMsmRequest(
         },
     };
 
-    switch (method)
-    {
+    switch (method) {
     case METHODS.GET:
         return fetch(URL_BASE + path, args);
 

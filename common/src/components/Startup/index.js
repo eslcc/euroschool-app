@@ -9,10 +9,8 @@ type: 'LOAD_APP',
 });
 */
 
-const startupReducer = (state, action) =>
-{
-    switch (action.type)
-    {
+const startupReducer = (state, action) => {
+    switch (action.type) {
     case 'LOAD_APP':
         return state;
 
@@ -21,26 +19,20 @@ const startupReducer = (state, action) =>
     }
 };
 
-export default class Startup extends Component
-{
-    constructor(props)
-    {
+export default class Startup extends Component {
+    constructor(props) {
         super(props);
-        this.state =
-        {
+        this.state = {
             ready: false,
             needsLogin: false,
         };
     }
 
-    componentDidMount()
-    {
+    componentDidMount() {
         window.setTimeout(
-            () =>
-            {
+            () => {
                 getLoginStatus().then(
-                    (loggedIn) =>
-                    {
+                    (loggedIn) => {
                         const base = { ready: true };
                         this.setState({ needsLogin: !loggedIn, ...base });
                     }
@@ -50,13 +42,11 @@ export default class Startup extends Component
         );
     }
 
-    loginComplete()
-    {
+    loginComplete() {
         this.setState({ needsLogin: false });
     }
 
-    render()
-    {
+    render() {
         let component;
 
         if (this.state.ready)

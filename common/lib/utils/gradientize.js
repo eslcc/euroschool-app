@@ -2,15 +2,11 @@
 
 import { rgbToString, hexToRgb } from './colors';
 
-function lerp(a, b, f)
-{
-    return a + f * (b - a);
-}
+const lerp = (a, b, f) => a + f * (b - a);
 
 export default (color1 : string | {r : number, g : number, b : number},
                 color2 : string | {r : number, g : number, b : number},
-                stops : number) =>
-{
+                stops : number) => {
     let c1 = color1;
     let c2 = color2;
     if (typeof c1 === 'string')
@@ -21,8 +17,8 @@ export default (color1 : string | {r : number, g : number, b : number},
 
     console.log(c1);
     const result = [];
-    for (let i = 0; i < stops; i++)
-    {
+
+    for (let i = 0; i < stops; i++) {
         const point = (1 / stops) * (i + 1);
         const out = {
             r: lerp(c1.r, c2.r, point).toFixed(0),
