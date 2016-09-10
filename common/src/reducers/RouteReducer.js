@@ -8,23 +8,23 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
     switch (action.type) {
     // focus action is dispatched when a new screen comes into focus
-    case ActionConst.FOCUS:
-        return {
-            ...state,
-            scene: action.scene,
-        };
+        case ActionConst.FOCUS:
+            return {
+                ...state,
+                scene: action.scene,
+            };
 
-    case ActionConst.PUSH:
-        return {
-            ...state,
-            scene: action.scene,
-        };
+        case ActionConst.PUSH:
+            return {
+                ...state,
+                scene: action.scene,
+            };
 
-    case Actions.AFTER_ROUTE:
-    case Actions.AFTER_POP:
-        return state.set('currentRoute', action.name);
+        case Actions.AFTER_ROUTE:
+        case Actions.AFTER_POP:
+            return state.set('currentRoute', action.name);
 
-    default:
-        return state;
+        default:
+            return state;
     }
 }

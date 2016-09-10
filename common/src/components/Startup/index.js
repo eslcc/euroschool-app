@@ -8,8 +8,7 @@ import {
 import { MKSpinner } from 'react-native-material-kit';
 import { connect } from 'react-redux';
 
-import * as actions from '../../ActionCreators';
-// import { loadApp } from '../../ActionCreators';
+import { loadApp as doLoadApp } from '../../ActionCreators';
 
 const styles = StyleSheet.create({
     container: {
@@ -34,8 +33,8 @@ Startup.propTypes = {
     loadApp: PropTypes.func,
 };
 
-const mapDispatchToProps = () => ({
-    loadApp: () => actions.loadApp(),
+const mapDispatchToProps = (dispatch) => ({
+    loadApp: () => dispatch(doLoadApp()),
 });
 
 export default connect(null, mapDispatchToProps)(Startup);

@@ -23,25 +23,25 @@ export const loginFailed = () => ({
     type: LOGIN_FAILED,
 });
 
-export function loadApp() {
-    getLoginStatus().then(
-        (status) => {
-            if (status)
-                Actions.home();
-            else
-                Actions.login();
-        }
-  );
-}
+export const loadApp = () =>
+    () =>
+        getLoginStatus().then(
+            (status) => {
+                if (status)
+                    Actions.home();
+                else
+                    Actions.login();
+            }
+        );
 
-export const loginThunk = (email: string, password: string) => (dispatch: func) => {
+export const doLogin = (email: string, password: string) => (dispatch: func) => {
     login(email, password)
         .then((status: boolean) => {
             if (status)
                 Actions.home();
             else
                 dispatch(loginFailed());
-        });
+        }); // TODO catch
 };
 
 export const scheduleLoaded = (schedule) => ({

@@ -30,7 +30,7 @@
     {
         "max-len": ["warn", 200, 4],
         "curly": ["error", "multi-or-nest"],
-        "indent": ["warn", 4],
+        "indent": ["warn", 4, {"SwitchCase": 1}],
         "comma-dangle": ["error", "always-multiline"],
         "global-require": "off",
         "no-global-assign": "off",
