@@ -1,3 +1,5 @@
+import { Actions } from 'react-native-router-flux';
+
 import {
     STARTUP_COMPLETED,
     APP_LOADED,
@@ -8,18 +10,17 @@ const initialState = {
     scene: {},
 };
 
-const startupReducer = (state = initialState, action = {}) => {
+export default (state = initialState, action = {}) => {
     switch (action.type) {
     case APP_LOADED:
-        return {
-            ...state,
-            scene: '',
-        };
+        return state;
 
     case LOGIN_NEEDED:
+        Actions.login();
         return state;
 
     case STARTUP_COMPLETED:
+        Actions.home();
         return state;
 
     default:

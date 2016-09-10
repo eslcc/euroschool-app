@@ -1,4 +1,3 @@
-import { Actions } from 'react-native-router-flux';
 import { getLoginStatus } from '../lib/msm/login';
 import { getSchedule } from '../lib/msm/schedule';
 
@@ -10,19 +9,13 @@ import {
     SCHEDULE_LOADED,
 } from './ActionTypes';
 
-export function startupCompleted() {
-    Actions.home();
-    return {
-        type: STARTUP_COMPLETED,
-    };
-}
+export const startupCompleted = () => ({
+    type: STARTUP_COMPLETED,
+});
 
-export function loginNeeded() {
-    Actions.login();
-    return {
-        type: LOGIN_NEEDED,
-    };
-}
+export const loginNeeded = () => ({
+    type: LOGIN_NEEDED,
+});
 
 export function appLoaded() {
     return (dispatch) => {
@@ -33,12 +26,10 @@ export function appLoaded() {
     };
 }
 
-export function scheduleLoaded(schedule) {
-    return {
-        type: SCHEDULE_LOADED,
-        schedule,
-    };
-}
+export const scheduleLoaded = (schedule) => ({
+    type: SCHEDULE_LOADED,
+    schedule,
+});
 
 export function loadSchedule(start, end) {
     return (dispatch) => {

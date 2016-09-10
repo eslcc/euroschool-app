@@ -8,17 +8,19 @@ const initialState = {
     scheduleLoading: false,
 };
 
-export default function scheduleReducer(state = initialState, action) {
+export default function scheduleReducer(state = initialState, action = {}) {
     switch (action.type) {
     case LOAD_SCHEDULE:
-        return state.merge({
+        return {
+            ...state,
             scheduleLoading: true,
-        });
+        };
     case SCHEDULE_LOADED:
-        return state.merge({
+        return {
+            ...state,
             scheduleLoading: false,
             schedule: action.schedule,
-        });
+        };
 
     default:
         return state;
