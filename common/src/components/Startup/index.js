@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 import {
     StyleSheet,
     Text,
@@ -6,9 +6,10 @@ import {
     Image,
 } from 'react-native';
 import { MKSpinner } from 'react-native-material-kit';
-// import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
 
-import { appLoaded } from '../../ActionCreators';
+import * as actions from '../../ActionCreators';
+// import { loadApp } from '../../ActionCreators';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,46 +18,24 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Startup extends Component {
-    static propTypes = {
-        routes: PropTypes.object,
-        actions: PropTypes.object,
-    };
+const Startup = ({ loadApp }) => {
+    loadApp();
 
-    static contextTypes = {
-        store: PropTypes.object,
-    }
+    return (
+        <View style = {styles.container}>
+            <Image source = {require('../../../assets/images/StunningPicture.jpg')} />
+            <Text>The app is loading, please wait...</Text>
+            <MKSpinner />
+        </View>
+    );
+};
 
-    componentDidMount() {
-        const { store } = this.context;
-        appLoaded(store.dispatch);
-        this.unsubscribe = store.subscribe(
-            () => this.forceUpdate()
-        );
-    }
-/*
-    componentDidUpdate(prevProps) {
-        const prevScene = prevProps.routes.scene;
-        const currentScene = this.props.routes.scene;
+Startup.propTypes = {
+    loadApp: PropTypes.func,
+};
 
-        if (currentScene === 'login' && prevScene !== currentScene)
-            this.props.actions.login();
+const mapDispatchToProps = () => ({
+    loadApp: () => actions.loadApp(),
+});
 
-        else if (currentScene === 'home' && prevScene !== currentScene)
-            this.props.actions.home();
-    }
-*/
-    componentWillUnmount() {
-        this.unsubscribe();
-    }
-
-    render() {
-        return (
-            <View style = {styles.container}>
-                <Image source = {require('../../../assets/images/StunningPicture.jpg')} />
-                <Text>The app is loading, please wait...</Text>
-                <MKSpinner />
-            </View>
-        );
-    }
-}
+export default connect(null, mapDispatchToProps)(Startup);

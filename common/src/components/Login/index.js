@@ -1,4 +1,3 @@
-// @flow
 import React, { Component } from 'react';
 import {
     Text,
@@ -9,6 +8,8 @@ import {
     Dimensions,
 } from 'react-native';
 import { MKButton, MKProgress, MKColor } from 'react-native-material-kit';
+import { connect } from 'react-redux';
+import * as actions from '../../ActionCreators';
 import { login } from '../../../lib/msm/login';
 
 const windowSize = Dimensions.get('window');
@@ -46,8 +47,8 @@ const styles = StyleSheet.create({
     },
 });
 
-export default class Login extends Component {
-    constructor(props) {
+class Login extends Component {
+    constructor(props: object) {
         super(props);
 
         this.state = {
@@ -66,7 +67,7 @@ export default class Login extends Component {
     doLogin() {
         this.setState({ loginState: 1 });
         login(this.state.email, this.state.password)
-        .then((success) => {
+        .then((success: boolean) => {
             if (success)
                 this.props.loginCallback();
 
@@ -83,7 +84,7 @@ export default class Login extends Component {
         .coloredButton()
         .withBackgroundColor(MKColor.Blue)
         .withText('LOG IN')
-        .withOnPress(this.doLogin.bind(this))
+        .withOnPress(this.doLogin)
         .build();
         return (
             <View>
@@ -129,3 +130,13 @@ export default class Login extends Component {
         );
     }
 }
+
+const mapStateToProps = () => ({
+
+});
+
+const mapDispatchToProps = () => ({
+    login: (email, password) => actions.loginThunk(email, password),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

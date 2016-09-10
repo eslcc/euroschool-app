@@ -14,6 +14,12 @@ export default function reducer(state = initialState, action = {}) {
             scene: action.scene,
         };
 
+    case ActionConst.PUSH:
+        return {
+            ...state,
+            scene: action.scene,
+        };
+
     case Actions.AFTER_ROUTE:
     case Actions.AFTER_POP:
         return state.set('currentRoute', action.name);
