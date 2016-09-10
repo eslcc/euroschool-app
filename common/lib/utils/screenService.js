@@ -1,4 +1,3 @@
-/* eslint-disable comma-dangle */
 // Workaround for Dimensions issue on Android.
 // Source: https://github.com/facebook/react-native/issues/8587#issuecomment-231595674
 

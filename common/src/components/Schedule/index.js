@@ -94,11 +94,12 @@ export default class Schedule extends Component {
     render() {
         return (
             <View>
-            {(() => // eslint-disable-line
-                this.state.schedule == null
-                ? (<Text>Loading</Text>)
-                : this.getScheduleForOrientation()
-            )()}
+            {() => {
+                if (this.state.schedule === null)
+                    return (<Text>Loading</Text>);
+
+                return this.getScheduleForOrientation();
+            }}
             </View>
         );
     }
