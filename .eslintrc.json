@@ -31,6 +31,7 @@
         "max-len": ["warn", 200, 4],
         "curly": ["error", "multi-or-nest"],
         "indent": ["warn", 4],
+        "comma-dangle": ["error", "always-multiline"],
         "global-require": "off",
         "no-global-assign": "off",
         "no-unsafe-negation": "off",

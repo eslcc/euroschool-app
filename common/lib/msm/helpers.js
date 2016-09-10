@@ -23,9 +23,9 @@ export function serialize(obj : {[key: string]: string}, prefix : string) : stri
 /* eslint-enable */
 
 export function doMsmRequest(
-    method : string,
-    path : string,
-    params : {[key: string]: string}
+    method: string,
+    path: string,
+    params: {[key: string]: string}
 ): Promise<any | string> {
     const args = {
         credentials: 'same-origin',

@@ -1,47 +1,32 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import {
+    StyleSheet,
+    Text,
+    View,
+    Image,
+} from 'react-native';
+import { MKSpinner } from 'react-native-material-kit';
 
-import { getLoginStatus } from '../../../lib/msm/login';
+import { appLoaded } from '../../ActionCreators';
+
+const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+});
 
 export default class Startup extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            ready: false,
-            needsLogin: false,
-        };
-    }
-
     componentDidMount() {
-        window.setTimeout(
-            () => {
-                getLoginStatus().then(
-                    (loggedIn) => {
-                        const base = { ready: true };
-                        this.setState({ needsLogin: !loggedIn, ...base });
-                    }
-                );
-            },
-            200
-        );
-    }
-
-    loginComplete() {
-        this.setState({ needsLogin: false });
+        appLoaded();
     }
 
     render() {
-        let component;
-
-        if (this.state.ready)
-            component = this.state.needsLogin ? Login : Home;
-
-        else
-            component = StartupMessage;
-
         return (
-            <View>
-            { React.createElement(component, { loginCallback: this.loginComplete.bind(this) }) }
+            <View style = {styles.container}>
+                <Image source = {require('../../../assets/images/StunningPicture.jpg')} />
+                <Text>The app is loading, please wait...</Text>
+                <MKSpinner />
             </View>
         );
     }

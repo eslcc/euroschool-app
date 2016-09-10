@@ -28,15 +28,15 @@ function getHours() {
             top,
             left: 0,
         };
-        return <Text key = { hour } style = { style }>{hour}</Text>;
+        return <Text key = {hour} style = {style}>{hour}</Text>;
     });
 }
 
 function getCourse(course, day, landscape) {
     if (landscape)
-        return <LandscapeCourse key = { `${course.start}-portrait` } course = { course } day = { day } />;
+        return <LandscapeCourse key = {`${course.start}-portrait`} course = {course} day = {day} />;
 
-    return <PortraitCourse key = { `${course.start}-landscape` } course = { course } day = { day } />;
+    return <PortraitCourse key = {`${course.start}-landscape`} course = {course} day = {day} />;
 }
 
 export default function Day({ schedule, day, landscape }) {
@@ -89,7 +89,7 @@ export default function Day({ schedule, day, landscape }) {
 
     return (
         <View>
-            <View style = { style }>
+            <View style = {style}>
                 <Text>{capitalize(dayName)}</Text>
             </View>
 

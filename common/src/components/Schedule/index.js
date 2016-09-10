@@ -26,10 +26,10 @@ function PortraitSchedule({ schedule }) {
             <ScrollView
                 horizontal
                 pagingEnabled
-                style = { style }
+                style = {style}
             >
                 {[1, 2, 3, 4, 5].map((num) =>
-                    <Day key = { `${num}-portrait` } schedule = { schedule } day = { num } />
+                    <Day key = {`${num}-portrait`} schedule = {schedule} day = {num} />
                 )}
             </ScrollView>
         </View>
@@ -44,7 +44,7 @@ function LandscapeSchedule({ schedule }) {
     return (
         <View>
         {[1, 2, 3, 4, 5].map((num) =>
-            <Day key = { `${num}-landscape` } schedule = { schedule } day = { num } landscape />
+            <Day key = {`${num}-landscape`} schedule = {schedule} day = {num} landscape />
         )}
         </View>
     );
@@ -87,8 +87,8 @@ export default class Schedule extends Component {
     getScheduleForOrientation() {
         const props = { schedule: this.state.schedule, landscape: this.state.landscape };
         return this.state.landscape
-        ? <LandscapeSchedule { ...props } />
-        : <PortraitSchedule { ...props } />;
+        ? <LandscapeSchedule {...props} />
+        : <PortraitSchedule {...props} />;
     }
 
     render() {

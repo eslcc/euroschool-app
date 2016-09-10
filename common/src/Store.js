@@ -1,6 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-import MasterReducer from './MasterReducer';
+import RouteReducer from './reducers/RouteReducer';
 
-export default () => createStore(MasterReducer, applyMiddleware(thunk));
+const MainReducer = combineReducers({
+    RouteReducer,
+});
+
+export default () => createStore(MainReducer, applyMiddleware(thunk));

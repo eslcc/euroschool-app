@@ -52,14 +52,14 @@ export function PortraitCourse({ course, day }) {
         },
     };
     return (
-        <View style = { style.course }>
-            <View style = { style.innerLeft }>
-                <Text style = { style.labelLevel1 }>{course.title}</Text>
-                <Text style = { style.labelLevel2 }>{course.teacher_name_list}</Text>
+        <View style = {style.course}>
+            <View style = {style.innerLeft}>
+                <Text style = {style.labelLevel1}>{course.title}</Text>
+                <Text style = {style.labelLevel2}>{course.teacher_name_list}</Text>
             </View>
-            <View style = { style.innerRight }>
-                <Text style = { style.labelLevel1 }>{course.param_1}</Text>
-                <Text style = { style.labelLevel2 }>{`Period ${period}`}</Text>
+            <View style = {style.innerRight}>
+                <Text style = {style.labelLevel1}>{course.param_1}</Text>
+                <Text style = {style.labelLevel2}>{`Period ${period}`}</Text>
             </View>
         </View>
     );
@@ -93,7 +93,7 @@ export function LandscapeCourse({ course, day }) {
         },
     };
     return (
-        <View style = { style.course }>
+        <View style = {style.course}>
             <Text>{ course.title }</Text>
         </View>
     );

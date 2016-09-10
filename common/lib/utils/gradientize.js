@@ -4,9 +4,9 @@ import { rgbToString, hexToRgb } from './colors';
 
 const lerp = (a, b, f) => a + f * (b - a);
 
-export default (color1 : string | {r : number, g : number, b : number},
-                color2 : string | {r : number, g : number, b : number},
-                stops : number) => {
+export default (color1: string | {r: number, g: number, b: number},
+                color2: string | {r: number, g: number, b: number},
+                stops: number) => {
     let c1 = color1;
     let c2 = color2;
     if (typeof c1 === 'string')
