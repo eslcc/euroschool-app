@@ -1,7 +1,8 @@
-import { ActionConst } from 'react-native-router-flux';
+import { Actions, ActionConst } from 'react-native-router-flux';
 
 const initialState = {
     scene: {},
+    currentRoute: {},
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -13,7 +14,9 @@ export default function reducer(state = initialState, action = {}) {
             scene: action.scene,
         };
 
-    // ...other actions
+    case Actions.AFTER_ROUTE:
+    case Actions.AFTER_POP:
+        return state.set('currentRoute', action.name);
 
     default:
         return state;

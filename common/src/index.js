@@ -8,12 +8,15 @@ import Login from './components/Login';
 import Home from './components/Home';
 
 const RouterWithRedux = connect()(Router);
+const StartupWithRedux = connect()(Startup);
+const LoginWithRedux = connect()(Login);
+const HomeWithRedux = connect()(Home);
 
 const scenes = Actions.create(
     <Scene key = "root">
-        <Scene key = "startup" component = {Startup} title = "Startup" initial />
-        <Scene key = "login" component = {Login} title = "Login" />
-        <Scene key = "home" component = {Home} title = "Home" />
+        <Scene key = "startup" component = {StartupWithRedux} title = "Startup" initial />
+        <Scene key = "login" component = {LoginWithRedux} title = "Login" />
+        <Scene key = "home" component = {HomeWithRedux} title = "Home" />
     </Scene>
 );
 

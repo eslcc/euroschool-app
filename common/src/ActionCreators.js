@@ -3,7 +3,6 @@ import { getSchedule } from '../lib/msm/schedule';
 
 import {
     STARTUP_COMPLETED,
-    APP_LOADED,
     LOGIN_NEEDED,
     LOAD_SCHEDULE,
     SCHEDULE_LOADED,
@@ -17,13 +16,10 @@ export const loginNeeded = () => ({
     type: LOGIN_NEEDED,
 });
 
-export function appLoaded() {
-    return (dispatch) => {
-        dispatch({ type: APP_LOADED });
-        return getLoginStatus().then(
-        status => dispatch(status ? startupCompleted() : loginNeeded())
-      );
-    };
+export function appLoaded(dispatch) {
+    return getLoginStatus().then(
+    status => dispatch(status ? startupCompleted() : loginNeeded())
+  );
 }
 
 export const scheduleLoaded = (schedule) => ({

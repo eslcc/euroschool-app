@@ -8,7 +8,7 @@ const initialState = {
     scheduleLoading: false,
 };
 
-export default function scheduleReducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
     switch (action.type) {
     case LOAD_SCHEDULE:
         return {
@@ -25,4 +25,4 @@ export default function scheduleReducer(state = initialState, action = {}) {
     default:
         return state;
     }
-}
+};
