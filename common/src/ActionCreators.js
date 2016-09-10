@@ -43,8 +43,7 @@ export function scheduleLoaded(schedule) {
 export function loadSchedule(start, end) {
     return (dispatch) => {
         dispatch({ type: LOAD_SCHEDULE });
-        return getSchedule(start, end)
-        .then(
+        return getSchedule(start, end).then(
         schedule => dispatch(scheduleLoaded(schedule))
       );
     };

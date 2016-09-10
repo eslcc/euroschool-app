@@ -1,14 +1,14 @@
 import {
     LOAD_SCHEDULE,
     SCHEDULE_LOADED,
-} from './actionTypes';
+} from '../ActionTypes';
 
 const initialState = {
     schedule: null,
     scheduleLoading: false,
 };
 
-export default function schedule(state = initialState, action) {
+export default function scheduleReducer(state = initialState, action) {
     switch (action.type) {
     case LOAD_SCHEDULE:
         return state.merge({
@@ -19,5 +19,8 @@ export default function schedule(state = initialState, action) {
             scheduleLoading: false,
             schedule: action.schedule,
         });
+
+    default:
+        return state;
     }
 }
