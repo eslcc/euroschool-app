@@ -8,6 +8,20 @@ import Login from './components/Login';
 import Home from './components/Home';
 
 const RouterWithRedux = connect()(Router);
+/*
+const mapStateToProps = (state) => ({
+    currentScene: state.scene,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    onSceneChange: (scene) => {
+        dispatch({
+            type: 'I_DONT_EVEN',
+            scene,
+        });
+    },
+});
+*/
 const StartupWithRedux = connect()(Startup);
 const LoginWithRedux = connect()(Login);
 const HomeWithRedux = connect()(Home);

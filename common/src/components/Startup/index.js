@@ -6,7 +6,7 @@ import {
     Image,
 } from 'react-native';
 import { MKSpinner } from 'react-native-material-kit';
-import { Actions } from 'react-native-router-flux';
+// import { Actions } from 'react-native-router-flux';
 
 import { appLoaded } from '../../ActionCreators';
 
@@ -34,18 +34,18 @@ export default class Startup extends Component {
             () => this.forceUpdate()
         );
     }
-
+/*
     componentDidUpdate(prevProps) {
-        const prevRoute = prevProps.routes.currentRoute;
-        const currentRoute = this.props.routes.currentRoute;
+        const prevScene = prevProps.routes.scene;
+        const currentScene = this.props.routes.scene;
 
-        if (currentRoute === 'login' && prevRoute !== currentRoute)
+        if (currentScene === 'login' && prevScene !== currentScene)
             this.props.actions.login();
 
-        else if (currentRoute === 'home' && prevRoute !== currentRoute)
+        else if (currentScene === 'home' && prevScene !== currentScene)
             this.props.actions.home();
     }
-
+*/
     componentWillUnmount() {
         this.unsubscribe();
     }
