@@ -34,6 +34,14 @@ local.properties
 # node.js
 #
 node_modules/*
+!node_modules/react-native-material-kit/
+node_modules/react-native-material-kit/*
+!node_modules/react-native-material-kit/android/
+node_modules/react-native-material-kit/android/*
+!node_modules/react-native-orientation/
+node_modules/react-native-orientation/*
+!node_modules/react-native-orientation/android/
+node_modules/react-native-orientation/android/*
 !node_modules/**/build.gradle
 
 npm-debug.log
