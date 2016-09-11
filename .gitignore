@@ -35,7 +35,6 @@ local.properties
 #
 node_modules/*
 !node_modules/**/build.gradle
-!node_modules/**/gradle.properties
 
 npm-debug.log
 
