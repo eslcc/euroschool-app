@@ -1,7 +1,7 @@
 import { Actions } from 'react-native-router-flux';
 
 import { getLoginStatus, login } from '../lib/msm/login';
-import { getSchedule } from '../lib/msm/schedule';
+import getSchedule from '../lib/msm/schedule';
 
 import {
     STARTUP_COMPLETED, // TODO: import * from './ActionTypes'
@@ -28,20 +28,20 @@ export const loadApp = () =>
         getLoginStatus().then(
             (status) => {
                 if (status)
-                    Actions.home();
+                    Actions.main();
                 else
                     Actions.login();
             }
-        );
+        ).done();
 
 export const doLogin = (email: string, password: string) => (dispatch: func) => {
     login(email, password)
         .then((status: boolean) => {
             if (status)
-                Actions.home();
+                Actions.main();
             else
                 dispatch(loginFailed());
-        }); // TODO catch
+        }).done(); // TODO catch
 };
 
 export const scheduleLoaded = (schedule) => ({
@@ -53,7 +53,7 @@ export function loadSchedule(start, end) {
     return (dispatch) => {
         dispatch({ type: LOAD_SCHEDULE });
         return getSchedule(start, end).then(
-        schedule => dispatch(scheduleLoaded(schedule))
-      );
+          schedule => dispatch(scheduleLoaded(schedule))
+        ).done();
     };
 }

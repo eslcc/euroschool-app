@@ -15,7 +15,6 @@ export default (color1: string | {r: number, g: number, b: number},
     if (typeof c2 === 'string')
         c2 = hexToRgb(c2);
 
-    console.log(c1);
     const result = [];
 
     for (let i = 0; i < stops; i++) {

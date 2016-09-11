@@ -46,6 +46,17 @@ const styles = StyleSheet.create({
     },
 });
 
+const DumbLoginFailureIndicator = ({ display }) => {
+    if (!(display)) return null;
+    return (
+    <Text style={styles.failureText}>Something went wrong. Please check your email and password.</Text>
+  );
+};
+
+const LoginFailureIndicator = connect((state) => ({
+    display: state.login.failed,
+}))(DumbLoginFailureIndicator);
+
 class Login extends Component {
     constructor(props: object) {
         super(props);
@@ -72,24 +83,24 @@ class Login extends Component {
         .build();
         return (
             <View>
-                <Image source = {require('../../../assets/images/LoginBackdrop.png')} style = {styles.bg} />
+                <Image source={require('../../../assets/images/LoginBackdrop.png')} style={styles.bg} />
                 <View>
-                    <Text style = {[styles.mainText, styles.whiteFont]}>Hello.</Text>
-                    <Text style = {[styles.subheading, styles.greyFont]}>Please log in with your SMS account.</Text>
-                    <View style = {styles.inputs}>
+                    <Text style={[styles.mainText, styles.whiteFont]}>Hello.</Text>
+                    <Text style={[styles.subheading, styles.greyFont]}>Please log in with your SMS account.</Text>
+                    <View style={styles.inputs}>
                         <TextInput
-                            placeholder = "Email"
-                            style = {styles.whiteFont}
-                            placeholderTextColor = "#FFF"
-                            onChangeText = {(text) => this.onInputChange('email', text)}
+                            placeholder="Email"
+                            style={styles.whiteFont}
+                            placeholderTextColor="#FFF"
+                            onChangeText={(text) => this.onInputChange('email', text)}
                             // value={this.state.username}
                         />
                         <TextInput
                             secureTextEntry
-                            style = {styles.whiteFont}
-                            placeholder = "Password"
-                            placeholderTextColor = "#FFF"
-                            onChangeText = {(text) => this.onInputChange('password', text)}
+                            style={styles.whiteFont}
+                            placeholder="Password"
+                            placeholderTextColor="#FFF"
+                            onChangeText={(text) => this.onInputChange('password', text)}
                             // value={this.state.password}
                         />
                         <LoginButton />
@@ -99,10 +110,7 @@ class Login extends Component {
                                 <MKProgress.Indeterminate />
                         }
 
-                        {
-                            (this.props.loginFailed) &&
-                                <Text style = {styles.failureText}>Something went wrong. Please check your email and password.</Text>
-                        }
+                        <LoginFailureIndicator />
 
                         {/* // TODO
                             (this.state.loginState === loginStates.NETWORK_ERROR) &&
@@ -115,8 +123,8 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    loginFailed: state.login.failed,
+const mapStateToProps = () => ({
+
 });
 
 const mapDispatchToProps = (dispatch) => ({

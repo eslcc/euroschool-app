@@ -21,8 +21,8 @@ const Startup = ({ loadApp }) => {
     loadApp();
 
     return (
-        <View style = {styles.container}>
-            <Image source = {require('../../../assets/images/StunningPicture.jpg')} />
+        <View style={styles.container}>
+            <Image source={require('../../../assets/images/StunningPicture.jpg')} />
             <Text>The app is loading, please wait...</Text>
             <MKSpinner />
         </View>

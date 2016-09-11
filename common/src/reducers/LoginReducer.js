@@ -1,11 +1,9 @@
 import { LOGIN_FAILED } from '../ActionTypes';
 
 const initialState = {
-    login: {
-        email: '',
-        password: '',
-        failed: false,
-    },
+    email: '',
+    password: '',
+    failed: false,
 };
 
 export default (state = initialState, action) => {
@@ -13,9 +11,7 @@ export default (state = initialState, action) => {
         case LOGIN_FAILED:
             return {
                 ...state,
-                login: {
-                    failed: true,
-                },
+                failed: true,
             };
         default:
             return state;

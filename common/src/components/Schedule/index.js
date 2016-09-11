@@ -5,16 +5,18 @@ import {
     ScrollView,
 } from 'react-native';
 import moment from 'moment';
+import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
-import getSchedule from '../../../lib/msm/schedule';
 import ScreenService from '../../../lib/utils/screenService';
+
+import * as actions from '../../ActionCreators';
 
 import Day from './Day';
 
 function PortraitSchedule({ schedule }) {
     const style = {
         position: 'absolute',
-        top: 0,
+        top: 54,
         left: 0,
         height: ScreenService.getScreenSize().height,
         width: ScreenService.getScreenSize().width,
@@ -26,10 +28,10 @@ function PortraitSchedule({ schedule }) {
             <ScrollView
                 horizontal
                 pagingEnabled
-                style = {style}
+                style={style}
             >
                 {[1, 2, 3, 4, 5].map((num) =>
-                    <Day key = {`${num}-portrait`} schedule = {schedule} day = {num} />
+                    <Day key={`${num}-portrait`} schedule={schedule} day={num} />
                 )}
             </ScrollView>
         </View>
@@ -38,13 +40,14 @@ function PortraitSchedule({ schedule }) {
 
 PortraitSchedule.propTypes = {
     schedule: PropTypes.array,
+    landscape: PropTypes.bool,
 };
 
 function LandscapeSchedule({ schedule }) {
     return (
         <View>
         {[1, 2, 3, 4, 5].map((num) =>
-            <Day key = {`${num}-landscape`} schedule = {schedule} day = {num} landscape />
+            <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape />
         )}
         </View>
     );
@@ -52,9 +55,15 @@ function LandscapeSchedule({ schedule }) {
 
 LandscapeSchedule.propTypes = {
     schedule: PropTypes.array,
+    landscape: PropTypes.bool,
 };
 
-export default class Schedule extends Component {
+class Schedule extends Component {
+    static propTypes = {
+        load: React.PropTypes.func,
+        loading: React.PropTypes.bool,
+    };
+
     constructor(props) {
         super(props);
         const initial = Orientation.getInitialOrientation();
@@ -66,18 +75,18 @@ export default class Schedule extends Component {
 
     componentDidMount() {
         // TODO get rid of this shit when school starts
-        getSchedule(
-            moment()
-            .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
-            .isoWeekday(1),
-            moment()
-            .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
-            .isoWeekday(1)
-            .add(1, 'w')
-            .subtract(1, 'd')
-        ).then((schedule) => {
-            this.setState({ schedule });
-        });
+        if (this.props.loading) {
+            this.props.load(
+                moment()
+                .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
+                .isoWeekday(1),
+                moment()
+                .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
+                .isoWeekday(1)
+                .add(1, 'w')
+                .subtract(1, 'd')
+            );
+        }
 
         Orientation.addOrientationListener((orientation) => {
             this.setState({ landscape: orientation === 'LANDSCAPE', key: Math.random() });
@@ -85,22 +94,33 @@ export default class Schedule extends Component {
     }
 
     getScheduleForOrientation() {
-        const props = { schedule: this.state.schedule, landscape: this.state.landscape };
-        return this.state.landscape
-        ? <LandscapeSchedule {...props} />
-        : <PortraitSchedule {...props} />;
+        const props = { schedule: this.props.schedule, landscape: this.state.landscape };
+        return this.state.landscape ?
+            <LandscapeSchedule {...props} /> :
+            <PortraitSchedule {...props} />;
     }
 
     render() {
         return (
             <View>
-            {() => {
-                if (this.state.schedule === null)
+            {(() => {
+                if (this.props.loading)
                     return (<Text>Loading</Text>);
 
                 return this.getScheduleForOrientation();
-            }}
+            })()}
             </View>
         );
     }
 }
+
+const mapStateToProps = (state) => ({
+    schedule: state.schedule.schedule,
+    loading: state.schedule.scheduleLoading,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    load: (start, end) => dispatch(actions.loadSchedule(start, end)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

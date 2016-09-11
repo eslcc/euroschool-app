@@ -5,7 +5,7 @@ import {
 
 const initialState = {
     schedule: null,
-    scheduleLoading: false,
+    scheduleLoading: true,
 };
 
 export default (state = initialState, action = {}) => {

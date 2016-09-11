@@ -1,16 +1,28 @@
-import { combineReducers, createStore, applyMiddleware } from 'redux';
+import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import devTools from 'remote-redux-devtools';
 
-import RouteReducer from './reducers/RouteReducer';
-import StartupReducer from './reducers/StartupReducer';
-import ScheduleReducer from './reducers/ScheduleReducer';
-import LoginReducer from './reducers/LoginReducer';
+import route from './reducers/RouteReducer';
+import startup from './reducers/StartupReducer';
+import schedule from './reducers/ScheduleReducer';
+import login from './reducers/LoginReducer';
 
 const MainReducer = combineReducers({
-    RouteReducer,
-    StartupReducer,
-    ScheduleReducer,
-    LoginReducer,
+    route,
+    startup,
+    schedule,
+    login,
 });
 
-export default () => createStore(MainReducer, applyMiddleware(thunk));
+export default function () {
+    const enhancer = compose(
+      applyMiddleware(thunk),
+      devTools()
+    );
+
+    const store = createStore(MainReducer, enhancer);
+
+    devTools.updateStore(store);
+
+    return store;
+}

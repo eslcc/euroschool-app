@@ -21,4 +21,6 @@ Orientation.addOrientationListener(setScreenSize);
 
 setScreenSize(Orientation.getInitialOrientation());
 
-export default () => screen;
+export default {
+    getScreenSize: () => screen,
+};

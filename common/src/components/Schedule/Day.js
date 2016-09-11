@@ -28,15 +28,15 @@ function getHours() {
             top,
             left: 0,
         };
-        return <Text key = {hour} style = {style}>{hour}</Text>;
+        return <Text key={hour} style={style}>{hour}</Text>;
     });
 }
 
 function getCourse(course, day, landscape) {
     if (landscape)
-        return <LandscapeCourse key = {`${course.start}-portrait`} course = {course} day = {day} />;
+        return <LandscapeCourse key={`${course.start}-portrait`} course={course} day={day} />;
 
-    return <PortraitCourse key = {`${course.start}-landscape`} course = {course} day = {day} />;
+    return <PortraitCourse key={`${course.start}-landscape`} course={course} day={day} />;
 }
 
 export default function Day({ schedule, day, landscape }) {
@@ -44,8 +44,7 @@ export default function Day({ schedule, day, landscape }) {
         (thing) => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
     const dayName = days[day];
-    const landscapeLeft = 80 + (((ScreenService.getScreenSize().width - 80) / 5) * (day - 1));
-    console.dir(ScreenService);
+    const landscapeLeft = ((ScreenService.getScreenSize().width / 5) * (day - 1));
     const styles = { // DIRTY HACK: Normally I would use StyleSheet.create. However, I need the
         // layout to be recalculated whenever the orientation changes.
         // TODO: make this use flexbox and avoid this
@@ -56,11 +55,11 @@ export default function Day({ schedule, day, landscape }) {
             justifyContent: 'center',
         },
         landscapeDay: {
-            width: ((ScreenService.getScreenSize().width - 80) / 5),
+            width: ((ScreenService.getScreenSize().width) / 5),
             height: 64,
             alignItems: 'center',
             justifyContent: 'center',
-            top: 0,
+            top: 54,
             position: 'absolute',
         },
         monday: {
@@ -89,12 +88,12 @@ export default function Day({ schedule, day, landscape }) {
 
     return (
         <View>
-            <View style = {style}>
+            <View style={style}>
                 <Text>{capitalize(dayName)}</Text>
             </View>
 
             {courses.map((course) => getCourse(course, day, landscape))}
-            {landscape ? (day === 1 ? getHours() : null) : getHours() }
+            {landscape ? null : getHours() }
         </View>
     );
 }

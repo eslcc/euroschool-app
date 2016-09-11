@@ -18,7 +18,7 @@ const colors = [
 ];
 
 export function PortraitCourse({ course, day }) {
-    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 16) / 9;
+    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 54 - 16) / 9;
     const oneMinuteHeight = oneHourHeight / 60;
     // Get rid of the naughty Z at the end that messes with Moment
     const start = moment(course.start.substring(0, course.start.length - 1));
@@ -52,14 +52,14 @@ export function PortraitCourse({ course, day }) {
         },
     };
     return (
-        <View style = {style.course}>
-            <View style = {style.innerLeft}>
-                <Text style = {style.labelLevel1}>{course.title}</Text>
-                <Text style = {style.labelLevel2}>{course.teacher_name_list}</Text>
+        <View style={style.course}>
+            <View style={style.innerLeft}>
+                <Text style={style.labelLevel1}>{course.title}</Text>
+                <Text style={style.labelLevel2}>{course.teacher_name_list}</Text>
             </View>
-            <View style = {style.innerRight}>
-                <Text style = {style.labelLevel1}>{course.param_1}</Text>
-                <Text style = {style.labelLevel2}>{`Period ${period}`}</Text>
+            <View style={style.innerRight}>
+                <Text style={style.labelLevel1}>{course.param_1}</Text>
+                <Text style={style.labelLevel2}>{`Period ${period}`}</Text>
             </View>
         </View>
     );
@@ -71,17 +71,17 @@ PortraitCourse.propTypes = {
 };
 
 export function LandscapeCourse({ course, day }) {
-    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
+    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 54 - 8) / 10;
     const oneMinuteHeight = oneHourHeight / 60;
-    const oneDayWidth = ((ScreenService.getScreenSize().width - 80) / 5);
+    const oneDayWidth = (ScreenService.getScreenSize().width / 5);
     const start = moment(course.start.substring(0, course.start.length - 1));
     const period = parseInt(course.param_2.replace(/Period ([1-9]) {10}-/, '$1'), 10);
     const style = {
         course: {
             position: 'absolute',
-            left: 80 + ((day - 1) * oneDayWidth),
+            left: ((day - 1) * oneDayWidth),
             width: oneDayWidth,
-            top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
+            top: 64 + 54 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
             height: (45 * oneMinuteHeight),
             backgroundColor: colors[day - 1][period - 1],
             marginRight: 16,
@@ -93,7 +93,7 @@ export function LandscapeCourse({ course, day }) {
         },
     };
     return (
-        <View style = {style.course}>
+        <View style={style.course}>
             <Text>{ course.title }</Text>
         </View>
     );
