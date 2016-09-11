@@ -58,7 +58,7 @@
         "react/jsx-indent-props": ["warn", 4],
         "react/jsx-filename-extension": "off",
         "react/require-extension": "off",
-        "react/jsx-equals-spacing": ["warn", "always"],
+        "react/jsx-equals-spacing": ["error", "never"],
         "react/jsx-curly-spacing": ["warn", "never"]
     },
     "globals":
