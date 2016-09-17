@@ -1,3 +1,5 @@
+import serialize from '../utils/serialize';
+
 export const METHODS = {
     GET: 'GET',
     POST: 'POST',
@@ -17,17 +19,6 @@ export const URL_BASE : string = 'https://es.msm.io';
 //     return str.join('&');
 // }
 
-export const serialize = (obj, prefix) =>
-    Object.keys(obj).map((name) => {
-        const key = prefix ?
-            `${prefix}[${name}]` :
-            name;
-        const val = obj[name];
-
-        return typeof val === 'object' ?
-            serialize(val, key) :
-            `${encodeURIComponent(key)}=${encodeURIComponent(val)}`;
-    }).join('&');
 
 export function doMsmRequest(
     method: string,
@@ -35,7 +26,7 @@ export function doMsmRequest(
     params: {[key: string]: string}
 ): Promise<any | string> {
     const args = {
-        credentials: 'same-origin',
+        credentials: 'include',
         method,
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',

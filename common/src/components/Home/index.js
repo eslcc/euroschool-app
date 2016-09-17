@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import Schedule from '../Schedule';
+import { Text } from 'react-native';
 
 export default class Home extends Component {
     render() {
         return (
-            <Schedule />
+            <Text>nothing to see here</Text>
         );
     }
 }

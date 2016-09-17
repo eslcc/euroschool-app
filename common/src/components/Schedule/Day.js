@@ -59,7 +59,7 @@ export default function Day({ schedule, day, landscape }) {
             height: 64,
             alignItems: 'center',
             justifyContent: 'center',
-            top: 54,
+            top: 0,
             position: 'absolute',
         },
         monday: {

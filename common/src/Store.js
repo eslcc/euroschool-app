@@ -6,12 +6,14 @@ import route from './reducers/RouteReducer';
 import startup from './reducers/StartupReducer';
 import schedule from './reducers/ScheduleReducer';
 import login from './reducers/LoginReducer';
+import canteen from './reducers/CanteenReducer';
 
 const MainReducer = combineReducers({
     route,
     startup,
     schedule,
     login,
+    canteen,
 });
 
 export default function () {

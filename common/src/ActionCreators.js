@@ -1,31 +1,35 @@
 import { Actions } from 'react-native-router-flux';
 
-import { getLoginStatus, login } from '../lib/msm/login';
+import * as msmLogin from '../lib/msm/login';
+import * as moneweb from '../lib/moneweb';
 import getSchedule from '../lib/msm/schedule';
 
-import {
-    STARTUP_COMPLETED, // TODO: import * from './ActionTypes'
-    LOGIN_NEEDED,
-    LOGIN_FAILED,
-    LOAD_SCHEDULE,
-    SCHEDULE_LOADED,
-} from './ActionTypes';
+import * as actions from './ActionTypes';
 
 
 export const startupCompleted = () => ({
-    type: STARTUP_COMPLETED,
+    type: actions.STARTUP_COMPLETED,
 });
 
 export const loginNeeded = () => ({
-    type: LOGIN_NEEDED,
+    type: actions.LOGIN_NEEDED,
 });
 export const loginFailed = () => ({
-    type: LOGIN_FAILED,
+    type: actions.LOGIN_FAILED,
+});
+
+export const loadingBalance = () => ({
+    type: actions.LOADING_BALANCE
+});
+
+export const balanceLoaded = (balance) => ({
+    type: actions.BALANCE_LOADED,
+    balance,
 });
 
 export const loadApp = () =>
     () =>
-        getLoginStatus().then(
+        msmLogin.getLoginStatus().then(
             (status) => {
                 if (status)
                     Actions.main();
@@ -35,7 +39,7 @@ export const loadApp = () =>
         ).done();
 
 export const doLogin = (email: string, password: string) => (dispatch: func) => {
-    login(email, password)
+    msmLogin.login(email, password)
         .then((status: boolean) => {
             if (status)
                 Actions.main();
@@ -45,15 +49,29 @@ export const doLogin = (email: string, password: string) => (dispatch: func) => 
 };
 
 export const scheduleLoaded = (schedule) => ({
-    type: SCHEDULE_LOADED,
+    type: actions.SCHEDULE_LOADED,
     schedule,
 });
 
 export function loadSchedule(start, end) {
     return (dispatch) => {
-        dispatch({ type: LOAD_SCHEDULE });
+        dispatch({ type: actions.LOAD_SCHEDULE });
         return getSchedule(start, end).then(
           schedule => dispatch(scheduleLoaded(schedule))
         ).done();
+    };
+}
+
+export function getBalance() {
+    console.log('called');
+    return (dispatch) => {
+        dispatch(loadingBalance());
+        return moneweb.login(TODO insert username and password here)
+            .then(status => {
+                moneweb.getBalance()
+                    .then(balance => dispatch(balanceLoaded(balance)));
+                    // ANTIPATTERN
+            })
+            .done();
     };
 }
