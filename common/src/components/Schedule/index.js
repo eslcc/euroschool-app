@@ -16,7 +16,7 @@ import Day from './Day';
 function PortraitSchedule({ schedule }) {
     const style = {
         position: 'absolute',
-        top: 54,
+        top: 0,
         left: 0,
         height: ScreenService.getScreenSize().height,
         width: ScreenService.getScreenSize().width,
