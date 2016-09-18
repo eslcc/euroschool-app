@@ -48,7 +48,7 @@ export function getBalance() {
         method: 'POST',
         credentials: 'include',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
     })
     .then(response => response.text())

@@ -27,6 +27,16 @@ export const balanceLoaded = (balance) => ({
     balance,
 });
 
+export const balanceLoadFailed = () => ({
+    type: actions.BALANCE_LOAD_FAILED,
+})
+
+export const settingChanged = (key, value) => ({
+    type: actions.SETTING_CHANGED,
+    key,
+    value,
+});
+
 export const loadApp = () =>
     () =>
         msmLogin.getLoginStatus().then(
@@ -62,15 +72,17 @@ export function loadSchedule(start, end) {
     };
 }
 
-export function getBalance() {
-    console.log('called');
+export function getBalance(username, password) {
     return (dispatch) => {
         dispatch(loadingBalance());
-        return moneweb.login(TODO insert username and password here)
+        return moneweb.login(username, password)
             .then(status => {
-                moneweb.getBalance()
-                    .then(balance => dispatch(balanceLoaded(balance)));
-                    // ANTIPATTERN
+                // if (status) {
+                    moneweb.getBalance()
+                        .then(balance => dispatch(balanceLoaded(balance)));
+                // } else {
+                    // dispatch(balanceLoadFailed());
+                // }
             })
             .done();
     };

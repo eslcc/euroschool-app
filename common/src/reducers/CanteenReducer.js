@@ -1,8 +1,9 @@
-import { LOADING_BALANCE, BALANCE_LOADED } from '../ActionTypes';
+import { LOADING_BALANCE, BALANCE_LOADED, BALANCE_LOAD_FAILED } from '../ActionTypes';
 
 const initialState = {
     loaded: false,
     loadInProgress: false,
+    loadFailed: false,
     balance: '',
 };
 
@@ -20,6 +21,13 @@ export default (state = initialState, action) => {
                 loadInProgress: false,
                 loaded: true,
                 balance: action.balance,
+            };
+        case BALANCE_LOAD_FAILED:
+            return {
+                ...state,
+                loadInProgress: false,
+                loaded: false,
+                loadFailed: true,
             };
         default:
             return state;
