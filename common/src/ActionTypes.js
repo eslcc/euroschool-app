@@ -6,3 +6,7 @@ export const NETWORK_ERROR = 'euroschool.NETWORK_ERROR';
 export const LOGIN_FAILED = 'euroschool.LOGIN_FAILED';
 export const LOGIN_SUCCESS = 'euroschool.YoMamaSoUgly.NobodyWillSeeHerHereAnyway';
 export const LOGIN_ATTEMPT = 'euroschool.LOGIN_ATTEMPT';
+export const LOADING_BALANCE = 'euroschool.LOADING_BALANCE';
+export const BALANCE_LOADED = 'euroschool.BALANCE_LOADED';
+export const BALANCE_LOAD_FAILED = 'euroschool.BALANCE_LOAD_FAILED';
+export const SETTING_CHANGED = 'euroschool.SETTING_CHANGED';

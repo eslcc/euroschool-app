@@ -26,11 +26,11 @@ project.xcworkspace
 #
 *.iml
 **/.idea/libraries/
-**/.idea/workspace.xml
 .gradle/
 
 # Local configuration file (sdk path, etc)
 local.properties
+android/
 
 # node.js
 #

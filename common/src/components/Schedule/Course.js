@@ -71,7 +71,7 @@ PortraitCourse.propTypes = {
 };
 
 export function LandscapeCourse({ course, day }) {
-    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 54 - 8) / 10;
+    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
     const oneMinuteHeight = oneHourHeight / 60;
     const oneDayWidth = (ScreenService.getScreenSize().width / 5);
     const start = moment(course.start.substring(0, course.start.length - 1));
