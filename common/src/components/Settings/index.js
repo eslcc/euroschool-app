@@ -5,7 +5,7 @@ import {
     StyleSheet
 } from 'react-native';
 import { connect } from 'react-redux';
-import { MKTextField } from 'react-native-material-kit';
+import { MKTextField, MKButton } from 'react-native-material-kit';
 import * as actions from '../../ActionCreators';
 import Settings, { categories as settingCategories } from '../../constants/settings';
 
@@ -21,26 +21,43 @@ const styles = StyleSheet.create({
     },
 });
 
-const dumbRenderRow = ({ row, change }) => {
+const dumbRenderRow = ({ row, change, settings }) => {
     switch (row.type) {
-        case 'string':
+        case 'string': {
+            const val = row.key.split('.').reduce((prev, itm) => prev[itm], settings);
+            const value = val ? val : row.default;
             return (
                 <MKTextField
                     placeholder={row.label}
                     secureTextEntry={row.secure}
+                    value={value}
                     onChangeText={text => change(row.key, text)}
                 />
             );
+        }
+        case 'button': {
+            const Button = MKButton.accentColoredButton()
+                            .withText(row.label)
+                            .withOnPress(row.onClick)
+                            .build();
+            return (
+                <Button />
+            );
+        }
         default:
             throw new Error(`Unrecognised setting type ${row.type}`);
     }
 };
 
+const mapRowStateToProps = (state) => ({
+    settings: state.settings,
+})
+
 const mapDispatchToProps = (dispatch) => ({
     change: (key, value) => dispatch(actions.settingChanged(key, value)),
 });
 
-const Row = connect(null, mapDispatchToProps)(dumbRenderRow);
+const Row = connect(mapRowStateToProps, mapDispatchToProps)(dumbRenderRow);
 
 const renderHeader = (sectionData, category) =>
     <Text style={styles.header}>{category}</Text>;

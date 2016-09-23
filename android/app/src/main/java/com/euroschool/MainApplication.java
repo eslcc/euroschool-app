@@ -3,6 +3,9 @@ package com.euroschool;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
+import com.github.yamill.orientation.OrientationPackage;
+import com.github.xinthink.rnmk.ReactMaterialKitPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.modules.network.OkHttpClientProvider;
@@ -33,8 +36,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.asList(
               new MainReactPackage(),
-              new ReactMaterialKitPackage(),
-              new OrientationPackage()
+            new ReactNativeRestartPackage(),
+            new OrientationPackage(),
+            new ReactMaterialKitPackage()
       );
     }
   };

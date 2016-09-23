@@ -6,6 +6,7 @@ import {
 const initialState = {
     schedule: null,
     scheduleLoading: true,
+    lastUpdate: -1,
 };
 
 export default (state = initialState, action = {}) => {
@@ -20,6 +21,7 @@ export default (state = initialState, action = {}) => {
                 ...state,
                 scheduleLoading: false,
                 schedule: action.schedule,
+                lastUpdate: new Date().valueOf(),
             };
 
         default:

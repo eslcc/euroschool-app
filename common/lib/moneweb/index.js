@@ -52,5 +52,6 @@ export function getBalance() {
         },
     })
     .then(response => response.text())
+    .then(text => text.indexOf('Erreur') > 0 ? Promise.reject() : text)
     .then(text => text.match(/([0-9]+,[0-9]{2}) €/)[1]);
 }

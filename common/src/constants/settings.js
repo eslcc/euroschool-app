@@ -1,3 +1,7 @@
+import { purgeStoredState } from 'redux-persist';
+import { AsyncStorage } from 'react-native';
+import restart from 'react-native-restart';
+
 const settings = {
     'moneweb.username': {
         key: 'moneweb.username',
@@ -15,12 +19,18 @@ const settings = {
         category: 'Moneweb',
         label: 'Password',
     },
+    'local.purge': {
+        type: 'button',
+        label: 'Purge Local State',
+        category: 'Development Options',
+        onClick: () => purgeStoredState({ storage: AsyncStorage }).then(() => restart()),
+    },
 };
 
 export default settings;
 
 export function categories() {
-    const categoryMap = {}
+    const categoryMap = {};
     Object.keys(settings).forEach(itemKey => {
         const item = settings[itemKey];
         if (!categoryMap[item.category]) {

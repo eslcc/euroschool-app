@@ -156,7 +156,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         },
         "source-map": {
           "version": "0.5.6",
@@ -177,7 +178,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         },
         "source-map": {
           "version": "0.5.6",
@@ -193,7 +195,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -209,7 +212,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -277,7 +281,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.6.1 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -333,7 +338,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -484,7 +490,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -500,7 +507,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -516,7 +524,8 @@
         },
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -527,7 +536,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.2.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -1432,7 +1442,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.0.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -1453,12 +1464,13 @@
     },
     "eslint-plugin-flowtype": {
       "version": "2.16.1",
-      "from": "eslint-plugin-flowtype@latest",
+      "from": "https://registry.npmjs.org/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.16.1.tgz",
       "resolved": "https://registry.npmjs.org/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.16.1.tgz",
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.15.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -2345,6 +2357,11 @@
       "from": "json-stable-stringify@>=1.0.1 <2.0.0",
       "resolved": "https://registry.npmjs.org/json-stable-stringify/-/json-stable-stringify-1.0.1.tgz"
     },
+    "json-stringify-safe": {
+      "version": "5.0.1",
+      "from": "json-stringify-safe@>=5.0.1 <6.0.0",
+      "resolved": "https://registry.npmjs.org/json-stringify-safe/-/json-stringify-safe-5.0.1.tgz"
+    },
     "json5": {
       "version": "0.4.0",
       "from": "json5@>=0.4.0 <0.5.0",
@@ -2446,7 +2463,7 @@
     },
     "lodash": {
       "version": "4.15.0",
-      "from": "lodash@latest",
+      "from": "lodash@4.15.0",
       "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
     },
     "lodash-es": {
@@ -3262,6 +3279,11 @@
       "from": "git+https://github.com/yamill/react-native-orientation.git",
       "resolved": "git+https://github.com/yamill/react-native-orientation.git#278291739e2b7c8ab208fdf404e4b139e24b4a3f"
     },
+    "react-native-restart": {
+      "version": "0.0.1",
+      "from": "react-native-restart@latest",
+      "resolved": "https://registry.npmjs.org/react-native-restart/-/react-native-restart-0.0.1.tgz"
+    },
     "react-native-router-flux": {
       "version": "3.35.0",
       "from": "react-native-router-flux@latest",
@@ -3279,7 +3301,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.6.1 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -3408,6 +3431,18 @@
         }
       }
     },
+    "redux-persist": {
+      "version": "4.0.0-alpha5",
+      "from": "redux-persist@latest",
+      "resolved": "https://registry.npmjs.org/redux-persist/-/redux-persist-4.0.0-alpha5.tgz",
+      "dependencies": {
+        "lodash-es": {
+          "version": "4.16.1",
+          "from": "lodash-es@>=4.16.0 <5.0.0",
+          "resolved": "https://registry.npmjs.org/lodash-es/-/lodash-es-4.16.1.tgz"
+        }
+      }
+    },
     "redux-thunk": {
       "version": "2.1.0",
       "from": "redux-thunk@*",
@@ -3445,7 +3480,7 @@
     },
     "remote-redux-devtools": {
       "version": "0.4.8",
-      "from": "remote-redux-devtools@>=0.4.8 <0.5.0",
+      "from": "remote-redux-devtools@latest",
       "resolved": "https://registry.npmjs.org/remote-redux-devtools/-/remote-redux-devtools-0.4.8.tgz"
     },
     "remotedev-utils": {
@@ -3455,7 +3490,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.0.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
@@ -3879,7 +3915,8 @@
       "dependencies": {
         "lodash": {
           "version": "4.15.0",
-          "from": "lodash@>=4.0.0 <5.0.0"
+          "from": "lodash@4.15.0",
+          "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.15.0.tgz"
         }
       }
     },
