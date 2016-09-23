@@ -25,16 +25,19 @@ const items = [
         type: 'button',
         label: 'Exercises',
         click: () => Actions.exercises(),
+        nyi: true,
     },
     {
         type: 'button',
         label: 'Absent Teachers',
         click: () => Actions.absences(),
+        nyi: true,
     },
     {
         type: 'button',
         label: 'News',
         click: () => Actions.news(),
+        nyi: true,
     },
     {
         type: 'button',
@@ -70,6 +73,10 @@ const styles = StyleSheet.create({
     view: {
         marginTop: 56,
     },
+    nyi: {
+        fontWeight: 'bold',
+        color: MKColor.Red,
+    }
 });
 
 let drawer;
@@ -82,15 +89,17 @@ function renderRowForType(row) {
     switch (row.type) {
         case 'header':
             return <Text style={styles.header}>{row.text}</Text>;
-        case 'button':
+        case 'button': {
+            const nyi = row.nyi ? <Text style={styles.nyi}>NYI</Text> : null;
             return (
                 <MKButton
                     style={styles.button}
                     onPress={click}
                 >
-                    <View><Text style={styles.buttonText}>{row.label}</Text></View>
+                    <View><Text style={styles.buttonText}>{row.label}</Text>{nyi}</View>
                 </MKButton>
             );
+        }
         default:
             return <Text>{JSON.stringify(row)}</Text>;
     }

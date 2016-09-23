@@ -79,9 +79,9 @@ export function LandscapeCourse({ course, day }) {
     const style = {
         course: {
             position: 'absolute',
-            left: ((day - 1) * oneDayWidth),
-            width: oneDayWidth,
-            top: 64 + 54 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
+            left: ((day - 1) * oneDayWidth) + 2,
+            width: oneDayWidth - 4,
+            top: 44 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
             height: (45 * oneMinuteHeight),
             backgroundColor: colors[day - 1][period - 1],
             marginRight: 16,
