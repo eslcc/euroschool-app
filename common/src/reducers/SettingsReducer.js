@@ -22,6 +22,9 @@ function assign(obj, prop, value) {
 const initialState = {};
 
 Object.keys(Settings).forEach(setting => {
+    if (Settings[setting].type === 'button') {
+        return;
+    }
     assign(initialState, Settings[setting].key, Settings[setting].default);
 });
 

@@ -30,10 +30,15 @@ class Balance extends Component {
         loading: PropTypes.bool,
         loadFailed: PropTypes.bool,
         balance: PropTypes.string,
+        refreshBalanceInBackground: PropTypes.func,
     };
 
     componentDidMount() {
-        this.props.loadBalance();
+        if(this.props.balance !== '') {
+            this.props.refreshBalanceInBackground();
+        } else {
+            this.props.loadBalance();
+        }
     }
 
     render() {
@@ -61,11 +66,12 @@ const mapStateToProps = (state) => ({
     balance: state.canteen.balance,
     loading: state.canteen.loadInProgress,
     loaded: state.canteen.loaded,
-    loadFailed: state.canteen.loadFailed
+    loadFailed: state.canteen.loadFailed,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     loadBalance: () => dispatch(actions.getBalance()),
+    refreshBalanceInBackground: () => dispatch(actions.refreshBalanceInBackground()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Balance);

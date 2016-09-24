@@ -62,6 +62,7 @@ class Schedule extends Component {
     static propTypes = {
         load: React.PropTypes.func,
         loading: React.PropTypes.bool,
+        refresh: React.PropTypes.func,
     };
 
     constructor(props) {
@@ -74,18 +75,10 @@ class Schedule extends Component {
     }
 
     componentDidMount() {
-        // TODO get rid of this shit when school starts
         if (this.props.loading) {
-            this.props.load(
-                moment()
-                .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
-                .isoWeekday(1),
-                moment()
-                .set({ month: 8, date: 12, hour: 0, minute: 0, second: 0 })
-                .isoWeekday(1)
-                .add(1, 'w')
-                .subtract(1, 'd')
-            );
+            this.props.load();
+        } else {
+            this.props.refresh();
         }
 
         Orientation.addOrientationListener((orientation) => {
@@ -121,6 +114,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     load: (start, end) => dispatch(actions.loadSchedule(start, end)),
+    refresh: (start, end) => dispatch(actions.refreshScheduleInBackgroundIfNeeded(start, end)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
