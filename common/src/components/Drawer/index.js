@@ -29,9 +29,8 @@ const items = [
     },
     {
         type: 'button',
-        label: 'Absent Teachers',
+        label: 'Absent Teachers (partially done)',
         click: () => Actions.absences(),
-        nyi: true,
     },
     {
         type: 'button',

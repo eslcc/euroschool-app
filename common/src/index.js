@@ -10,6 +10,7 @@ import Drawer from './components/Drawer';
 import Schedule from './components/Schedule';
 import Canteen from './components/Canteen';
 import Settings from './components/Settings';
+import Absences from './components/Absences';
 
 const RouterWithRedux = connect()(Router);
 
@@ -35,7 +36,8 @@ const scenes = Actions.create(
                 }}
             >
                 <Scene key="schedule" hideNavBar component={Schedule} icon={TabIcon} title="Schedule" />
-                <Scene key="balance" hideNavBar component={Canteen} icon={TabIcon} title="Balance" />
+                <Scene key="balance" component={Canteen} icon={TabIcon} title="Canteen Balance" />
+                <Scene key="absences" component={Absences} icon={TabIcon} title="Teacher Absences" />
             </Scene>
         </Scene>
         <Scene key="settings" component={Settings} hideTabBar type={ActionConst.PUSH} title="Settings" />

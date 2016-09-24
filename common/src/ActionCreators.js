@@ -3,6 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import * as msmLogin from '../lib/msm/login';
 import * as moneweb from '../lib/moneweb';
 import getSchedule from '../lib/msm/schedule';
+import * as euroschool from '../lib/euroschool';
 
 import * as actions from './ActionTypes';
 
@@ -19,7 +20,7 @@ export const loginFailed = () => ({
 });
 
 export const loadingBalance = () => ({
-    type: actions.LOADING_BALANCE
+    type: actions.LOADING_BALANCE,
 });
 
 export const balanceLoaded = (balance) => ({
@@ -29,12 +30,21 @@ export const balanceLoaded = (balance) => ({
 
 export const balanceLoadFailed = () => ({
     type: actions.BALANCE_LOAD_FAILED,
-})
+});
 
 export const settingChanged = (key, value) => ({
     type: actions.SETTING_CHANGED,
     key,
     value,
+});
+
+export const loadAbsences = () => ({
+    type: actions.LOAD_ABSENCES,
+});
+
+export const absencesLoaded = (absences) => ({
+    type: actions.ABSENCES_LOADED,
+    absences,
 });
 
 export const doLogin = (email: string, password: string) => (dispatch: func) => {
@@ -123,3 +133,9 @@ export function refreshBalanceInBackground() {
         moneweb.getBalance().then(balance => dispatch(balanceLoaded(balance))).done();
     };
 }
+
+export const getAbsences = () => (dispatch) => {
+    dispatch(loadAbsences());
+    euroschool.absences()
+        .then(absences => dispatch(absencesLoaded(absences)));
+};

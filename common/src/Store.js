@@ -9,6 +9,7 @@ import schedule from './reducers/ScheduleReducer';
 import login from './reducers/LoginReducer';
 import canteen from './reducers/CanteenReducer';
 import settings from './reducers/SettingsReducer';
+import absences from './reducers/AbsencesReducer';
 
 const mainReducer = combineReducers({
     route,
@@ -17,6 +18,7 @@ const mainReducer = combineReducers({
     login,
     canteen,
     settings,
+    absences,
 });
 
 export default function () {
