@@ -10,3 +10,5 @@ export const LOADING_BALANCE = 'euroschool.LOADING_BALANCE';
 export const BALANCE_LOADED = 'euroschool.BALANCE_LOADED';
 export const BALANCE_LOAD_FAILED = 'euroschool.BALANCE_LOAD_FAILED';
 export const SETTING_CHANGED = 'euroschool.SETTING_CHANGED';
+export const LOAD_ABSENCES = 'euroschool.LOAD_ABSENCES';
+export const ABSENCES_LOADED = 'euroschool.ABSENCES_LOADED';

@@ -14,8 +14,19 @@ export const startupCompleted = () => ({
 export const loginNeeded = () => ({
     type: actions.LOGIN_NEEDED,
 });
+
 export const loginFailed = () => ({
     type: actions.LOGIN_FAILED,
+});
+
+export const loginAttempt = () => ({
+    type: actions.LOGIN_ATTEMPT,
+});
+
+export const loginSuccess = (email, password) => ({
+    type: actions.LOGIN_SUCCESS,
+    email,
+    password,
 });
 
 export const loadingBalance = () => ({
@@ -38,12 +49,15 @@ export const settingChanged = (key, value) => ({
 });
 
 export const doLogin = (email: string, password: string) => (dispatch: func) => {
+    dispatch(loginAttempt());
     msmLogin.login(email, password)
         .then((status: boolean) => {
-            if (status)
+            if (status) {
+                dispatch(loginSuccess(email, password));
                 Actions.main();
-            else
+            } else {
                 dispatch(loginFailed());
+            }
         }).done(); // TODO catch
 };
 
