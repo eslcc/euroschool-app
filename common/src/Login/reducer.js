@@ -1,4 +1,4 @@
-import { LOGIN_FAILED, LOGIN_SUCCESS, LOGIN_ATTEMPT } from '../ActionTypes';
+import { LOGIN_FAILED, LOGIN_SUCCESS, LOGIN_ATTEMPT } from './actionTypes';
 
 const initialState = {
     email: '',
@@ -18,13 +18,13 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 inProgress: true,
+                email: action.email,
+                password: action.password,
             };
         case LOGIN_SUCCESS:
             return {
                 ...state,
                 inProgress: false,
-                email: action.email,
-                password: action.password,
             };
         default:
             return state;

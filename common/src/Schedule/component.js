@@ -4,12 +4,11 @@ import {
     View,
     ScrollView,
 } from 'react-native';
-import moment from 'moment';
 import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
-import ScreenService from '../../../lib/utils/screenService';
+import ScreenService from '../../lib/utils/screenService';
 
-import * as actions from '../../ActionCreators';
+import * as actions from './actions';
 
 import Day from './Day';
 
@@ -114,7 +113,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     load: (start, end) => dispatch(actions.loadSchedule(start, end)),
-    refresh: (start, end) => dispatch(actions.refreshScheduleInBackgroundIfNeeded(start, end)),
+    refresh: (start, end) => dispatch(actions.refreshScheduleIfNeeded(start, end)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

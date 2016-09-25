@@ -1,14 +1,16 @@
 import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import thunk from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga'
 
-import route from './reducers/RouteReducer';
-import startup from './reducers/StartupReducer';
-import schedule from './reducers/ScheduleReducer';
-import login from './reducers/LoginReducer';
-import canteen from './reducers/CanteenReducer';
-import settings from './reducers/SettingsReducer';
+import RootSaga from './RootSaga';
+
+import route from './Route/reducer';
+import startup from './Startup/reducer';
+import schedule from './Schedule/reducer';
+import login from './Login/reducer';
+import canteen from './Canteen/reducer';
+import settings from './Settings/reducer';
 
 const mainReducer = combineReducers({
     route,
@@ -20,8 +22,10 @@ const mainReducer = combineReducers({
 });
 
 export default function () {
+    const sagaMiddleware = createSagaMiddleware();
+
     const enhancer = compose(
-      applyMiddleware(thunk),
+      applyMiddleware(sagaMiddleware),
       global.reduxNativeDevTools ? global.reduxNativeDevTools(/*options*/) : nope => nope,
     );
 
@@ -34,6 +38,8 @@ export default function () {
     };
 
     const store = createStore(reducer, enhancer, autoRehydrate());
+
+    sagaMiddleware.run(RootSaga);
 
     const persistor = persistStore(store, {
         blacklist: ['route', 'startup'],

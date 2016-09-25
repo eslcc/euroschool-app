@@ -6,8 +6,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import { MKTextField, MKButton } from 'react-native-material-kit';
-import * as actions from '../../ActionCreators';
-import Settings, { categories as settingCategories } from '../../constants/settings';
+import * as actions from './actions';
+import Settings, { categories as settingCategories } from './settings';
 
 const styles = StyleSheet.create({
     view: {
@@ -25,7 +25,7 @@ const dumbRenderRow = ({ row, change, settings }) => {
     switch (row.type) {
         case 'string': {
             const val = row.key.split('.').reduce((prev, itm) => prev[itm], settings);
-            const value = val ? val : row.default;
+            const value = val || row.default;
             return (
                 <MKTextField
                     placeholder={row.label}
@@ -51,7 +51,7 @@ const dumbRenderRow = ({ row, change, settings }) => {
 
 const mapRowStateToProps = (state) => ({
     settings: state.settings,
-})
+});
 
 const mapDispatchToProps = (dispatch) => ({
     change: (key, value) => dispatch(actions.settingChanged(key, value)),

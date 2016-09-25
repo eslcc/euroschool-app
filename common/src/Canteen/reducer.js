@@ -1,4 +1,4 @@
-import { LOADING_BALANCE, BALANCE_LOADED, BALANCE_LOAD_FAILED } from '../ActionTypes';
+import { LOADING_BALANCE, BALANCE_LOADED, BALANCE_LOAD_FAILED } from './actionTypes';
 
 const initialState = {
     loaded: false,

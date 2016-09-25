@@ -1,5 +1,5 @@
-import { SETTING_CHANGED } from '../ActionTypes';
-import Settings from '../constants/settings';
+import { SETTING_CHANGED } from './actionTypes';
+import Settings from './settings';
 
 /* eslint-disable */ // http://stackoverflow.com/questions/13719593/how-to-set-object-property-of-object-property-of-given-its-string-name-in-ja#
 function assign(obj, prop, value) {

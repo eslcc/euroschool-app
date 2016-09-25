@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Text, View, StyleSheet } from 'react-native';
 import { MKButton, MKColor, MKSpinner } from 'react-native-material-kit';
-import * as actions from '../../ActionCreators';
+import * as actions from './actions';
 
 // This is the bit where I wank off a horse to make debugging work.
 // Except it actually breaks everything. Don't wank off horses, kids.
@@ -70,7 +70,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    loadBalance: () => dispatch(actions.getBalance()),
+    loadBalance: () => dispatch(actions.loadBalance()),
     refreshBalanceInBackground: () => dispatch(actions.refreshBalanceInBackground()),
 });
 

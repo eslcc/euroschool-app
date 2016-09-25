@@ -1,7 +1,7 @@
 import {
     STARTUP_COMPLETED,
     LOGIN_NEEDED,
-} from '../ActionTypes';
+} from './actionTypes';
 
 const initialState = {
     scene: {},

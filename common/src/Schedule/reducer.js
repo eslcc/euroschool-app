@@ -1,7 +1,7 @@
 import {
     LOAD_SCHEDULE,
     SCHEDULE_LOADED,
-} from '../ActionTypes';
+} from './actionTypes';
 
 const initialState = {
     schedule: null,

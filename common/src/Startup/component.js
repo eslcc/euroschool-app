@@ -8,7 +8,7 @@ import {
 import { MKSpinner } from 'react-native-material-kit';
 import { connect } from 'react-redux';
 
-import { loadApp as doLoadApp } from '../../ActionCreators';
+import { checkLogin } from './actions';
 
 const styles = StyleSheet.create({
     container: {
@@ -22,7 +22,7 @@ const Startup = ({ loadApp }) => {
 
     return (
         <View style={styles.container}>
-            <Image source={require('../../../assets/images/StunningPicture.jpg')} />
+            <Image source={require('./assets/StunningPicture.jpg')} />
             <Text>The app is loading, please wait...</Text>
             <MKSpinner />
         </View>
@@ -34,7 +34,7 @@ Startup.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-    loadApp: () => dispatch(doLoadApp()),
+    loadApp: () => dispatch(checkLogin()),
 });
 
 export default connect(null, mapDispatchToProps)(Startup);

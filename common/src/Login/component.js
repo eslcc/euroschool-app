@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
     Text,
     View,
@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { MKButton, MKProgress, MKColor } from 'react-native-material-kit';
 import { connect } from 'react-redux';
-import * as actions from '../../ActionCreators';
+import * as actions from './actions';
 
 const windowSize = Dimensions.get('window');
 
@@ -47,10 +47,17 @@ const styles = StyleSheet.create({
 });
 
 const DumbLoginFailureIndicator = ({ display }) => {
-    if (!(display)) return null;
-    return (
-    <Text style={styles.failureText}>Something went wrong. Please check your email and password.</Text>
-  );
+    if (!(display)) {
+        return null;
+    } else {
+        return (
+            <Text style={styles.failureText}>Something went wrong. Please check your email and password.</Text>
+        );
+    }
+};
+
+DumbLoginFailureIndicator.propTypes = {
+    display: PropTypes.bool,
 };
 
 const LoginFailureIndicator = connect((state) => ({
@@ -83,7 +90,7 @@ class Login extends Component {
         .build();
         return (
             <View>
-                <Image source={require('../../../assets/images/LoginBackdrop.png')} style={styles.bg} />
+                <Image source={require('./assets/LoginBackdrop.png')} style={styles.bg} />
                 <View>
                     <Text style={[styles.mainText, styles.whiteFont]}>Hello.</Text>
                     <Text style={[styles.subheading, styles.greyFont]}>Please log in with your SMS account.</Text>
@@ -123,12 +130,8 @@ class Login extends Component {
     }
 }
 
-const mapStateToProps = () => ({
-
-});
-
 const mapDispatchToProps = (dispatch) => ({
-    login: (email, password) => dispatch(actions.doLogin(email, password)),
+    login: (email, password) => dispatch(actions.loginAttempt(email, password)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(null, mapDispatchToProps)(Login);

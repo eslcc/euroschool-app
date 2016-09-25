@@ -4,7 +4,7 @@ import moment from 'moment';
 import { capitalize } from 'lodash';
 
 import { PortraitCourse, LandscapeCourse } from './Course';
-import ScreenService from '../../../lib/utils/screenService';
+import ScreenService from '../../lib/utils/screenService';
 
 
 const days = [
@@ -45,9 +45,7 @@ export default function Day({ schedule, day, landscape }) {
     );
     const dayName = days[day];
     const landscapeLeft = ((ScreenService.getScreenSize().width / 5) * (day - 1));
-    const styles = { // DIRTY HACK: Normally I would use StyleSheet.create. However, I need the
-        // layout to be recalculated whenever the orientation changes.
-        // TODO: make this use flexbox and avoid this
+    const styles = {
         day: {
             width: ScreenService.getScreenSize().width,
             height: 64,
