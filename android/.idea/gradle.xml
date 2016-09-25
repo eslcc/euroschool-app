@@ -11,16 +11,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-material-kit/android" />
             <option value="$PROJECT_DIR$/../node_modules/react-native-orientation/android" />
+            <option value="$PROJECT_DIR$/../node_modules/react-native-restart/android" />
           </set>
         </option>
-        <option name="myModules">
-          <set>
-            <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/../node_modules/react-native-material-kit/android" />
-            <option value="$PROJECT_DIR$/../node_modules/react-native-orientation/android" />
-          </set>
-        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
   </component>
