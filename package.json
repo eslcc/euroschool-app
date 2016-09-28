@@ -5,7 +5,17 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "node node_modules/eslint/bin/eslint.js common || true",
-    "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true"
+    "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true",
+    "test-views": "mocha --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
+    "test-views-watch": "mocha --watch --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
+    "cover-views": "cross-env NODE_ENV=test nyc --reporter=text mocha --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
+    "cover-views-travis": "cross-env NODE_ENV=test nyc --reporter=lcovonly mocha --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
+    "test": "npm run test-views",
+    "test-watch": "npm run test-views-watch"
+  },
+  "nyc": {
+    "sourceMap": false,
+    "instrument": false
   },
   "dependencies": {
     "lodash": "^4.15.0",
@@ -25,6 +35,10 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
+    "babel-register": "https://registry.npmjs.org/babel-register/-/babel-register-6.14.0.tgz",
+    "chai": "^3.5.0",
+    "chai-enzyme": "^0.5.1",
+    "enzyme": "^2.4.1",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-flowtype": "^2.16.1",
@@ -32,6 +46,13 @@
     "eslint-plugin-jsx-a11y": "^2.2.0",
     "eslint-plugin-react": "^6.2.0",
     "flow-bin": "^0.32.0",
-    "redux-devtools": "^3.3.1"
+    "mocha": "^3.1.0",
+    "nyc": "^8.3.0",
+    "react": "https://registry.npmjs.org/react/-/react-15.3.1.tgz",
+    "react-addons-test-utils": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-native-mock": "^0.2.6",
+    "redux-devtools": "^3.3.1",
+    "sinon": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz"
   }
 }
