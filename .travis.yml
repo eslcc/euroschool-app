@@ -1,13 +1,11 @@
 language: node_js
+sudo: false
 node_js:
 - '6.1'
 script:
 - npm test
 - npm run cover-views-travis
-after_script: codecov -f coverage/lcov.info -t $CODECOV_TOKEN
+after_script: codecov -t $CODECOV_TOKEN
 cache:
   directories:
     - node_modules
-env:
-  global:
-    secure: pdrgtWN6LBr2dvRMRPSALzWNQ4ud7DAWTQmfvLoOXlkTAEC48IG6EiluIY+tUsgPTOMozC+NNaVHBQwfETeOMSh6HISR6hNyqsN79yTa6N57H2W6rsJxUvXVnaYI+FGQ7+PUJEuIKx70wXzwJ3NkRDsRGkIZFVNjvpU8UbsUQR1QmQ5+53II0z18n8G3hy/R+gaty9wph2tdQCP2EQcg68x0BV4OEyFdQ8sa1RiaRMP5WxGWIDiJIm1YQ7yGVpZA5FW3dXZyuF5xngR3kUIWfaBBW/60WZ0D2GU/JBw+89Dgnw1qwd1z2aKBPoie5ipWg5Uuc2nd4+eEKi/eQT2TnWYPJV/VArVfTbeCv0o6GB6cc0UdorR6xMXr0HgHh1DY8cDLQZYS2DX5cz17zDiAM3I5v6ZsmeFfW2E5lr8zhgNsGSlYiLqhc203GGN3Lf8oQqBXFpDpUHUNpvnakPqUlyfyIH0tNoxdbh5km77rOv0yxOmpXbRFVxf2wgr9MBqHgwqLxxIEW2nKXSYuW7bab0R5qLZUYDo1UxmBH7mY8fzVnRe2UMGq8WNQuedDFNWraXHWFF2tPhSS5xqNr8OU6C9XO80aP/l1kv7fxVZDbwdwtQlEKs3mCFakJLwBDo1UnUlK8Rh4w1h/pTmMDAAGoiL2l5KbgNIQL8lB7jN3yEs=
