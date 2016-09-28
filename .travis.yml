@@ -5,7 +5,7 @@ node_js:
 script:
 - npm test
 - npm run cover-views-travis
-after_script: ./node_modules/.bin/codecov -t $CODECOV_TOKEN
+- ./node_modules/.bin/codecov -t $CODECOV_TOKEN
 cache:
   directories:
     - node_modules
