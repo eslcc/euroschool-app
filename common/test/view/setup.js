@@ -5,13 +5,21 @@ import path from 'path';
 import register from 'babel-register';
 import chai from 'chai';
 import chaiEnzyme from 'chai-enzyme';
+import sinonChai from 'sinon-chai';
 import Module from 'module';
+
+import stubs from './stubs';
 
 const originalLoader = Module._load;
 Module._load = function hookedLoader(request, parent, isMain) {
     // Don't load images, because no packager
     if (request.match(/.jpeg|.jpg|.png$/)) {
         return { uri: request };
+    }
+
+    // STUBS
+    if ({}.hasOwnProperty.call(stubs, request)) {
+        return stubs[request];
     }
 
     return originalLoader(request, parent, isMain);
@@ -37,7 +45,7 @@ const modulesToCompile = [
     'react-native-orientation',
 ].map((moduleName) => new RegExp(`/node_modules/${moduleName}`));
 
-const rcPath = path.join(__dirname, '..', '.babelrc');
+const rcPath = path.join(__dirname, '..', '..', '..', '.babelrc');
 const source = fs.readFileSync(rcPath).toString();
 const config = JSON.parse(source);
 
@@ -53,7 +61,9 @@ config.ignore = (filename) => {
 register(config);
 
 global.__DEV__ = true; // eslint-disable-line
+global.TEST = true;
 global.expect = chai.expect;
 chai.use(chaiEnzyme());
+chai.use(sinonChai);
 
 require('react-native-mock/mock');
