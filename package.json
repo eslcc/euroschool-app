@@ -53,7 +53,7 @@
     "react": "https://registry.npmjs.org/react/-/react-15.3.1.tgz",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-native-mock": "http://markspolakovs.me/repo/react-native-mock-30bea2c.tar.gz",
+    "react-native-mock": "http://markspolakovs.me/repo/react-native-mock-30bea2c.tar",
     "redux-devtools": "^3.3.1",
     "sinon": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz",
     "sinon-chai": "^2.8.0"
