@@ -54,7 +54,7 @@
     "react": "https://registry.npmjs.org/react/-/react-15.3.1.tgz",
     "react-addons-test-utils": "^15.3.2",
     "react-dom": "^15.3.2",
-    "react-native-mock": "git+https://github.com/lelandrichardson/react-native-mock#400f741691e914ce823fee60ec5a420d5772cbc1",
+    "react-native-mock": "https://github.com/lelandrichardson/react-native-mock.git",
     "redux-devtools": "^3.3.1",
     "sinon": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz",
     "sinon-chai": "^2.8.0"
