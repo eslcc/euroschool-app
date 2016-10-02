@@ -43,6 +43,7 @@ const modulesToCompile = [
     // 'react-native-material-kit',
     'react-native-router-flux',
     'react-native-orientation',
+    'react-native-mock',
 ].map((moduleName) => new RegExp(`/node_modules/${moduleName}`));
 
 const rcPath = path.join(__dirname, '..', '..', '..', '.babelrc');
