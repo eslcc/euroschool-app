@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     }
 });
 
-class Balance extends Component {
+export class Balance extends Component {
     static propTypes = {
         loadBalance: PropTypes.func,
         loaded: PropTypes.bool,
@@ -45,7 +45,7 @@ class Balance extends Component {
         if (this.props.loaded) {
             return <Text style={styles.container}>{this.props.loaded ? this.props.balance : 'FOO'}</Text>;
         } else if (this.props.loading) {
-            return <MKSpinner style={styles.container} />
+            return <MKSpinner style={styles.container} />;
         }
         const Button = MKButton.button()
             .withBackgroundColor(MKColor.Red)
