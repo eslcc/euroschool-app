@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "postinstall": "cd node_modules/react-native-mock && npm install && npm run build",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "node node_modules/eslint/bin/eslint.js common || true",
     "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true",
