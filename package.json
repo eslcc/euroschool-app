@@ -8,7 +8,6 @@
     "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true",
     "test-views": "cross-env NODE_ENV=test nyc --reporter=text mocha --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
     "test-views-watch": "mocha --watch --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
-    "cover-views": "cross-env NODE_ENV=test nyc --reporter=text mocha --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
     "cover-views-travis": "nyc report --reporter=text-lcov > coverage.lcov",
     "test": "npm run test-views",
     "test-watch": "npm run test-views-watch"
@@ -56,6 +55,7 @@
     "react-dom": "^15.3.2",
     "react-native-mock": "^0.2.6",
     "redux-devtools": "^3.3.1",
-    "sinon": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz"
+    "sinon": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz",
+    "sinon-chai": "^2.8.0"
   }
 }
