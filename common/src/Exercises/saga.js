@@ -17,26 +17,34 @@ function* filterAndPut(scheduleData) {
 }
 
 function* exerciseSaga(action = { start: null, end: null }) {
+    try {
     // WIZARD SHIT:
     // If the schedule is already loaded, and the user only asks for one week,
     // we don't need a server round trip - all the data is already in redux.
-    const localSchedule = yield select(loadedSchedule);
-    const { start, end } = action;
+        const localSchedule = yield select(loadedSchedule);
+        const { start, end } = action;
 
-    const s = start || moment() // first day of this week
+        const s = start || moment() // first day of this week
                         .isoWeekday(1)
                         .set({ hour: 0, minute: 0, second: 0 });
-    const e = end || moment() // last day of this week
+        const e = end || moment() // last day of this week
                         .isoWeekday(1)
                         .set({ hour: 23, minute: 59, second: 59 })
                         .add(6, 'd');
 
-    if (localSchedule.schedule !== null && localSchedule.start === s && localSchedule.end === e) {
-        yield call(filterAndPut, localSchedule.schedule);
-    } else {
-        const data = yield call(msmSchedule, s, e);
-        yield call(filterAndPut, data.schedule);
+        if (localSchedule.schedule !== null && localSchedule.start === s && localSchedule.end === e) {
+            yield call(filterAndPut, localSchedule.schedule);
+        } else {
+            const data = yield call(msmSchedule, s, e);
+            yield call(filterAndPut, data.schedule);
+        }
+    } catch (e) {
+        console.error(e);
     }
+}
+
+function* exerciseDetailSage(action) {
+    const { id } = action;
 }
 
 export default function* () {

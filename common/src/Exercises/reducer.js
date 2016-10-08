@@ -2,6 +2,7 @@ import * as actions from './actionTypes';
 
 const initialState = {
     exercises: null,
+    exerciseDetails: {},
     loading: false,
 };
 
@@ -13,8 +14,8 @@ export default (state = initialState, action) => {
                 loading: true,
             };
         case actions.EXERCISES_LOADED:
-            console.dir(action);
             return {
+                ...state,
                 loading: false,
                 exercises: action.exercises,
             };

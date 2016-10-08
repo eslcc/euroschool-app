@@ -2,12 +2,13 @@ import React, { Component, PropTypes } from 'react';
 import { View, ListView, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import Row from './Row';
+import renderRow from './Row';
 import * as actions from './actions';
 
 const styles = StyleSheet.create({
     mainView: {
-        marginTop: 54,
+        top: 54,
+        flex: 1,
     },
 });
 
@@ -27,9 +28,7 @@ export class Exercises extends Component {
     }
 
     componentDidMount() {
-        if (!this.props.loading) {
-            this.props.loadExercises();
-        }
+        this.props.loadExercises();
     }
 
     render() {
@@ -40,7 +39,7 @@ export class Exercises extends Component {
             <View style={styles.mainView}>
                 <ListView
                     dataSource={this.state.dataSource}
-                    renderRow={row => Row(row)}
+                    renderRow={row => renderRow(row)}
                 />
             </View>
         );
