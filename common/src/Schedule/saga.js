@@ -6,7 +6,6 @@ import * as actions from './actions';
 
 function* loadSchedule(action = { start: null, end: null }) {
     const result = yield call(schedule, action.start, action.end);
-    console.dir(result);
     yield put(actions.scheduleLoaded(result.schedule, result.start, result.end));
 }
 

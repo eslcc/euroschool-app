@@ -5,6 +5,7 @@ import moment from 'moment';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 import msmSchedule from '../../lib/msm/schedule';
+import msmExercise from '../../lib/msm/exercises';
 
 const loadedSchedule = state => state.schedule;
 
@@ -43,10 +44,21 @@ function* exerciseSaga(action = { start: null, end: null }) {
     }
 }
 
-function* exerciseDetailSage(action) {
-    const { id } = action;
+function* exerciseDetailSaga(action) {
+    try {
+        const { id } = action;
+        const detail = yield call(msmExercise, id);
+        // Note: Exercise details are cached clientside. We still hit the server
+        // for them in case they have updated.
+        yield put(actions.exerciseDetailLoaded(id, detail));
+    } catch (e) {
+        console.error(e);
+    }
 }
 
 export default function* () {
-    yield takeEvery(actionTypes.LOAD_EXERCISES, exerciseSaga);
+    yield [
+        takeEvery(actionTypes.LOAD_EXERCISES, exerciseSaga),
+        takeEvery(actionTypes.LOAD_EXERCISE_DETAIL, exerciseDetailSaga),
+    ];
 }

@@ -8,6 +8,7 @@
     "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true"
   },
   "dependencies": {
+    "cheerio-without-node-native": "^0.20.1",
     "lodash": "^4.15.0",
     "moment": "^2.14.1",
     "moment.distance": "^1.0.1",

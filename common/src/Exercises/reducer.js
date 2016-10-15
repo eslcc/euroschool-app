@@ -19,6 +19,14 @@ export default (state = initialState, action) => {
                 loading: false,
                 exercises: action.exercises,
             };
+        case actions.EXERCISE_DETAIL_LOADED:
+            return {
+                ...state,
+                exerciseDetails: {
+                    ...state.exerciseDetails,
+                    [action.id]: action.detail,
+                },
+            };
         default:
             return state;
     }
