@@ -5,12 +5,17 @@ import createSagaMiddleware from 'redux-saga'
 
 import RootSaga from './RootSaga';
 
-import route from './Route/reducer';
-import startup from './Startup/reducer';
-import schedule from './Schedule/reducer';
-import login from './Login/reducer';
-import canteen from './Canteen/reducer';
-import settings from './Settings/reducer';
+/* eslint-disable no-multi-spaces */
+
+import route     from './Route/reducer';
+import startup   from './Startup/reducer';
+import schedule  from './Schedule/reducer';
+import login     from './Login/reducer';
+import canteen   from './Canteen/reducer';
+import settings  from './Settings/reducer';
+import exercises from './Exercises/reducer';
+
+/* eslint-enable no-multi-spaces */
 
 const mainReducer = combineReducers({
     route,
@@ -19,6 +24,7 @@ const mainReducer = combineReducers({
     login,
     canteen,
     settings,
+    exercises,
 });
 
 export default function () {

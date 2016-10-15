@@ -4,9 +4,9 @@ import schedule from '../../lib/msm/schedule';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 
-function* loadSchedule(action) {
+function* loadSchedule(action = { start: null, end: null }) {
     const result = yield call(schedule, action.start, action.end);
-    yield put(actions.scheduleLoaded(result));
+    yield put(actions.scheduleLoaded(result.schedule, result.start, result.end));
 }
 
 const lastUpdate = state => state.schedule.lastUpdate;
@@ -14,7 +14,9 @@ const lastUpdate = state => state.schedule.lastUpdate;
 function* refreshScheduleIfNeeded() {
     const updated = yield select(lastUpdate);
     if ((new Date().valueOf() - updated) > 86400000) { // last updated more than a day ago
-        yield call(loadSchedule);
+        yield call(loadSchedule, {
+
+        });
     }
 }
 
