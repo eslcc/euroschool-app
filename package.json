@@ -3,23 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "postinstall": "cd node_modules/react-native-mock && npm install && npm run build",
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "lint": "node node_modules/eslint/bin/eslint.js common || true",
-    "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true",
-    "test-views": "cross-env NODE_ENV=test nyc --reporter=text mocha --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
-    "test-views-watch": "mocha --watch --opts common/test/view/mocha.opts common/test/view/**/*.spec.js",
-    "cover-views-travis": "nyc report --reporter=text-lcov > coverage.lcov",
-    "test": "npm run test-views",
-    "test-watch": "npm run test-views-watch"
-  },
-  "nyc": {
-    "sourceMap": false,
-    "instrument": false
+    "lintfix": "node node_modules/eslint/bin/eslint.js common --fix || true"
   },
   "dependencies": {
+    "cheerio-without-node-native": "^0.20.1",
     "lodash": "^4.15.0",
     "moment": "^2.14.1",
+    "moment.distance": "^1.0.1",
     "react": "^15.3.1",
     "react-native": "^0.32.1",
     "react-native-material-kit": "^0.3.2",
@@ -35,13 +27,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^6.1.2",
-    "babel-plugin-istanbul": "^2.0.1",
-    "babel-register": "https://registry.npmjs.org/babel-register/-/babel-register-6.14.0.tgz",
-    "chai": "^3.5.0",
-    "chai-enzyme": "^0.5.1",
-    "codecov": "^1.0.1",
-    "cross-env": "^3.0.0",
-    "enzyme": "^2.4.1",
     "eslint": "^3.5.0",
     "eslint-config-airbnb": "^10.0.1",
     "eslint-plugin-flowtype": "^2.16.1",
@@ -49,14 +34,6 @@
     "eslint-plugin-jsx-a11y": "^2.2.0",
     "eslint-plugin-react": "^6.2.0",
     "flow-bin": "^0.32.0",
-    "mocha": "^3.1.0",
-    "nyc": "^8.3.0",
-    "react": "https://registry.npmjs.org/react/-/react-15.3.1.tgz",
-    "react-addons-test-utils": "^15.3.2",
-    "react-dom": "^15.3.2",
-    "react-native-mock": "git+https://github.com/lelandrichardson/react-native-mock#400f741691e914ce823fee60ec5a420d5772cbc1",
-    "redux-devtools": "^3.3.1",
-    "sinon": "https://registry.npmjs.org/sinon/-/sinon-1.17.5.tgz",
-    "sinon-chai": "^2.8.0"
+    "redux-devtools": "^3.3.1"
   }
 }

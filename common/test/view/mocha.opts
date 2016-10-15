@@ -1,2 +1,0 @@
---compilers js:babel-register
---require common/test/view/setup.js

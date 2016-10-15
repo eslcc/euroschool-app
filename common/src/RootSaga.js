@@ -4,6 +4,7 @@ import Canteen from './Canteen/saga';
 import Schedule from './Schedule/saga';
 import Login from './Login/saga';
 import Startup from './Startup/saga';
+import Exercises from './Exercises/saga';
 
 export default function* () {
     yield [
@@ -11,5 +12,6 @@ export default function* () {
         fork(Schedule),
         fork(Login),
         fork(Startup),
+        fork(Exercises),
     ];
 }

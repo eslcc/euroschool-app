@@ -1,8 +1,10 @@
 import * as actions from './actionTypes';
 
-export const scheduleLoaded = (schedule) => ({
+export const scheduleLoaded = (schedule, start, end) => ({
     type: actions.SCHEDULE_LOADED,
     schedule,
+    start,
+    end,
 });
 
 export const loadSchedule = () => ({

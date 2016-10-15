@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     }
 });
 
-export class Balance extends Component {
+class Balance extends Component {
     static propTypes = {
         loadBalance: PropTypes.func,
         loaded: PropTypes.bool,

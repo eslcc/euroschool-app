@@ -7,6 +7,8 @@ const initialState = {
     schedule: null,
     scheduleLoading: true,
     lastUpdate: -1,
+    start: -1,
+    end: -1,
 };
 
 export default (state = initialState, action = {}) => {
@@ -22,6 +24,8 @@ export default (state = initialState, action = {}) => {
                 scheduleLoading: false,
                 schedule: action.schedule,
                 lastUpdate: new Date().valueOf(),
+                start: action.start,
+                end: action.end,
             };
 
         default:

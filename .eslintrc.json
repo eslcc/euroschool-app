@@ -59,7 +59,8 @@
         "react/jsx-filename-extension": "off",
         "react/require-extension": "off",
         "react/jsx-equals-spacing": ["error", "never"],
-        "react/jsx-curly-spacing": ["warn", "never"]
+        "react/jsx-curly-spacing": ["warn", "never"],
+        "import/no-named-as-default": "off"
     },
     "globals":
     {

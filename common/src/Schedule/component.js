@@ -57,7 +57,7 @@ LandscapeSchedule.propTypes = {
     landscape: PropTypes.bool,
 };
 
-export class Schedule extends Component {
+class Schedule extends Component {
     static propTypes = {
         load: React.PropTypes.func,
         loading: React.PropTypes.bool,
@@ -79,6 +79,7 @@ export class Schedule extends Component {
         } else {
             this.props.refresh();
         }
+
         Orientation.addOrientationListener((orientation) => {
             this.setState({ landscape: orientation === 'LANDSCAPE', key: Math.random() });
         });
@@ -95,9 +96,8 @@ export class Schedule extends Component {
         return (
             <View>
             {(() => {
-                if (this.props.loading) {
+                if (this.props.loading)
                     return (<Text>Loading</Text>);
-                }
 
                 return this.getScheduleForOrientation();
             })()}

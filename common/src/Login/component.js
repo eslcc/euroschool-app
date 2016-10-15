@@ -64,7 +64,7 @@ const LoginFailureIndicator = connect((state) => ({
     display: state.login.failed,
 }))(DumbLoginFailureIndicator);
 
-export class Login extends Component {
+class Login extends Component {
     constructor(props: object) {
         super(props);
 
