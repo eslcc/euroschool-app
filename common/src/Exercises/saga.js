@@ -9,12 +9,12 @@ import msmExercise from '../../lib/msm/exercises';
 
 const loadedSchedule = state => state.schedule;
 
-function* filterAndPut(scheduleData) {
+function* filterAndPut(scheduleData, start, end) {
     const filtered = scheduleData.filter(
         item => item.entry_type === 'Exercise'
     );
 
-    yield put(actions.exercisesLoaded(filtered));
+    yield put(actions.exercisesLoaded(filtered, start.unix(), end.unix()));
 }
 
 function* exerciseSaga(action = { start: null, end: null }) {
@@ -25,19 +25,30 @@ function* exerciseSaga(action = { start: null, end: null }) {
         const localSchedule = yield select(loadedSchedule);
         const { start, end } = action;
 
-        const s = start || moment() // first day of this week
+        const s = moment.isMoment(start)
+                        ? start
+                        : moment() // first day of this week
                         .isoWeekday(1)
                         .set({ hour: 0, minute: 0, second: 0 });
-        const e = end || moment() // last day of this week
-                        .isoWeekday(1)
-                        .set({ hour: 23, minute: 59, second: 59 })
-                        .add(6, 'd');
+        const e = moment.isMoment(end)
+                        ? end
+                        : moment() // last day of this week
+                        .isoWeekday(7)
+                        .set({ hour: 23, minute: 59, second: 59 });
+
+        if (start === 'WEEK_BEFORE') {
+            s.subtract(1, 'w');
+        }
+
+        if (end === 'WEEK_AFTER') {
+            e.add(1, 'w');
+        }
 
         if (localSchedule.schedule !== null && localSchedule.start === s && localSchedule.end === e) {
-            yield call(filterAndPut, localSchedule.schedule);
+            yield call(filterAndPut, localSchedule.schedule, s, e);
         } else {
             const data = yield call(msmSchedule, s, e);
-            yield call(filterAndPut, data.schedule);
+            yield call(filterAndPut, data.schedule, s, e);
         }
     } catch (e) {
         console.error(e);

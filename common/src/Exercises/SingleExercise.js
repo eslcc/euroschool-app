@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, StyleSheet, WebView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import HTMLView from 'react-native-htmlview';
 import * as actions from './actions';
 
 
@@ -12,12 +13,17 @@ const styles = StyleSheet.create({
     },
     heading: {
         fontWeight: '300',
-        fontSize: 24,
+        fontSize: 28,
         color: '#212121',
+        marginVertical: 6,
     },
     subheading: {
-        fontSize: 20,
+        fontSize: 24,
         color: '#727272',
+        marginVertical: 2,
+    },
+    text: {
+        marginVertical: 2,
     },
 });
 
@@ -42,18 +48,17 @@ class SingleExercise extends Component {
                 .replace(/([0-9]{2})-([0-9]{2})-([0-9]{4})/, '$3-$2-$1')
             );
             return (
-                <View style={styles.coreview}>
+                <ScrollView style={styles.coreview}>
                     <Text style={styles.subheading}>{details.type} / {details.course}</Text>
                     <Text style={styles.heading}>{details.title}</Text>
-                    <Text>Due {details.due}, {mmnt < moment ? mmnt.toNow() : mmnt.fromNow()}</Text>
-                    <Text>{details.status}</Text>
-                    <Text>{details.grade}</Text>
-                    <WebView
-                        source={{ html: details.generalComment }}
-                        scalesPageToFit
-                        style={{ flex: 1 }}
+                    <Text style={styles.text}>Due {details.due}, {mmnt < moment ? mmnt.toNow() : mmnt.fromNow()}</Text>
+                    <Text style={styles.text}>{details.status}</Text>
+                    <Text style={styles.text}>{details.grade}</Text>
+                    <HTMLView
+                        value={details.generalComment}
+                        style={{ flex: 1, paddingBottom: 300 }}
                     />
-                </View>
+                </ScrollView>
             );
         }
         return (

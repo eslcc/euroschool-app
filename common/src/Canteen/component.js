@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Text, View, StyleSheet } from 'react-native';
+import { Text, View, StyleSheet, ScrollView, RefreshControl } from 'react-native';
 import { MKButton, MKColor, MKSpinner } from 'react-native-material-kit';
+import moment from 'moment';
+import TimeAgo from 'react-native-timeago';
 import * as actions from './actions';
 
 // This is the bit where I wank off a horse to make debugging work.
@@ -18,9 +20,13 @@ import * as actions from './actions';
 const styles = StyleSheet.create({
     container: {
         marginHorizontal: 16,
-        marginTop: 64,
+        marginTop: 80,
         flex: 1,
-    }
+    },
+    balanceText: {
+        fontSize: 32,
+        color: '#212121'
+    },
 });
 
 class Balance extends Component {
@@ -31,33 +37,43 @@ class Balance extends Component {
         loadFailed: PropTypes.bool,
         balance: PropTypes.string,
         refreshBalanceInBackground: PropTypes.func,
+        lastUpdate: PropTypes.number,
     };
 
     componentDidMount() {
-        if(this.props.balance !== '') {
-            this.props.refreshBalanceInBackground();
-        } else {
-            this.props.loadBalance();
-        }
+        this.props.loadBalance();
     }
 
     render() {
-        if (this.props.loaded) {
-            return <Text style={styles.container}>{this.props.loaded ? this.props.balance : 'FOO'}</Text>;
-        } else if (this.props.loading) {
-            return <MKSpinner style={styles.container} />;
+        if (this.props.loadFailed) {
+            const Button = MKButton.button()
+                .withBackgroundColor(MKColor.Red)
+                .withText('RETRY')
+                .withOnPress(this.props.loadBalance)
+                .build();
+            return (
+                <View style={styles.container}>
+                    <Text>Could not access balance.</Text>
+                    <Text>Please make sure you have set your credentials in settings.</Text>
+                    <Button />
+                </View>
+            );
         }
-        const Button = MKButton.button()
-            .withBackgroundColor(MKColor.Red)
-            .withText('RETRY')
-            .withOnPress(this.props.loadBalance)
-            .build();
         return (
-            <View style={styles.container}>
-                <Text>Could not access balance.</Text>
-                <Text>Please make sure you have set your credentials in settings.</Text>
-                <Button />
-            </View>
+            <ScrollView
+                style={[styles.container, { marginTop: 54 }]}
+                refreshControl={<RefreshControl
+                    refreshing={this.props.loading}
+                    onRefresh={this.props.loadBalance}
+                />}
+            >
+                {/* The double nested view is so the pull-to-refresh appears  */}
+                {/* directly below the navbar but the content still has space */}
+                <View style={{ marginTop: 26 }}>
+                    <Text style={styles.balanceText}>{this.props.balance}</Text>
+                    <Text>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -67,6 +83,7 @@ const mapStateToProps = (state) => ({
     loading: state.canteen.loadInProgress,
     loaded: state.canteen.loaded,
     loadFailed: state.canteen.loadFailed,
+    lastUpdate: state.canteen.lastUpdate,
 });
 
 const mapDispatchToProps = (dispatch) => ({

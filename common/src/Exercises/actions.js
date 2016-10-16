@@ -6,9 +6,11 @@ export const loadExercises = (start = null, end = null) => ({
     end,
 });
 
-export const exercisesLoaded = (exercises) => ({
+export const exercisesLoaded = (exercises, start, end) => ({
     type: actions.EXERCISES_LOADED,
     exercises,
+    start,
+    end,
 });
 
 export const loadExerciseDetail = (id) => ({

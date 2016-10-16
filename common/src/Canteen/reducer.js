@@ -5,6 +5,7 @@ const initialState = {
     loadInProgress: false,
     loadFailed: false,
     balance: '',
+    lastUpdate: -1,
 };
 
 export default (state = initialState, action) => {
@@ -20,7 +21,9 @@ export default (state = initialState, action) => {
                 ...state,
                 loadInProgress: false,
                 loaded: true,
+                loadFailed: false,
                 balance: action.balance,
+                lastUpdate: new Date().valueOf(),
             };
         case BALANCE_LOAD_FAILED:
             return {

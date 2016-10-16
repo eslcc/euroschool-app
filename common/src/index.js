@@ -44,13 +44,18 @@ const routes = Actions.create(
             >
                 <Scene key="schedule" hideNavBar component={Schedule} icon={TabIcon} title="Schedule" />
                 <Scene key="exercises" component={Exercises} icon={TabIcon} title="Exercises" />
-                <Scene key="balance" hideNavBar component={Canteen} icon={TabIcon} title="Balance" />
+                <Scene key="balance" component={Canteen} icon={TabIcon} title="Balance" />
             </Scene>
         </Scene>
         <Scene key="singleExercise" component={SingleExercise} title="BUG!" />
         <Scene key="settings" component={Settings} hideTabBar type={ActionConst.PUSH} title="Settings" />
     </Scene>
 );
+
+
+// const {whyDidYouUpdate} = require('why-did-you-update')
+// whyDidYouUpdate(React, { exclude: /(Navigation|MK|Touchable)/ })
+
 
 const Euroschool = () => (
     <Provider store={createStore()}>
