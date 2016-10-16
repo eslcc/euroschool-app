@@ -28,8 +28,6 @@ android/*
 *.iml
 !android/app/
 android/app/build/
-android/.idea/
-android/.idea/libraries
 !android/build.gradle
 !android/gradle.properties
 !android/settings.gradle
