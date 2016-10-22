@@ -25,7 +25,6 @@ const items = [
         type: 'button',
         label: 'Exercises',
         click: () => Actions.exercises(),
-        nyi: true,
     },
     {
         type: 'button',
@@ -90,7 +89,7 @@ function renderRowForType(row) {
         case 'header':
             return <Text style={styles.header}>{row.text}</Text>;
         case 'button': {
-            const nyi = row.nyi ? <Text style={styles.nyi}>NYI</Text> : null;
+            const nyi = row.nyi ? <Text style={styles.nyi}>NYI - expect crash if you tap me</Text> : null;
             return (
                 <MKButton
                     style={styles.button}

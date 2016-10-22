@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     coreview: {
         marginTop: 54,
         flex: 1,
+        marginHorizontal: 16,
     },
     heading: {
         fontWeight: '300',
@@ -34,9 +35,23 @@ class SingleExercise extends Component {
         loadDetail: PropTypes.func.isRequired,
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            itemId: props.item.id,
+        };
+    }
+
     componentDidMount() {
         const { loadDetail, item } = this.props;
         loadDetail(item.id);
+    }
+
+    componentWillReceiveProps() {
+        const { loadDetail, item } = this.props;
+        if (item.id !== this.state.itemId) {
+            loadDetail(item.id);
+        }
     }
 
     render() {
