@@ -26,6 +26,11 @@ const styles = StyleSheet.create({
     text: {
         marginVertical: 2,
     },
+    grade: {
+        marginVertical: 4,
+        fontSize: 18,
+        color: '#212121',
+    },
 });
 
 class SingleExercise extends Component {
@@ -54,6 +59,27 @@ class SingleExercise extends Component {
         }
     }
 
+    renderGrade(details) {
+        const matches = details.grade.match(/([0-9.]+)\/([0-9.]+)/);
+        if (matches) {
+            const grade = parseFloat(matches[1]);
+            const outOf = parseFloat(matches[2]);
+            const overall = Math.round((grade / outOf) * 10 * 100) / 100;
+            return <Text style={styles.grade}>{`${grade}/${outOf} (${overall})`}</Text>;
+        }
+        return details.grade;
+    }
+
+    renderSupportingComment(details) {
+        if (details.supportingComment.length > 0) {
+            return (<HTMLView
+                value={details.supportingComment}
+                style={{ flex: 1, paddingBottom: 25, marginTop: 25, backgroundColor: '#eee' }}
+            />);
+        }
+        return null;
+    }
+
     render() {
         const { details: allDetails, item } = this.props;
         const details = allDetails[item.id];
@@ -68,11 +94,13 @@ class SingleExercise extends Component {
                     <Text style={styles.heading}>{details.title}</Text>
                     <Text style={styles.text}>Due {details.due}, {mmnt < moment ? mmnt.toNow() : mmnt.fromNow()}</Text>
                     <Text style={styles.text}>{details.status}</Text>
-                    <Text style={styles.text}>{details.grade}</Text>
-                    <HTMLView
-                        value={details.generalComment}
-                        style={{ flex: 1, paddingBottom: 300 }}
-                    />
+                    <Text style={styles.text}>{this.renderGrade(details)}</Text>
+                    {this.renderSupportingComment(details)}
+                    <View style={{ flex: 1, paddingBottom: 100, marginTop: 25 }}>
+                        <HTMLView
+                            value={details.generalComment}
+                        />
+                    </View>
                 </ScrollView>
             );
         }
