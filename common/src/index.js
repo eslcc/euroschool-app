@@ -13,6 +13,8 @@ import Canteen from './Canteen/component';
 import Settings from './Settings/component';
 import Exercises from './Exercises/component';
 import SingleExercise from './Exercises/SingleExercise';
+import TransitionExplorer from './Devtools/TransitionExplorer';
+import StateLogViewer from './Devtools/StateLogViewer';
 
 const RouterWithRedux = connect()(Router);
 
@@ -29,10 +31,10 @@ TabIcon.propTypes = {
     title: React.PropTypes.string,
 };
 
-const routes = Actions.create(
+export const routes = Actions.create(
     <Scene key="root">
         <Scene key="startup" component={Startup} title="Startup" initial />
-        <Scene key="login" component={Login} type={ActionConst.REPLACE} title="Login" />
+        <Scene key="login" hideNavBar component={Login} type={ActionConst.REPLACE} title="Login" />
         <Scene key="main" component={Drawer} type={ActionConst.REPLACE}>
             <Scene
                 key="tabs"
@@ -49,6 +51,8 @@ const routes = Actions.create(
         </Scene>
         <Scene key="singleExercise" component={SingleExercise} title="BUG!" />
         <Scene key="settings" component={Settings} hideTabBar type={ActionConst.PUSH} title="Settings" />
+        <Scene key="transitionExplorer" component={TransitionExplorer} title="Transition Explorer" />
+        <Scene key="stateLogViewer" component={StateLogViewer} title="State Log Viewer" />
     </Scene>
 );
 
