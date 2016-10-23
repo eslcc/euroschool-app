@@ -1,7 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import { persistStore, autoRehydrate } from 'redux-persist';
-import createSagaMiddleware from 'redux-saga'
+import createSagaMiddleware from 'redux-saga';
+import _ from 'lodash';
 
 import RootSaga from './RootSaga';
 
@@ -14,6 +15,7 @@ import login     from './Login/reducer';
 import canteen   from './Canteen/reducer';
 import settings  from './Settings/reducer';
 import exercises from './Exercises/reducer';
+import devtools  from './Devtools/reducer';
 
 /* eslint-enable no-multi-spaces */
 
@@ -25,6 +27,7 @@ const mainReducer = combineReducers({
     canteen,
     settings,
     exercises,
+    devtools,
 });
 
 export default function () {
@@ -40,7 +43,15 @@ export default function () {
         if (action.type === 'debug.RESET_STATE') {
             state = undefined; // eslint-disable-line
         }
-        return mainReducer(state, action);
+        const outcome = mainReducer(state, action);
+
+        const diff = _.pickBy(outcome, (value, key) => { // eslint-disable-line
+            return !state ? true : state[key] !== value;
+        });
+
+        outcome.devtools.log.push({ action, diff });
+
+        return outcome;
     };
 
     const store = createStore(reducer, enhancer, autoRehydrate());
