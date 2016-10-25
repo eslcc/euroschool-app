@@ -10,7 +10,13 @@ import {
 import { Actions, DefaultRenderer } from 'react-native-router-flux';
 import { MKButton, MKColor } from 'react-native-material-kit';
 
+import GlobalStyles from '../../styles';
+
 const items = [
+    {
+        type: 'header',
+        text: 'Euroschool PRE-ALPHA'
+    },
     {
         type: 'button',
         label: 'Home',
@@ -50,33 +56,7 @@ const items = [
     },
 ];
 
-const styles = StyleSheet.create({
-    header: {
-        height: 56,
-        flex: 1,
-        paddingVertical: 8,
-        marginLeft: 16,
-        fontWeight: 'bold',
-        color: '#212121',
-    },
-    button: {
-        flex: 1,
-        height: 48,
-        marginLeft: 4,
-        paddingVertical: 8,
-    },
-    buttonText: {
-        color: '#212121',
-        left: 72,
-    },
-    view: {
-        marginTop: 56,
-    },
-    nyi: {
-        fontWeight: 'bold',
-        color: MKColor.Red,
-    }
-});
+const { drawer: styles } = GlobalStyles;
 
 let drawer;
 
@@ -89,10 +69,10 @@ function renderRowForType(row) {
         case 'header':
             return <Text style={styles.header}>{row.text}</Text>;
         case 'button': {
-            const nyi = row.nyi ? <Text style={styles.nyi}>NYI - expect crash if you tap me</Text> : null;
+            const nyi = row.nyi ? <Text style={styles.nyiWarning}>NYI - expect crash if you tap me</Text> : null;
             return (
                 <MKButton
-                    style={styles.button}
+                    style={GlobalStyles.core.button}
                     onPress={click}
                 >
                     <View><Text style={styles.buttonText}>{row.label}</Text>{nyi}</View>

@@ -8,28 +8,25 @@ import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
 import ScreenService from '../../lib/utils/screenService';
 
+import GlobalStyles from '../../styles';
+
 import * as actions from './actions';
 
 import Day from './Day';
 
 function PortraitSchedule({ schedule }) {
     const style = {
-        position: 'absolute',
-        top: 0,
-        left: 0,
         height: ScreenService.getScreenSize().height,
         width: ScreenService.getScreenSize().width,
-        flex: 1,
-        flexDirection: 'row',
     };
     return (
         <View>
             <ScrollView
                 horizontal
                 pagingEnabled
-                style={style}
+                style={[GlobalStyles.schedule.portraitScheduleContainer, style]}
             >
-                {[1, 2, 3, 4, 5].map((num) =>
+                {[1, 2, 3, 4, 5].map(num =>
                     <Day key={`${num}-portrait`} schedule={schedule} day={num} />
                 )}
             </ScrollView>

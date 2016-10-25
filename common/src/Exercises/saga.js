@@ -16,7 +16,7 @@ function* filterAndPut(scheduleData, start, end) {
     const filtered = scheduleData.filter(
         item => item.entry_type === 'Exercise'
     );
-    console.dir(end);
+
     yield put(actions.exercisesLoaded(filtered, start.unix(), end.unix()));
 }
 
@@ -29,6 +29,7 @@ function* exerciseSaga(action = { start: null, end: null }) {
 
     const lastLoaded = yield select(loadedStart);
     const lastLoadedEnd = yield select(loadedEnd);
+
 
     let s;
     if (moment.isMoment(start)) {
@@ -52,6 +53,7 @@ function* exerciseSaga(action = { start: null, end: null }) {
                     .set({ hour: 23, minute: 59, second: 59 });
     }
 
+
     if (start === 'WEEK_BEFORE') {
         s.subtract(1, 'w');
     }
@@ -60,13 +62,11 @@ function* exerciseSaga(action = { start: null, end: null }) {
         e.add(1, 'w');
     }
 
-    console.dir(e);
-
     if (localSchedule.schedule !== null && localSchedule.start === s && localSchedule.end === e) {
         yield call(filterAndPut, localSchedule.schedule, s, e, null);
     } else {
         const data = yield call(msmSchedule, s, e);
-        console.dir(e);
+
         yield call(filterAndPut, data.schedule, s, e, null);
     }
 }

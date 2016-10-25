@@ -9,19 +9,13 @@ import { MKSpinner } from 'react-native-material-kit';
 import { connect } from 'react-redux';
 
 import { checkLogin } from './actions';
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-});
+import styles from '../../styles';
 
 const Startup = ({ loadApp }) => {
     loadApp();
 
     return (
-        <View style={styles.container}>
+        <View style={styles.core.center}>
             <Image source={require('./assets/StunningPicture.jpg')} />
             <Text>The app is loading, please wait...</Text>
             <MKSpinner />

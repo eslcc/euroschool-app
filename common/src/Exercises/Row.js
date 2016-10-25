@@ -4,7 +4,7 @@ import { getTheme } from 'react-native-material-kit';
 import moment from 'moment';
 import { truncate } from 'lodash';
 import { Actions } from 'react-native-router-flux';
-import ScreenService from '../../lib/utils/screenService';
+import styles from '../../styles';
 
 moment.defineLocale('en-yesterday', {
     parent: 'en',
@@ -18,19 +18,7 @@ moment.defineLocale('en-yesterday', {
     },
 });
 
-const theme = getTheme();
-
-const styles = StyleSheet.create({
-    nowMarker: {
-        backgroundColor: '#D32F2F',
-        height: 1,
-        flex: 1,
-    },
-    nowText: {
-        textAlign: 'center',
-        color: '#f44336',
-    },
-});
+const theme = getTheme(); // TODO replace theme.card{} with our own list styles
 
 function openItem(item) {
     Actions.singleExercise({ title: truncate(item.title), item });
@@ -40,8 +28,8 @@ export default function Row(item) {
     if (item.NOW_MARKER) {
         return (
             <View>
-                <View style={styles.nowMarker} />
-                <Text style={styles.nowText}>YOU ARE HERE</Text>
+                <View style={styles.exercises.nowMarker} />
+                <Text style={styles.exercises.nowText}>YOU ARE HERE</Text>
             </View>
         );
     }
