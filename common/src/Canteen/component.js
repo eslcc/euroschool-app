@@ -5,6 +5,7 @@ import { MKButton, MKColor, MKSpinner } from 'react-native-material-kit';
 import moment from 'moment';
 import TimeAgo from 'react-native-timeago';
 import * as actions from './actions';
+import styles from '../../styles';
 
 // This is the bit where I wank off a horse to make debugging work.
 // Except it actually breaks everything. Don't wank off horses, kids.
@@ -17,17 +18,7 @@ import * as actions from './actions';
 // XMLHttpRequest = _XHR
 /* eslint-enable */
 
-const styles = StyleSheet.create({
-    container: {
-        marginHorizontal: 16,
-        marginTop: 80,
-        flex: 1,
-    },
-    balanceText: {
-        fontSize: 32,
-        color: '#212121'
-    },
-});
+
 
 class Balance extends Component {
     static propTypes = {
@@ -52,7 +43,7 @@ class Balance extends Component {
                 .withOnPress(this.props.loadBalance)
                 .build();
             return (
-                <View style={styles.container}>
+                <View style={styles.core.screenContainer}>
                     <Text>Could not access balance.</Text>
                     <Text>Please make sure you have set your credentials in settings.</Text>
                     <Button />
@@ -61,7 +52,7 @@ class Balance extends Component {
         }
         return (
             <ScrollView
-                style={[styles.container, { marginTop: 54 }]}
+                style={styles.core.screenContainer}
                 refreshControl={<RefreshControl
                     refreshing={this.props.loading}
                     onRefresh={this.props.loadBalance}
@@ -70,7 +61,7 @@ class Balance extends Component {
                 {/* The double nested view is so the pull-to-refresh appears  */}
                 {/* directly below the navbar but the content still has space */}
                 <View style={{ marginTop: 26 }}>
-                    <Text style={styles.balanceText}>{this.props.balance}</Text>
+                    <Text style={styles.core.mainText}>{this.props.balance}</Text>
                     <Text>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
                 </View>
             </ScrollView>

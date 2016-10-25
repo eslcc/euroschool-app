@@ -1,21 +1,14 @@
+// TODO this file is a den of bollocks rapidly in need of refactoring
+
 import React, { Component, PropTypes } from 'react';
-import { View, ListView, Text, StyleSheet, TouchableHighlight, Alert } from 'react-native';
+import { View, ListView, Text, TouchableHighlight } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
+import styles from '../../styles';
+
 import renderRow from './Row';
 import * as actions from './actions';
-
-const styles = StyleSheet.create({
-    mainView: {
-        top: 54,
-        flex: 1,
-        marginBottom: 108,
-    },
-    list: {
-        paddingBottom: 128,
-    },
-});
 
 const DumbHeader = ({ start, loadBefore }) => (
     <TouchableHighlight onPress={loadBefore}>
@@ -100,9 +93,9 @@ export class Exercises extends Component {
             return <Text>loading</Text>;
         }
         return (
-            <View style={styles.mainView}>
+            <View style={styles.exercises.mainView}>
                 <ListView
-                    style={styles.list}
+                    style={styles.exercises.list}
                     dataSource={this.state.dataSource}
                     renderRow={row => renderRow(row)}
                     renderHeader={() => <Header />}

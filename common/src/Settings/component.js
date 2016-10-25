@@ -2,12 +2,15 @@ import React, { Component, PropTypes } from 'react';
 import {
     Text,
     ListView,
-    StyleSheet
+    StyleSheet,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { MKTextField, MKButton } from 'react-native-material-kit';
+
+import GlobalStyles from '../../styles';
 import * as actions from './actions';
 import Settings, { categories as settingCategories } from './settings';
+
 
 const styles = StyleSheet.create({
     view: {
@@ -41,7 +44,7 @@ const dumbRenderRow = ({ row, change, settings }) => {
                             .withOnPress(row.onClick)
                             .build();
             return (
-                <Button />
+                <Button style={GlobalStyles.core.button} />
             );
         }
         default:

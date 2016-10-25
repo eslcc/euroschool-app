@@ -11,6 +11,8 @@ import { MKButton, MKProgress, MKColor } from 'react-native-material-kit';
 import { connect } from 'react-redux';
 import * as actions from './actions';
 
+import GlobalStyles from '../../styles';
+
 const windowSize = Dimensions.get('window');
 
 const loginStates = {
@@ -21,37 +23,12 @@ const loginStates = {
     NETWORK_ERROR: 4,
 };
 
-const styles = StyleSheet.create({
-    bg: {
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: windowSize.width,
-        height: windowSize.height,
-    },
-    mainText: {
-        fontSize: 48,
-    },
-    subheading: {
-        fontSize: 30,
-    },
-    greyFont: {
-        color: '#D8D8D8',
-    },
-    whiteFont: {
-        color: '#FFF',
-    },
-    failureText: {
-        color: '#f44336',
-    },
-});
-
 const DumbLoginFailureIndicator = ({ display }) => {
     if (!(display)) {
         return null;
     } else {
         return (
-            <Text style={styles.failureText}>Something went wrong. Please check your email and password.</Text>
+            <Text style={GlobalStyles.core.error}>Something went wrong. Please check your email and password.</Text>
         );
     }
 };
@@ -90,24 +67,25 @@ class Login extends Component {
         .build();
         return (
             <View>
-                <Image source={require('./assets/LoginBackdrop.png')} style={styles.bg} />
-                <View>
-                    <Text style={[styles.mainText, styles.whiteFont]}>Hello.</Text>
-                    <Text style={[styles.subheading, styles.greyFont]}>Please log in with your SMS account.</Text>
-                    <View style={styles.inputs}>
+                <Image source={require('./assets/LoginBackdrop.png')} style={GlobalStyles.login.background} />
+                <View style={GlobalStyles.core.screenContainerNoTabs}>
+                    <Text style={GlobalStyles.core.mainText}>Hello.</Text>
+                    <Text style={GlobalStyles.login.secondaryText}>Please log in with your SMS account.</Text>
+                    <View>
                         <TextInput
                             placeholder="Email"
-                            style={styles.whiteFont}
                             placeholderTextColor="#FFF"
-                            onChangeText={(text) => this.onInputChange('email', text)}
+                            onChangeText={text => this.onInputChange('email', text)}
+                            returnKeyType="next"
+                            keyboardType="email-address"
                             // value={this.state.username}
                         />
                         <TextInput
                             secureTextEntry
-                            style={styles.whiteFont}
                             placeholder="Password"
                             placeholderTextColor="#FFF"
-                            onChangeText={(text) => this.onInputChange('password', text)}
+                            onChangeText={text => this.onInputChange('password', text)}
+                            returnKeyType="go"
                             // value={this.state.password}
                         />
                         <LoginButton />
