@@ -1,0 +1,6 @@
+{
+  "findPotentialReviewers": true,
+  "skipAlreadyAssignedPR": false, // mention-bot will ignore already assigned PR's
+  "skipAlreadyMentionedPR": false, // mention-bot will ignore if there is already existing an exact mention
+  "skipCollaboratorPR": false // mention-bot will ignore if PR is made by collaborator
+}
