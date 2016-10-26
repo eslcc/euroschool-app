@@ -67,7 +67,7 @@ export class Exercises extends Component {
         const yesterday = moment().subtract(1, 'd');
         rows.push({
             NOW_MARKER: 1,
-            start: yesterday
+            start: yesterday,
         });
         rows.sort(
             (a, b) => {
