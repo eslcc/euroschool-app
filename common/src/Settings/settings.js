@@ -1,6 +1,6 @@
 import { purgeStoredState } from 'redux-persist';
 import { AsyncStorage } from 'react-native';
-import restart from 'react-native-restart';
+import { Actions } from 'react-native-router-flux';
 
 const settings = {
     'moneweb.username': {
@@ -23,7 +23,13 @@ const settings = {
         type: 'button',
         label: 'Purge Local State',
         category: 'Development Options',
-        onClick: () => purgeStoredState({ storage: AsyncStorage }).then(() => restart()),
+        onClick: () => purgeStoredState({ storage: AsyncStorage }),
+    },
+    'debug.transitionState': {
+        type: 'button',
+        label: 'Open State Transition Explorer',
+        category: 'Development Options',
+        onClick: () => Actions.transitionExplorer(),
     },
 };
 
@@ -31,7 +37,7 @@ export default settings;
 
 export function categories() {
     const categoryMap = {};
-    Object.keys(settings).forEach(itemKey => {
+    Object.keys(settings).forEach((itemKey) => {
         const item = settings[itemKey];
         if (!categoryMap[item.category]) {
             categoryMap[item.category] = [];
