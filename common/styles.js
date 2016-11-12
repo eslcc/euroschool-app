@@ -68,6 +68,11 @@ const normalStyles = {
             justifyContent: 'center',
             alignItems: 'center',
         },
+        card: {
+            elevation: 1,
+            marginVertical: 8,
+            marginHorizontal: 16,
+        },
     }),
     drawer: StyleSheet.create({
         header: {

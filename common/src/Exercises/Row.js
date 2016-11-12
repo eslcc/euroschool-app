@@ -37,7 +37,7 @@ export default function Row(item) {
     const due = moment(item.start.substring(0, item.start.length - 1)).locale('en-yesterday').calendar();
     return (
         <TouchableHighlight onPress={() => openItem(item)}>
-            <View style={[theme.cardStyle, { elevation: 1, marginVertical: 8, marginHorizontal: 16 }]}>
+            <View style={[theme.cardStyle, styles.core.card]}>
                 <Text style={theme.cardContentStyle}>{`${item.param_1}\n${item.title}\nDue ${due}`}</Text>
             </View>
         </TouchableHighlight>

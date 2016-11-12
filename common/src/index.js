@@ -15,6 +15,7 @@ import Exercises from './Exercises/component';
 import SingleExercise from './Exercises/SingleExercise';
 import TransitionExplorer from './Devtools/TransitionExplorer';
 import StateLogViewer from './Devtools/StateLogViewer';
+import Absences from './Absences/component';
 
 const RouterWithRedux = connect()(Router);
 
@@ -46,6 +47,7 @@ export const routes = Actions.create(
             >
                 <Scene key="schedule" hideNavBar component={Schedule} icon={TabIcon} title="Schedule" />
                 <Scene key="exercises" component={Exercises} icon={TabIcon} title="Exercises" />
+                <Scene key="absences" component={Absences} icon={TabIcon} title="Absent Teachers" />
                 <Scene key="balance" component={Canteen} icon={TabIcon} title="Balance" />
             </Scene>
         </Scene>
