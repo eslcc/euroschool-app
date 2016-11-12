@@ -35,9 +35,14 @@ const mainReducer = combineReducers({
 export default function () {
     const sagaMiddleware = createSagaMiddleware();
 
-    const enhancer = compose(
-      applyMiddleware(sagaMiddleware),
-      global.reduxNativeDevTools ? global.reduxNativeDevTools(/*options*/) : nope => nope,
+    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
+        global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+            /* options */
+        }) :
+        compose;
+
+    const enhancer = composeEnhancers(
+        applyMiddleware(sagaMiddleware)
     );
 
     // Fuckery to allow us to reset the state for debugging.
@@ -61,7 +66,7 @@ export default function () {
     sagaMiddleware.run(RootSaga);
 
     const persistor = persistStore(store, {
-        blacklist: ['route', 'startup'],
+        blacklist: ['route', 'startup', 'devtools'],
         storage: AsyncStorage,
     });
 
