@@ -11,7 +11,7 @@
     "cheerio-without-node-native": "^0.20.1",
     "global": "^4.3.1",
     "lodash": "^4.15.0",
-    "moment": "^2.14.1",
+    "moment": "^2.15.2",
     "moment.distance": "^1.0.1",
     "npm-check-updates": "^2.8.5",
     "react": "^15.3.1",
