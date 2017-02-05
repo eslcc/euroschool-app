@@ -36,7 +36,6 @@ const items = [
         type: 'button',
         label: 'Absent Teachers',
         click: () => Actions.absences(),
-        nyi: true,
     },
     {
         type: 'button',

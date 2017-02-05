@@ -1,8 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Text, StyleSheet, ScrollView, RefreshControl } from 'react-native';
+import { Text, ScrollView, RefreshControl } from 'react-native';
 import { Button, Heading, View } from '@shoutem/ui';
-import moment from 'moment';
 import TimeAgo from 'react-native-timeago';
 import * as actions from './actions';
 import styles from '../../styles';
@@ -38,10 +37,7 @@ class Balance extends Component {
     render() {
         if (this.props.loadFailed) {
             return (
-                <View style={{
-        marginTop: 54,
-        marginBottom: 100,
-    }}>
+                <View style={styles.core.screenContainer}>
                     <Text>Could not access balance.</Text>
                     <Text>Please make sure you have set your credentials in settings.</Text>
                     <Button onPress={this.props.loadBalance}>
@@ -52,7 +48,7 @@ class Balance extends Component {
         }
         return (
             <ScrollView
-                style={styles.screenContainer}
+                style={styles.core.screenContainer}
                 refreshControl={<RefreshControl
                     refreshing={this.props.loading}
                     onRefresh={this.props.loadBalance}
@@ -61,7 +57,7 @@ class Balance extends Component {
                 {/* The double nested view is so the pull-to-refresh appears  */}
                 {/* directly below the navbar but the content still has space */}
                 <View style={{ marginTop: 56 }}>
-                    <Heading>{this.props.balance}</Heading>
+                    <Heading styleName="" style={{ fontSize: 28 }}>€{this.props.balance}</Heading>
                     <Text>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
                 </View>
             </ScrollView>

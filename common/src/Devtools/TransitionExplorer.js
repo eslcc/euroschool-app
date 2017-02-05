@@ -16,7 +16,7 @@ import { routes } from '../';
 
 export default class TransitionExplorer extends Component {
 
-    static propTypes = {}
+    static propTypes = {};
 
     constructor(props) {
         super(props);

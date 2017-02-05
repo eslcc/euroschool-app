@@ -21,7 +21,6 @@ module.exports =
             "plugin:import/errors",
             "plugin:import/warnings",
             "plugin:react/recommended",
-            "airbnb"
         ],
         "rules": {
             "max-len": ["warn", 200, 4],
@@ -50,16 +49,18 @@ module.exports =
             "flowtype/type-id-match": [2, "^([A-Z][a-z0-9]+)+Type$"],
             "flowtype/union-intersection-spacing": [2, "always"],
             "flowtype/valid-syntax": 1,
+            "react/jsx-first-prop-new-line": ["error", "multiline"],
             "react/jsx-indent": ["warn", 4],
             "react/jsx-indent-props": ["warn", 4],
+            "react/jsx-key": "error",
             "react/jsx-filename-extension": "off",
             "react/require-extension": "off",
             "react/jsx-equals-spacing": ["error", "never"],
-            "react/jsx-curly-spacing": ["warn", "never"],
-            "import/no-named-as-default": "off"
+            "react/jsx-curly-spacing": ["warn", "never"]
         },
         "globals": {
-            "fetch": false
+            "fetch": false,
+            "global": false,
         },
         "settings": {
             "flowtype": {

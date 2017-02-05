@@ -4,6 +4,7 @@ import moment from 'moment';
 import schedule from '../../lib/msm/schedule';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
+import * as selectors from './selectors';
 
 function* loadSchedule(action = { start: null, end: null }) {
     const result = yield call(
@@ -20,10 +21,8 @@ function* loadSchedule(action = { start: null, end: null }) {
     yield put(actions.scheduleLoaded(result.schedule, result.start, result.end));
 }
 
-const lastUpdate = state => state.schedule.lastUpdate;
-
 function* refreshScheduleIfNeeded() {
-    const updated = yield select(lastUpdate);
+    const updated = yield select(selectors.lastUpdate);
     if ((new Date().valueOf() - updated) > 86400000) { // last updated more than a day ago
         yield call(loadSchedule, {});
     }

@@ -16,7 +16,7 @@ function* filterAndPut(scheduleData, start, end) {
     const filtered = scheduleData.filter(
         item => item.entry_type === 'Exercise'
     );
-    console.log(start);
+    trace: 'filterAndPut start', start;
     yield put(actions.exercisesLoaded(filtered, start, end));
 }
 

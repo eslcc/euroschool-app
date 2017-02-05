@@ -1,58 +1,61 @@
 // @flow
 import serialize from '../utils/serialize';
 
-const MONEWEB_BASE_URL = 'http://sodexo-ecole-europeenne.moneweb.lu';
+export const MONEWEB_BASE_URL = 'http://sodexo-ecole-europeenne.moneweb.lu';
 
-const hiddenFieldRegex = 'name="(__[A-Z]+)".+value="(.*)"';
 // OPTIMIZATION: avoids creating a new RegExp for each field
+const hiddenFieldRegex = 'name="(__[A-Z]+)".+value="(.*)"';
 const globalHiddenFieldRegex = new RegExp(hiddenFieldRegex, 'g');
 
-export function login(username: string, password: string): boolean {
-    return fetch(MONEWEB_BASE_URL)
-        .then(request => request.text())
-        .then(text => text.match(globalHiddenFieldRegex))
-        .then(matches =>
-            matches.map(match => match.match(hiddenFieldRegex))
-        )
-        .then(fields =>
-            fields.map(field => field.slice(Math.max(field.length - 2, 1)))
-        )
-        .then(fields =>
-            fields.reduce((o, currentArray) => {
-                const key = currentArray[0];
-                o[key] = currentArray[1]; // eslint-disable-line
-                return o;
-            }, {})
-        )
-        .then(fields =>
-            fetch(`${MONEWEB_BASE_URL}/default.aspx`, {
-                method: 'POST',
-                credentials: 'include',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded',
-                },
-                body: serialize({
-                    ...fields,
-                    __EVENTTARGET: 'login$ctl00$btnConnexion',
-                    login$ctl00$tbLogin: username,
-                    login$ctl00$tbPassword: password,
-                }),
-            })
-        )
-        .then(response =>
-            response.url.indexOf('convive') !== -1
-        );
+function parseHiddenFields(html) {
+    // Find all hidden fields
+    const allHiddenFields = html.match(globalHiddenFieldRegex);
+    // match with a global regex returns an array of all matched strings, so capture the key and the value from each
+    const hiddenFieldCaptures = allHiddenFields.map(field => field.match(hiddenFieldRegex));
+    // Convert into [[key, value], ...]
+    // TODO determine if this could be skipped
+    const hiddenFieldKeyValuePairs = hiddenFieldCaptures.map(field => field.slice(Math.max(field.length - 2, 1)));
+    // convert into {key: value, ...}
+    const hiddenFields = hiddenFieldKeyValuePairs.reduce((result, kvPair) => {
+        const key = kvPair[0];
+        result[key] = kvPair[1];
+        return result;
+    }, {});
+
+    return hiddenFields;
 }
 
-export function getBalance() {
-    return fetch(`${MONEWEB_BASE_URL}/Services/profil.asmx/GetProfil`, {
+export async function login(username: string, password: string): boolean {
+    const initialText = await (await fetch(MONEWEB_BASE_URL)).text();
+
+    const fields = parseHiddenFields(initialText);
+
+    const loginResponse = await fetch(`${MONEWEB_BASE_URL}/default.aspx`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: serialize({
+            ...fields,
+            __EVENTTARGET: 'login$ctl00$btnConnexion',
+            login$ctl00$tbLogin: username,
+            login$ctl00$tbPassword: password,
+        }),
+    });
+    return loginResponse.url.indexOf('convive') !== -1
+}
+
+export async function getBalance(): string {
+    const response = await (await fetch(`${MONEWEB_BASE_URL}/Services/profil.asmx/GetProfil`, {
         method: 'POST',
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
         },
-    })
-    .then(response => response.text())
-    .then(text => text.indexOf('Erreur') > 0 ? Promise.reject() : text)
-    .then(text => text.match(/([0-9]+,[0-9]{2}) €/)[1]);
+    })).text();
+    if(response.indexOf('Erreur') > 0) {
+        throw new Error('Getting balance failed (not logged in?)');
+    }
+    return response.match(/([0-9]+,[0-9]{2}) €/)[1];
 }

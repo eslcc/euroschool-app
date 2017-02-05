@@ -1,0 +1,1 @@
+exports[`Moneweb balance fails gracefully 1`] = `[Error: Getting balance failed (not logged in?)]`;

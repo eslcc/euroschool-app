@@ -10,13 +10,14 @@ import Absences from './Absences/saga';
 function* wrap(saga, args) {
     const task = yield fork(saga, args);
     task.done.catch(error => {
+        alert('FUCK');
         console.error(error);
     });
     return task;
 }
 
 // wrap the fork effect
-const wrapFork = (saga, ...args) => wrap(saga, args);
+const wrapFork = (saga, ...args) => fork(saga, args);
 
 export default function* () {
     yield [

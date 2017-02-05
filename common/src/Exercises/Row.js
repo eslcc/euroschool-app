@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
-import { Row as ShoutemRow } from '@shoutem/ui';
+import { GridRow, Tile, Title, Caption } from '@shoutem/ui';
 import moment from 'moment';
 import { truncate } from 'lodash';
-import { Actions } from 'react-native-router-flux';
+
 import styles from '../../styles';
+import renderItem from './Item';
 
 moment.defineLocale('en-yesterday', {
     parent: 'en',
@@ -18,30 +19,19 @@ moment.defineLocale('en-yesterday', {
     },
 });
 
-function openItem(item) {
-    Actions.singleExercise({ title: truncate(item.title), item });
-}
 
-export default function Row(item) {
-    if (item.NOW_MARKER) {
-        return (
-            <View>
-                <View style={styles.exercises.nowMarker} />
-                <Text style={styles.exercises.nowText}>YOU ARE HERE</Text>
-            </View>
-        );
-    }
-    if (typeof item !== 'object') { return <Text>{typeof item}</Text>; }
-    const due = moment(item.start.substring(0, item.start.length - 1)).locale('en-yesterday').calendar();
+export default function Row(row) {
+    trace: 'row', row;
+    const key = '__' + row.map(item => item.id).join(';');
     return (
-        <TouchableHighlight onPress={() => openItem(item)}>
-            <ShoutemRow styleName="small">
-                <Text>{`${item.param_1}\n${item.title}\nDue ${due}`}</Text>
-            </ShoutemRow>
+        <TouchableHighlight key={key} style={styles.fill}>
+            <GridRow columns={row.length} style={styles.fill}>
+                {row.map(item => renderItem(item, row.length))}
+            </GridRow>
         </TouchableHighlight>
     );
 }
 
 // Row.propTypes = {
-//     item: PropTypes.object,
+//     row: PropTypes.object,
 // };

@@ -1,7 +1,7 @@
 // @flow
 import cheerio from 'cheerio-without-node-native';
 
-import { doMsmRequest, METHODS } from './helpers';
+import { doMsmRequest, METHODS } from '../utils/requestHelpers';
 
 declare type HtmlString = string;
 

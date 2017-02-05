@@ -1,4 +1,6 @@
 rootProject.name = 'euroschoolApp'
+include ':react-native-cookie'
+project(':react-native-cookie').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-cookie/android')
 include ':react-native-restart'
 project(':react-native-restart').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-restart/android')
 include ':react-native-orientation'

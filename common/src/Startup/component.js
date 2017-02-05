@@ -15,7 +15,7 @@ const Startup = ({ loadApp }) => {
     loadApp();
 
     return (
-        <View style={styles.core.center}>
+        <View style={styles.core.screenContainer}>
             <Image source={require('./assets/StunningPicture.jpg')} />
             <Text>The app is loading, please wait...</Text>
             <Spinner />

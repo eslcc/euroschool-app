@@ -23,7 +23,7 @@ const settings = {
         type: 'button',
         label: 'Purge Local State',
         category: 'Development Options',
-        onClick: () => global.STORE.dispatch({type: 'debug.RESET_STATE'}),
+        onClick: () => global.store.dispatch({ type: 'debug.RESET_STATE' }),
     },
     'debug.transitionState': {
         type: 'button',

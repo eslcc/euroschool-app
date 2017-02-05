@@ -1,5 +1,5 @@
 // @flow
-import { doMsmRequest, METHODS } from './helpers';
+import { doMsmRequest, METHODS } from '../utils/requestHelpers';
 
 /**
 * Logs in to the MySchool server.
@@ -27,6 +27,6 @@ export function logout() : Promise<*> {
 export function getLoginStatus() : Promise<Boolean> {
     return doMsmRequest(METHODS.GET, '/', {})
     .then(
-        (response: Response): boolean => response.url.indexOf('login.php') === -1
+        (response: Response): boolean => response.url.indexOf('login') === -1
     );
 }

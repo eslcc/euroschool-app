@@ -11,6 +11,7 @@ import ScreenService from '../../lib/utils/screenService';
 import GlobalStyles from '../../styles';
 
 import * as actions from './actions';
+import * as selectors from './selectors';
 
 import Day from './Day';
 
@@ -27,7 +28,7 @@ function PortraitSchedule({ schedule }) {
                 style={[GlobalStyles.schedule.portraitScheduleContainer, style]}
             >
                 {[1, 2, 3, 4, 5].map(num =>
-                    <Day key={`${num}-portrait`} schedule={schedule} day={num} />
+                    <Day key={`${num}-portrait`} schedule={schedule} day={num}/>
                 )}
             </ScrollView>
         </View>
@@ -42,9 +43,9 @@ PortraitSchedule.propTypes = {
 function LandscapeSchedule({ schedule }) {
     return (
         <View>
-        {[1, 2, 3, 4, 5].map((num) =>
-            <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape />
-        )}
+            {[1, 2, 3, 4, 5].map((num) =>
+                <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape/>
+            )}
         </View>
     );
 }
@@ -59,6 +60,7 @@ class Schedule extends Component {
         load: React.PropTypes.func,
         loading: React.PropTypes.bool,
         refresh: React.PropTypes.func,
+        schedule: React.PropTypes.array,
     };
 
     constructor(props) {
@@ -90,22 +92,17 @@ class Schedule extends Component {
     }
 
     render() {
-        return (
-            <View>
-            {(() => {
-                if (this.props.loading)
-                    return (<Text>Loading</Text>);
+        if (this.props.loading) {
+            return <Text>Loading</Text>;
+        }
 
-                return this.getScheduleForOrientation();
-            })()}
-            </View>
-        );
+        return this.getScheduleForOrientation();
     }
 }
 
 const mapStateToProps = (state) => ({
-    schedule: state.schedule.schedule,
-    loading: state.schedule.scheduleLoading,
+    schedule: selectors.schedule(state),
+    loading: selectors.loading(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

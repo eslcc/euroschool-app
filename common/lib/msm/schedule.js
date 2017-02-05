@@ -1,6 +1,5 @@
 // @flow
-import moment from 'moment';
-import { doMsmRequest, METHODS } from './helpers';
+import { doMsmRequest, METHODS } from '../utils/requestHelpers';
 
 declare type ScheduleEntry = {
     entry_type: string;
@@ -35,8 +34,8 @@ declare type GetScheduleResponse = {
 export default (start: number, end: number): Promise<GetScheduleResponse> => {
     return doMsmRequest(METHODS.POST, '/data/common_handler.php?action=Contact::AJAX_U_GetSchedule', {
         inc_appointment: true,
-        start: start,
-        end: end,
+        start,
+        end,
     })
     .then((response: Response): Array<ScheduleEntry> => response.json())
     .then((data: Array<ScheduleEntry>): GetScheduleResponse => ({

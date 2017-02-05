@@ -46,6 +46,9 @@
 		D06973368D2F4539B59A1174 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0FE36322A25C41188583DB49 /* Rubik-Medium.ttf */; };
 		93614038A3FD46F286CB09C1 /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 11A7B5797D3B4D609346A83A /* Rubik-MediumItalic.ttf */; };
 		22D2DA36871441A0A60FA6D7 /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D2AD469C4B514FB2940F47BF /* Rubik-Regular.ttf */; };
+		E14D7531C8A048169ABB8CC3 /* libRNCookieManagerIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 18E4BBCB84314FC58AA56DB9 /* libRNCookieManagerIOS.a */; };
+		423EFD418C84441B8B48AAC0 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 155AC59EF2A347E8993680FA /* OFL.txt */; };
+		84892B6C862D47919EC87EF9 /* libRNCookieManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66361D244F31491CAE8E81E0 /* libRNCookieManager.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +195,11 @@
 		0FE36322A25C41188583DB49 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		11A7B5797D3B4D609346A83A /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-MediumItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		D2AD469C4B514FB2940F47BF /* Rubik-Regular.ttf */ = {isa = PBXFileReference; name = "Rubik-Regular.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6F569AD0DD3741C2898C83BA /* RNCookieManagerIOS.xcodeproj */ = {isa = PBXFileReference; name = "RNCookieManagerIOS.xcodeproj"; path = "../node_modules/react-native-cookies/RNCookieManagerIOS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		18E4BBCB84314FC58AA56DB9 /* libRNCookieManagerIOS.a */ = {isa = PBXFileReference; name = "libRNCookieManagerIOS.a"; path = "libRNCookieManagerIOS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		155AC59EF2A347E8993680FA /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../node_modules/@shoutem/ui/fonts/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		1F6AE15CDA1F4FB5B2D98978 /* RNCookieManager.xcodeproj */ = {isa = PBXFileReference; name = "RNCookieManager.xcodeproj"; path = "../node_modules/react-native-cookie/ios/RNCookieManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		66361D244F31491CAE8E81E0 /* libRNCookieManager.a */ = {isa = PBXFileReference; name = "libRNCookieManager.a"; path = "libRNCookieManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -222,6 +230,8 @@
 				22A075DCCB3943D1BB6105DB /* libRNShare.a in Frameworks */,
 				21FB824FCB824FC1A2C91058 /* libRCTOrientation.a in Frameworks */,
 				37FE2EAF1B124D65BA8CFAB3 /* libRCTRestart.a in Frameworks */,
+				E14D7531C8A048169ABB8CC3 /* libRNCookieManagerIOS.a in Frameworks */,
+				84892B6C862D47919EC87EF9 /* libRNCookieManager.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,6 +368,8 @@
 				6408FBE99BB3433BA5131C47 /* RNShare.xcodeproj */,
 				94675F467ED1452A99E55F67 /* RCTOrientation.xcodeproj */,
 				E63276FBBABB4398B04BC475 /* RCTRestart.xcodeproj */,
+				6F569AD0DD3741C2898C83BA /* RNCookieManagerIOS.xcodeproj */,
+				1F6AE15CDA1F4FB5B2D98978 /* RNCookieManager.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -414,6 +426,7 @@
 				0FE36322A25C41188583DB49 /* Rubik-Medium.ttf */,
 				11A7B5797D3B4D609346A83A /* Rubik-MediumItalic.ttf */,
 				D2AD469C4B514FB2940F47BF /* Rubik-Regular.ttf */,
+				155AC59EF2A347E8993680FA /* OFL.txt */,
 			);
 			name = Resources;
 			path = "";
@@ -658,6 +671,7 @@
 				D06973368D2F4539B59A1174 /* Rubik-Medium.ttf in Resources */,
 				93614038A3FD46F286CB09C1 /* Rubik-MediumItalic.ttf in Resources */,
 				22D2DA36871441A0A60FA6D7 /* Rubik-Regular.ttf in Resources */,
+				423EFD418C84441B8B48AAC0 /* OFL.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -740,6 +754,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -756,6 +772,8 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/euroschoolApp.app/euroschoolApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
@@ -841,6 +859,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 					"$(SRCROOT)\..\node_modules\react-native-restart\ios\RCTRestart",
+					"$(SRCROOT)\..\node_modules\react-native-cookies\RNCookieManagerIOS",
+					"$(SRCROOT)\..\node_modules\react-native-cookie\ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
@@ -885,6 +905,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-share\ios",
 					"$(SRCROOT)\..\node_modules\react-native-orientation\iOS\RCTOrientation/**",
 					"$(SRCROOT)\..\node_modules\react-native-restart\ios\RCTRestart",
+					"$(SRCROOT)\..\node_modules\react-native-cookies\RNCookieManagerIOS",
+					"$(SRCROOT)\..\node_modules\react-native-cookie\ios",
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
