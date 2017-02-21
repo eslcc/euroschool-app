@@ -3,7 +3,6 @@
 import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore as reduxCreateStore, applyMiddleware, compose } from 'redux';
 import { createNavigationEnabledStore, NavigationReducer } from '@exponent/ex-navigation';
-import { persistStore, autoRehydrate } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
 import RootSaga from './RootSaga';
@@ -56,11 +55,6 @@ function createStore () {
     const store = createStoreWithNavigation(mainReducer, enhancer, autoRehydrate());
 
     sagaMiddleware.run(RootSaga);
-
-    persistStore(store, {
-        blacklist: ['navigation', 'startup', 'devtools'],
-        storage: AsyncStorage,
-    });
 
     return store;
 }
