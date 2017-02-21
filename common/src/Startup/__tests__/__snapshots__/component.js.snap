@@ -1,0 +1,21 @@
+exports[`Startup component renders correctly 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#303030",
+      "flex": 1,
+      "paddingBottom": 100,
+      "paddingHorizontal": 16,
+      "paddingTop": 80,
+    }
+  }>
+  <Image
+    source={1} />
+  <Text
+    accessible={true}
+    allowFontScaling={true}
+    ellipsizeMode="tail">
+    The app is loading, please wait...
+  </Text>
+</View>
+`;
