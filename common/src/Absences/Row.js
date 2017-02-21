@@ -1,13 +1,13 @@
 import React from 'react';
-
-import { View, Text } from 'react-native';
+import { Text } from 'react-native';
+import { View } from '@shoutem/ui';
 
 import styles from '../../styles';
 
 export default function (item) {
     return (
-        <View style={styles.core.card}>
-            <Text>{item}</Text>
+        <View>
+            <Text style={styles.t}>{item}</Text>
         </View>
     );
 }

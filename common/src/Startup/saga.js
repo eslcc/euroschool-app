@@ -1,10 +1,12 @@
 import {takeLatest} from 'redux-saga';
 import {put, select, call} from 'redux-saga/effects';
-import {Actions} from 'react-native-router-flux';
+import { NavigationActions } from '@exponent/ex-navigation';
 import * as neutron from '../../lib/appcore/neutron';
 import * as msm from '../../lib/msm/login';
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
+import store from '../Store';
+import Router from '../router';
 
 const loginPersistedData = state => ({
     email: state.login.email,
@@ -12,10 +14,13 @@ const loginPersistedData = state => ({
     failed: state.login.failed,
 });
 
+const currentNavigatorUID = state => state.navigation.currentNavigatorUID;
+
 function* startup() {
     const status = yield call(msm.getLoginStatus);
+    const navigatorUID = yield select(currentNavigatorUID);
     if (status) {
-        yield call(Actions.main);
+        yield put(NavigationActions.replace(navigatorUID, Router.getRoute('tabScreen')));
     } else {
         // If login fails (session expiration), the email and password may still be persisted.
         // In this case, attempt login with persisted credentials.
@@ -24,12 +29,12 @@ function* startup() {
         if (email !== '' && password !== '' && !failed) {
             const result = yield call(neutron.login, email, password);
             if (result) {
-                yield call(Actions.main);
+                yield put(NavigationActions.push(navigatorUID, Router.getRoute('tabScreen')));
             } else {
                 yield put(actions.loginNeeded());
             }
         } else {
-            yield call(Actions.login);
+            yield put(NavigationActions.replace(navigatorUID, Router.getRoute('login')))
         }
     }
 }

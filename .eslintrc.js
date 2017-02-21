@@ -33,6 +33,7 @@ module.exports =
             "linebreak-style": "off",
             "brace-style": ["error", "1tbs", {"allowSingleLine": true}],
             "arrow-body-style": ["error", "as-needed"],
+            "operator-linebreak": ["error", "before"],
             "flowtype/use-flow-type": 1,
             "flowtype/boolean-style": ["error", "boolean"],
             "flowtype/define-flow-type": 1,
@@ -61,6 +62,7 @@ module.exports =
         "globals": {
             "fetch": false,
             "global": false,
+            "require": false,
         },
         "settings": {
             "flowtype": {

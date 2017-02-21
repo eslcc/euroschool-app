@@ -6,6 +6,7 @@ const normalColors = {
     primaryText: '#212121',
     subText: '#727272',
     red: '#D32F2F',
+    accent: '#FFC107',
     schedule: {
         monday: '#ffc400', // Amber
         tuesday: '#FF5722', // deep orange
@@ -41,7 +42,7 @@ const darkColors = {
     subText: 'rgba(255, 255, 255, 0.87)',
 };
 
-global.secretDarkThemeDoNotUseOrYouWillBeFired = true;
+global.secretDarkThemeDoNotUseOrYouWillBeFired = false;
 
 export const colors = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalColors, darkColors) : normalColors; //eslint-disable-line
 
@@ -56,21 +57,24 @@ const normalStyles = {
     core: {
         screenContainer: {
             paddingHorizontal: 16,
-            paddingTop: 80,
+            paddingTop: 16,
             paddingBottom: 100,
             flex: 1,
             backgroundColor: colors.background,
         },
         screenContainerNoTabs: {
-            marginHorizontal: 16,
-            marginTop: 64,
+            paddingHorizontal: 16,
+            paddingTop: 16,
             flex: 1,
+            backgroundColor: colors.background,
         },
         fill: {
             flex: 1,
             backgroundColor: colors.background,
         },
-        mainText: {},
+        mainText: {
+            color: colors.primaryText,
+        },
         subText: {
             fontSize: 24,
             color: colors.subText,
@@ -78,6 +82,7 @@ const normalStyles = {
         },
         textMargin: {
             marginVertical: 2,
+            color: colors.primaryText,
         },
         error: {
             color: colors.red,
@@ -102,6 +107,11 @@ const normalStyles = {
             marginHorizontal: 16,
         },
     },
+    tabs: StyleSheet.create({
+        selected: {
+            backgroundColor: colors.accent,
+        },
+    }),
     drawer: StyleSheet.create({
         header: {
             height: 56,
@@ -117,6 +127,7 @@ const normalStyles = {
         },
         view: {
             marginTop: 56,
+            backgroundColor: colors.background,
         },
         nyiWarning: {
             fontWeight: 'bold',
@@ -126,11 +137,11 @@ const normalStyles = {
     exercises: {
         mainView: {
             // marginTop: 80,
-            // marginBottom: 80,
-            paddingBottom: 1,
+            // paddingBottom: 80,
         },
         list: {
-            marginBottom: 64
+            flex: 1,
+            backgroundColor: colors.background,
         },
         nowMarker: {
             backgroundColor: '#D32F2F',
@@ -173,7 +184,7 @@ const normalStyles = {
             left: 0,
             flex: 1,
             flexDirection: 'row',
-            backgroundColor: colors.background
+            backgroundColor: colors.background,
         },
         day: {
             height: 64,
@@ -191,7 +202,7 @@ const normalStyles = {
             fontSize: 24,
             position: 'absolute',
             left: 0,
-            color: colors.subText
+            color: colors.subText,
         },
         monday: {
             backgroundColor: colors.schedule.monday,
@@ -239,7 +250,9 @@ const normalStyles = {
     }),
 };
 
-const secretDarkStyles = StyleSheet.create({});
+const secretDarkStyles = {};
 
-module.exports = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? normalStyles : normalStyles; // TODO change first normalStyles to secretDarkStyles
+module.exports = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalStyles, secretDarkStyles) : normalStyles; // TODO change first normalStyles to secretDarkStyles
+module.exports.default = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalStyles, secretDarkStyles)  : normalStyles;
 module.exports.colors = colors;
+module.exports.dark = global.secretDarkThemeDoNotUseOrYouWillBeFired;

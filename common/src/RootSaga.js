@@ -7,25 +7,13 @@ import Startup from './Startup/saga';
 import Exercises from './Exercises/saga';
 import Absences from './Absences/saga';
 
-function* wrap(saga, args) {
-    const task = yield fork(saga, args);
-    task.done.catch(error => {
-        alert('FUCK');
-        console.error(error);
-    });
-    return task;
-}
-
-// wrap the fork effect
-const wrapFork = (saga, ...args) => fork(saga, args);
-
 export default function* () {
     yield [
-        wrapFork(Canteen),
-        wrapFork(Schedule),
-        wrapFork(Login),
-        wrapFork(Startup),
-        wrapFork(Exercises),
-        wrapFork(Absences),
+        fork(Canteen),
+        fork(Schedule),
+        fork(Login),
+        fork(Startup),
+        fork(Exercises),
+        fork(Absences),
     ];
 }

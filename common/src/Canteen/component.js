@@ -38,9 +38,9 @@ class Balance extends Component {
         if (this.props.loadFailed) {
             return (
                 <View style={styles.core.screenContainer}>
-                    <Text>Could not access balance.</Text>
-                    <Text>Please make sure you have set your credentials in settings.</Text>
-                    <Button onPress={this.props.loadBalance}>
+                    <Text style={styles.t}>Could not access balance.</Text>
+                    <Text style={styles.t}>Please make sure you have set your credentials in settings.</Text>
+                    <Button onPress={this.props.loadBalance} styleName="dark">
                         <Text>RETRY</Text>
                     </Button>
                 </View>
@@ -56,9 +56,9 @@ class Balance extends Component {
             >
                 {/* The double nested view is so the pull-to-refresh appears  */}
                 {/* directly below the navbar but the content still has space */}
-                <View style={{ marginTop: 56 }}>
-                    <Heading styleName="" style={{ fontSize: 28 }}>€{this.props.balance}</Heading>
-                    <Text>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
+                <View style={styles.core.screenContainer}>
+                    <Heading styleName="" style={{ fontSize: 28, color: styles.colors.primaryText }}>€{this.props.balance}</Heading>
+                    <Text style={styles.t}>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
                 </View>
             </ScrollView>
         );

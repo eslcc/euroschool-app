@@ -22,7 +22,7 @@ export function Absences({ absences, load, loading, lastUpdate }) {
         const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
         const data = ds.cloneWithRows(absences);
         return (
-            <View style={styles.core.screenContainerNoTabs}>
+            <View style={styles.core.screenContainer}>
                 <Text>Last updated <TimeAgo time={lastUpdate} /></Text>
                 <ListView
                     dataSource={data}

@@ -63,6 +63,12 @@ class Schedule extends Component {
         schedule: React.PropTypes.array,
     };
 
+    static route = {
+        navigationBar: {
+            visible: false,
+        },
+    };
+
     constructor(props) {
         super(props);
         const initial = Orientation.getInitialOrientation();
@@ -76,7 +82,7 @@ class Schedule extends Component {
         if (this.props.loading) {
             this.props.load();
         } else {
-            this.props.refresh();
+            //this.props.refresh();
         }
 
         Orientation.addOrientationListener((orientation) => {
@@ -86,9 +92,9 @@ class Schedule extends Component {
 
     getScheduleForOrientation() {
         const props = { schedule: this.props.schedule, landscape: this.state.landscape };
-        return this.state.landscape ?
-            <LandscapeSchedule {...props} /> :
-            <PortraitSchedule {...props} />;
+        return this.state.landscape
+            ? <LandscapeSchedule {...props} />
+            : <PortraitSchedule {...props} />;
     }
 
     render() {

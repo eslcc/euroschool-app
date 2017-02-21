@@ -130,7 +130,7 @@ export class Exercises extends Component {
                     renderHeader={() => <Header />}
                     renderFooter={() => <Footer />}
                     styleName="flexible"
-                    style={{...styles.fill, ...styles.exercises.list}}
+                    style={styles.exercises.list}
                 />
             </View>
         );

@@ -9,16 +9,16 @@ declare type LoginResult = {
 }
 
 // eslint-disable-next-line import/prefer-default-export
-export function login(email: string, password: string): Promise<LoginResult> {
-    return doAppcoreRequest(METHODS.POST, '/neutron/login', {
+export async function login(email: string, password: string): Promise<LoginResult> {
+    const result = await doAppcoreRequest(METHODS.POST, '/neutron/login', {
         email,
         password,
-    }).then((data: LoginResult): LoginResult => {
-        if (data.cookie)
-            return Cookie.set('https://sms.eursc.eu', 'PHPSESSID', data.cookie, {
-                path: '/',
-                expires: moment().add(5, 'y').toDate(),
-            }).then((): LoginResult => data);
-        return data;
     });
+    if (!result.error) {
+        await Cookie.set('https://sms.eursc.eu', 'PHPSESSID', result.cookie, {
+            path: '/',
+            expires: moment().add(5, 'y').toDate(),
+        });
+    }
+    return result;
 }

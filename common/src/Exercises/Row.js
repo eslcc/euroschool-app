@@ -5,7 +5,7 @@ import moment from 'moment';
 import { truncate } from 'lodash';
 
 import styles from '../../styles';
-import renderItem from './Item';
+import Item from './Item';
 
 moment.defineLocale('en-yesterday', {
     parent: 'en',
@@ -26,7 +26,7 @@ export default function Row(row) {
     return (
         <TouchableHighlight key={key} style={styles.fill}>
             <GridRow columns={row.length} style={styles.fill}>
-                {row.map(item => renderItem(item, row.length))}
+                {row.map(item => <Item key={key + item.id} item={item} style={row.length} />)}
             </GridRow>
         </TouchableHighlight>
     );

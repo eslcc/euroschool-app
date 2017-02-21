@@ -1,6 +1,5 @@
 import React, { PropTypes } from 'react';
 import {
-    StyleSheet,
     Text,
     View,
     Image,
@@ -9,19 +8,24 @@ import { Spinner } from '@shoutem/ui';
 import { connect } from 'react-redux';
 
 import { checkLogin } from './actions';
-import styles from '../../styles';
+import styles from '../../styles'; // eslint-disable-line
 
-const Startup = ({ loadApp }) => {
-    loadApp();
+export class Startup extends React.Component {
 
-    return (
-        <View style={styles.core.screenContainer}>
-            <Image source={require('./assets/StunningPicture.jpg')} />
-            <Text>The app is loading, please wait...</Text>
-            <Spinner />
-        </View>
-    );
-};
+    componentDidMount() {
+        this.props.loadApp();
+    }
+
+    render() {
+        return (
+            <View style={styles.core.screenContainer}>
+                <Image source={require('./assets/StunningPicture.jpg')} />
+                <Text>The app is loading, please wait...</Text>
+                <Spinner />
+            </View>
+        );
+    }
+}
 
 Startup.propTypes = {
     loadApp: PropTypes.func,

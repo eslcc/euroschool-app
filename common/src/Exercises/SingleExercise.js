@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import HTMLView from 'react-native-htmlview';
@@ -9,20 +9,29 @@ import styles from '../../styles';
 
 class SingleExercise extends Component {
     static propTypes = {
-        item: PropTypes.object.isRequired,
+        route: PropTypes.object.isRequired,
         details: PropTypes.object.isRequired,
         loadDetail: PropTypes.func.isRequired,
+    };
+
+    static route = {
+        navigationBar: {
+            title(params) {
+                return params.title;
+            },
+        },
     };
 
     constructor(props) {
         super(props);
         this.state = {
-            itemId: props.item.id,
+            itemId: props.route.params.item.id,
         };
     }
 
     componentDidMount() {
-        const { loadDetail, item } = this.props;
+        const { loadDetail } = this.props;
+        const item = this.props.route.params.item;
         loadDetail(item.id);
     }
 
@@ -48,7 +57,8 @@ class SingleExercise extends Component {
     }
 
     render() {
-        const { details: allDetails, item } = this.props;
+        const { details: allDetails } = this.props;
+        const item = this.props.route.params.item;
         const details = allDetails[item.id];
         if (details) {
             const mmnt = moment(details.due
