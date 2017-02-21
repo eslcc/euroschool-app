@@ -6,7 +6,7 @@ script: npm run cover
 cache: yarn
 after_success:
 - codecov
-- "./transpilebuild.sh"
+- "babel --presets stage-0 -o postbuild.js postbuild.es6"
 - node postbuild.js --dev
 env:
   global:
