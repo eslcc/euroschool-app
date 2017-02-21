@@ -4,10 +4,11 @@ import android.app.Application;
 import android.util.Log;
 
 import com.facebook.react.ReactApplication;
-import im.shimo.react.cookie.CookieManagerPackage;
-import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.github.yamill.orientation.OrientationPackage;
+import im.shimo.react.cookie.CookieManagerPackage;
 import cl.json.RNSharePackage;
+import com.BV.LinearGradient.LinearGradientPackage;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -29,10 +30,11 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new CookieManagerPackage(),
-            new ReactNativeRestartPackage(),
             new OrientationPackage(),
-            new RNSharePackage()
+            new CookieManagerPackage(),
+            new RNSharePackage(),
+            new LinearGradientPackage(),
+            new VectorIconsPackage()
       );
     }
   };

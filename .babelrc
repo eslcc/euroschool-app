@@ -1,15 +1,14 @@
 {
-  "presets": ["react-native-stage-0/decorator-support"],
-  "plugins": [
-    [
-      "trace",
-      {
-        "env": {
-          "production": {
-            "strip": true
-          }
-        }
-      }
-    ]
-  ]
+	"presets": ["react-native-stage-0/decorator-support"],
+	"plugins": [
+		[
+			"trace", {
+				"env": {
+					"production": {
+						"strip": true
+					}
+				}
+			}
+		]
+	]
 }
