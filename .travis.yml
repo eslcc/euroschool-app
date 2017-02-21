@@ -3,7 +3,6 @@ sudo: false
 node_js:
 - node
 script: npm run cover
-cache: yarn
 after_success:
 - codecov
 - "babel --presets stage-0 -o postbuild.js postbuild.es6"
