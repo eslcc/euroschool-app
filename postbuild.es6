@@ -8,7 +8,9 @@ const pkg = require('./package.json');
 
 const DEV = !!argv.dev;
 
-const release = argv.release || `${pkg.version}-${execSync('git rev-parse HEAD').toString().replace(/\r?\n|\r/g, "")}-${new Date().getSeconds()}${DEV ? '-dev' : ''}`;
+const commit = process.env['TRAVIS_COMMIT'] || execSync('git rev-parse HEAD').toString().replace(/\r?\n|\r/g, "");
+
+const release = argv.release || `${pkg.version}-$}-${new Date().getSeconds()}${DEV ? '-dev' : ''}`;
 
 console.log(`Building release ${release}`);
 
