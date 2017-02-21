@@ -1,0 +1,192 @@
+exports[`Startup component renders correctly 1`] = `
+<View>
+  <Image
+    source={1}
+    style={
+      Object {
+        "flex": 1,
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+      }
+    } />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#212121",
+        }
+      }>
+      Hello.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#727272",
+          "fontSize": 24,
+        }
+      }>
+      Please log in with your SMS account.
+    </Text>
+    <View>
+      <TextInput
+        keyboardType="email-address"
+        onChangeText={[Function]}
+        placeholder="Email"
+        placeholderTextColor="#FFF"
+        returnKeyType="next" />
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Password"
+        placeholderTextColor="#FFF"
+        returnKeyType="go"
+        secureTextEntry={true} />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#222222",
+            "borderColor": "#222222",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "paddingLeft": 15,
+            "paddingRight": 5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail">
+          LOG IN
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+`;
+
+exports[`Startup component shows the failure indicator 1`] = `
+<View>
+  <Image
+    source={1}
+    style={
+      Object {
+        "flex": 1,
+        "left": 0,
+        "position": "absolute",
+        "top": 0,
+      }
+    } />
+  <View>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#212121",
+        }
+      }>
+      Hello.
+    </Text>
+    <Text
+      accessible={true}
+      allowFontScaling={true}
+      ellipsizeMode="tail"
+      style={
+        Object {
+          "color": "#727272",
+          "fontSize": 24,
+        }
+      }>
+      Please log in with your SMS account.
+    </Text>
+    <View>
+      <TextInput
+        keyboardType="email-address"
+        onChangeText={[Function]}
+        placeholder="Email"
+        placeholderTextColor="#FFF"
+        returnKeyType="next" />
+      <TextInput
+        onChangeText={[Function]}
+        placeholder="Password"
+        placeholderTextColor="#FFF"
+        returnKeyType="go"
+        secureTextEntry={true} />
+      <View
+        accessibilityComponentType={undefined}
+        accessibilityLabel={undefined}
+        accessibilityTraits={undefined}
+        accessible={true}
+        hitSlop={undefined}
+        isTVSelectable={true}
+        onLayout={[Function]}
+        onResponderGrant={[Function]}
+        onResponderMove={[Function]}
+        onResponderRelease={[Function]}
+        onResponderTerminate={[Function]}
+        onResponderTerminationRequest={[Function]}
+        onStartShouldSetResponder={[Function]}
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#222222",
+            "borderColor": "#222222",
+            "borderRadius": 2,
+            "borderWidth": 1,
+            "flexDirection": "row",
+            "justifyContent": "center",
+            "opacity": 1,
+            "paddingLeft": 15,
+            "paddingRight": 5,
+          }
+        }
+        testID={undefined}
+        tvParallaxProperties={undefined}>
+        <Text
+          accessible={true}
+          allowFontScaling={true}
+          ellipsizeMode="tail">
+          LOG IN
+        </Text>
+      </View>
+      <Text
+        accessible={true}
+        allowFontScaling={true}
+        ellipsizeMode="tail"
+        style={
+          Object {
+            "color": "#D32F2F",
+          }
+        }>
+        Something went wrong. Please check your email and password.
+      </Text>
+    </View>
+  </View>
+</View>
+`;

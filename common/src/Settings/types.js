@@ -6,7 +6,6 @@ import styles from '../../styles';
 import { get } from 'lodash';
 
 export const text = (key, label, defaultValue, keyboardType = 'default', secure = false) => (state, dispatch) => {
-    trace: state;
     const value = get(state, key) || defaultValue;
     return <TextInput
         key={key}

@@ -2,11 +2,13 @@
 import request from 'superagent';
 import { execSync } from 'child_process';
 
+const argv = require('yargs').argv;
+
 const pkg = require('./package.json');
 
-const DEV = process.argv.join(' ').indexOf('--dev') > -1;
+const DEV = !!argv.dev;
 
-const release = `${pkg.version}-${execSync('git rev-parse HEAD').toString().replace(/\r?\n|\r/g, "")}-${new Date().getSeconds()}${DEV && '-dev'}`;
+const release = argv.release || `${pkg.version}-${execSync('git rev-parse HEAD').toString().replace(/\r?\n|\r/g, "")}-${new Date().getSeconds()}${DEV ? '-dev' : ''}`;
 
 console.log(`Building release ${release}`);
 
@@ -17,7 +19,7 @@ const rnbuild = execSync(command);
 
 console.log('Uploading bundle and sourcemap to Sentry...');
 
-const token = process.env.SENTRY_TOKEN;
+const token = argv.sentryToken || process.env.SENTRY_TOKEN;
 
 request
     .post('https://sentry.io/api/0/projects/eslcc/euroschool-app/releases/')
@@ -31,7 +33,7 @@ request
             .type('application/json')
             .set('Authorization', 'Bearer ' + token)
             .attach('file', 'main.jsbundle')
-            .field('name', DEV ? '/index.android.bundle?platform=android&dev=true' : '/main.jsbundle')
+            .field('name', DEV ? '/index.android.bundle?platform=android&dev=true&hot=false&minify=false' : '/main.jsbundle')
             .on('progress', e => {
                 console.log(`Bundle uploaded ${((e.loaded / e.total) * 100).toFixed(2)}%`)
             })
@@ -42,7 +44,7 @@ request
                     .type('application/json')
                     .set('Authorization', 'Bearer ' + token)
                     .attach('file', 'main.jsbundle.map')
-                    .field('name', DEV ? '/index.android.map?platform=android&dev=true' : '/main.jsbundle.map')
+                    .field('name', DEV ? '/index.android.map?platform=android&dev=true&hot=false&minify=false' : '/main.jsbundle.map')
                     .on('progress', e => {
                         console.log(`Sourcemap uploaded ${((e.loaded / e.total) * 100).toFixed(2)}%`)
                     })

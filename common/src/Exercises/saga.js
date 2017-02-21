@@ -1,16 +1,11 @@
 import { takeEvery } from 'redux-saga';
-import { put, select, call } from 'redux-saga/effects';
+import { put, call } from 'redux-saga/effects';
 import moment from 'moment';
 
 import * as actionTypes from './actionTypes';
 import * as actions from './actions';
 import msmSchedule from '../../lib/msm/schedule';
 import msmExercise from '../../lib/msm/exercises';
-
-const loadedSchedule = state => state.schedule;
-
-const loadedStart = state => state.exercises.loadedStart;
-const loadedEnd = state => state.exercises.loadedEnd;
 
 function* filterAndPut(scheduleData, start, end) {
     const filtered = scheduleData.filter(
@@ -24,7 +19,7 @@ function* exerciseSaga(action) {
     // WIZARD SHIT:
     // If the schedule is already loaded, and the user only asks for one week,
     // we don't need a server round trip - all the data is already in redux.
-    // TODO bring this back
+    // TODO bring this back (it's a buggy mess)
     // const localSchedule = yield select(loadedSchedule);
     const { start, end } = action;
 

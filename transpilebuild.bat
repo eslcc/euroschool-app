@@ -1,1 +1,1 @@
-babel --presets stage-0 -o build.js build.es6
+babel --presets stage-0 -o postbuild.js postbuild.es6

@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import 'react-native-mock/mock';
+require('react-native-mock/mock');
 import React from 'react';
 import { SettingsView as Settings } from '../component';
 // import renderer from 'react-test-renderer';

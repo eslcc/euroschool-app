@@ -5,9 +5,9 @@ import { combineReducers, createStore as reduxCreateStore, applyMiddleware, comp
 import { createNavigationEnabledStore, NavigationReducer } from '@exponent/ex-navigation';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
-import _ from 'lodash';
 
 import RootSaga from './RootSaga';
+import middleware from '../lib/utils/middleware';
 
 /* eslint-disable no-multi-spaces */
 
@@ -44,16 +44,8 @@ function createStore () {
         : compose;
 
     const enhancer = composeEnhancers(
-        applyMiddleware(sagaMiddleware)
+        applyMiddleware(sagaMiddleware, ...middleware)
     );
-
-    // Fuckery to allow us to reset the state for debugging.
-    const reducer = (state, action) => {
-        if (action.type === 'debug.RESET_STATE') {
-            state = undefined; // eslint-disable-line
-        }
-        return mainReducer(state, action);
-    };
 
     const createStoreWithNavigation = createNavigationEnabledStore({
         reduxCreateStore,
@@ -61,7 +53,7 @@ function createStore () {
     });
 
     // const store = createStoreWithNavigation(reducer, enhancer);
-    const store = createStoreWithNavigation(reducer, enhancer, autoRehydrate());
+    const store = createStoreWithNavigation(mainReducer, enhancer, autoRehydrate());
 
     sagaMiddleware.run(RootSaga);
 

@@ -2,11 +2,11 @@ exports[`Startup component renders correctly 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#303030",
+      "backgroundColor": "#F9F9F9",
       "flex": 1,
       "paddingBottom": 100,
       "paddingHorizontal": 16,
-      "paddingTop": 80,
+      "paddingTop": 16,
     }
   }>
   <Image
@@ -17,5 +17,11 @@ exports[`Startup component renders correctly 1`] = `
     ellipsizeMode="tail">
     The app is loading, please wait...
   </Text>
+  <ActivityIndicator
+    animating={true}
+    color="#cccccc"
+    hidesWhenStopped={true}
+    size="small"
+    style={Object {}} />
 </View>
 `;
