@@ -120,7 +120,6 @@ export class Exercises extends Component {
     }
 
     render() {
-        trace: 'exercise rows', this.state.rows;
         return (
             <View style={Object.assign({}, styles.core.screenContainer, styles.exercises.mainView)}>
                 <ListView

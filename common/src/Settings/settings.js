@@ -7,5 +7,5 @@ export default [
     types.header('Developer Tools'),
     types.label('Be careful with these.'),
     types.dispatchButton('Purge Local State', () => ({ type: 'debug.RESET_STATE' })),
-    types.button('Open State Transition Explorer (BROKEN, DO NOT USE!)', () => { throw new Exception('What did I just say?') }),
+    types.button('Open State Transition Explorer (BROKEN, DO NOT USE!)', () => { throw new Error('What did I just say?') }),
 ];

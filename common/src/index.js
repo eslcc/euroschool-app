@@ -4,7 +4,7 @@ import {
     NavigationProvider,
     StackNavigation,
     NavigationContext,
-} from '@exponent/ex-navigation';
+} from '@expo/ex-navigation';
 import { Text } from 'react-native';
 import { StyleProvider } from '@shoutem/theme';
 

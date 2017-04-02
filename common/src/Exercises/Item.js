@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { View as ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } from '@shoutem/ui';
 import moment from 'moment';
 import { truncate, sample } from 'lodash';
-import { withNavigation } from '@exponent/ex-navigation';
+import { withNavigation } from '@expo/ex-navigation';
 import Router from '../router';
 import styles from '../../styles';
 

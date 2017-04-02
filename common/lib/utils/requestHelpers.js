@@ -9,7 +9,7 @@ export const MSM_URL_BASE: string = 'https://sms.eursc.eu';
 export const APPCORE_URL_BASE: string = 'https://eslcc-appcore.herokuapp.com';
 
 export function doRequest(method: string,
-                          path: string,
+                          url: string,
                           params: {[key: string]: string}): Promise<Response> {
     const args = {
         credentials: 'include',
@@ -21,10 +21,10 @@ export function doRequest(method: string,
 
     switch (method) {
         case METHODS.GET:
-            return fetch(path, args);
+            return fetch(url, args);
 
         case METHODS.POST:
-            return fetch(path, {body: serialize(params), ...args});
+            return fetch(url, { body: serialize(params), ...args });
 
         default:
             throw new Error(`Unexpected request method (allowed GET and POST, given ${method})`);

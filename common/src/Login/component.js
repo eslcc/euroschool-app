@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import {
     Text,
     View,
@@ -8,7 +8,7 @@ import {
     Dimensions,
 } from 'react-native';
 import { Button, Spinner } from '@shoutem/ui';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import * as actions from './actions';
 
 import GlobalStyles from '../../styles';
@@ -23,7 +23,7 @@ const loginStates = {
     NETWORK_ERROR: 4,
 };
 
-const DumbLoginFailureIndicator = ({display}) => {
+const DumbLoginFailureIndicator = ({ display }) => {
     if (!(display)) {
         return null;
     } else {
@@ -46,8 +46,8 @@ export class Login extends Component {
         super(props);
 
         this.state = {
-            email: '',
-            password: '',
+            email: 'polakoma@student.eursc.eu',
+            password: '***REMOVED***',
             loginState: 0,
         };
     }
@@ -72,7 +72,7 @@ export class Login extends Component {
                             onChangeText={text => this.onInputChange('email', text)}
                             returnKeyType="next"
                             keyboardType="email-address"
-                            // value={this.state.username}
+                            value={this.state.email}
                         />
                         <TextInput
                             secureTextEntry
@@ -80,17 +80,18 @@ export class Login extends Component {
                             placeholderTextColor="#FFF"
                             onChangeText={text => this.onInputChange('password', text)}
                             returnKeyType="go"
-                            // value={this.state.password}
+                            value={this.state.password}
                         />
-                        <Button styleName="dark"
-                                onPress={() => this.props.login(this.state.email, this.state.password)}
+                        <Button
+                            styleName="dark"
+                            onPress={() => this.props.login(this.state.email, this.state.password)}
                         >
                             <Text>LOG IN</Text>
                         </Button>
 
                         {
-                            (this.state.loginState === loginStates.IN_PROGRESS) &&
-                            <Spinner />
+                            (this.state.loginState === loginStates.IN_PROGRESS)
+                            && <Spinner />
                         }
 
                         <LoginFailureIndicator />

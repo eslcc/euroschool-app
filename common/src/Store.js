@@ -2,7 +2,7 @@
 // @flow
 import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore as reduxCreateStore, applyMiddleware, compose } from 'redux';
-import { createNavigationEnabledStore, NavigationReducer } from '@exponent/ex-navigation';
+import { createNavigationEnabledStore, NavigationReducer } from '@expo/ex-navigation';
 import createSagaMiddleware from 'redux-saga';
 
 import RootSaga from './RootSaga';
@@ -30,7 +30,7 @@ const mainReducer = combineReducers({
     exercises,
     devtools,
     absences,
-    navigation: NavigationReducer,
+    navigation: NavigationReducer ,
 });
 
 function createStore () {
@@ -48,11 +48,11 @@ function createStore () {
 
     const createStoreWithNavigation = createNavigationEnabledStore({
         reduxCreateStore,
-        navigationStateKey: 'navigation',
+        navigationStateKey: 'navigation' ,
     });
 
     // const store = createStoreWithNavigation(reducer, enhancer);
-    const store = createStoreWithNavigation(mainReducer, enhancer, autoRehydrate());
+    const store = createStoreWithNavigation(mainReducer, enhancer);
 
     sagaMiddleware.run(RootSaga);
 

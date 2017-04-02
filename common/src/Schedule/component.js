@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import {
     Text,
     View,
-    ScrollView,
+    ScrollView ,
 } from 'react-native';
 import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
 import ScreenService from '../../lib/utils/screenService';
+import Cache from '../../lib/utils/cache';
 
 import GlobalStyles from '../../styles';
 
@@ -18,7 +19,7 @@ import Day from './Day';
 function PortraitSchedule({ schedule }) {
     const style = {
         height: ScreenService.getScreenSize().height,
-        width: ScreenService.getScreenSize().width,
+        width: ScreenService.getScreenSize().width ,
     };
     return (
         <View>
@@ -37,7 +38,7 @@ function PortraitSchedule({ schedule }) {
 
 PortraitSchedule.propTypes = {
     schedule: PropTypes.array,
-    landscape: PropTypes.bool,
+    landscape: PropTypes.bool ,
 };
 
 function LandscapeSchedule({ schedule }) {
@@ -52,7 +53,7 @@ function LandscapeSchedule({ schedule }) {
 
 LandscapeSchedule.propTypes = {
     schedule: PropTypes.array,
-    landscape: PropTypes.bool,
+    landscape: PropTypes.bool ,
 };
 
 class Schedule extends Component {
@@ -60,12 +61,12 @@ class Schedule extends Component {
         load: React.PropTypes.func,
         loading: React.PropTypes.bool,
         refresh: React.PropTypes.func,
-        schedule: React.PropTypes.array,
+        schedule: React.PropTypes.array ,
     };
 
     static route = {
         navigationBar: {
-            visible: false,
+            visible: false ,
         },
     };
 
@@ -74,7 +75,7 @@ class Schedule extends Component {
         const initial = Orientation.getInitialOrientation();
         this.state = {
             schedule: null,
-            landscape: initial === 'LANDSCAPE',
+            landscape: initial === 'LANDSCAPE' ,
         };
     }
 
@@ -97,6 +98,12 @@ class Schedule extends Component {
             : <PortraitSchedule {...props} />;
     }
 
+    componentDidUpdate() {
+        if (!this.props.loading) {
+            Cache.set('schedule', this.props.schedule);
+        }
+    }
+
     render() {
         if (this.props.loading) {
             return <Text>Loading</Text>;
@@ -108,12 +115,12 @@ class Schedule extends Component {
 
 const mapStateToProps = (state) => ({
     schedule: selectors.schedule(state),
-    loading: selectors.loading(state),
+    loading: selectors.loading(state) ,
 });
 
 const mapDispatchToProps = (dispatch) => ({
     load: (start, end) => dispatch(actions.loadSchedule(start, end)),
-    refresh: (start, end) => dispatch(actions.refreshScheduleIfNeeded(start, end)),
+    refresh: (start, end) => dispatch(actions.refreshScheduleIfNeeded(start, end)) ,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

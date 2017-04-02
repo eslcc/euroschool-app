@@ -21,7 +21,6 @@ moment.defineLocale('en-yesterday', {
 
 
 export default function Row(row) {
-    trace: 'row', row;
     const key = '__' + row.map(item => item.id).join(';');
     return (
         <TouchableHighlight key={key} style={styles.fill}>

@@ -1,6 +1,6 @@
 import {
     createRouter,
-} from '@exponent/ex-navigation';
+} from '@expo/ex-navigation';
 
 import Startup from './Startup/component';
 import Login from './Login/component';

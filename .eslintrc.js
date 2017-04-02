@@ -17,7 +17,7 @@ module.exports =
             "react"
         ],
         "extends": [
-            "eslint:recommended",
+            //"eslint:recommended", // Appears to break things
             "plugin:import/errors",
             "plugin:react/recommended",
         ],
@@ -33,6 +33,7 @@ module.exports =
             "brace-style": ["error", "1tbs", {"allowSingleLine": true}],
             "arrow-body-style": ["error", "as-needed"],
             "operator-linebreak": ["error", "before"],
+            "object-curly-spacing": ["error", "always", { "arraysInObjects": false, "objectsInObjects": false }],
             "flowtype/use-flow-type": 1,
             "flowtype/boolean-style": ["error", "boolean"],
             "flowtype/define-flow-type": 1,
@@ -60,7 +61,7 @@ module.exports =
         },
         "globals": {
             "fetch": false,
-            "global": false,
+            "global": true,
             "require": false,
         },
         "settings": {

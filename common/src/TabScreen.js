@@ -3,7 +3,7 @@ import {
     StackNavigation,
     TabNavigation,
     TabNavigationItem as TabItem,
-} from '@exponent/ex-navigation';
+} from '@expo/ex-navigation';
 import styles from '../styles';
 import Router from './router';
 
