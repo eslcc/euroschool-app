@@ -12,7 +12,6 @@ import Canteen from './Canteen/component';
 import Settings from './Settings/component';
 import Exercises from './Exercises/component';
 import SingleExercise from './Exercises/SingleExercise';
-import TransitionExplorer from './Devtools/TransitionExplorer';
 import StateLogViewer from './Devtools/StateLogViewer';
 import Absences from './Absences/component';
 import TestShoutemBork from './Devtools/TestShoutemBork'
@@ -28,7 +27,6 @@ export default createRouter(() => ({
     more: () => MoreScreen,
     settings: () => Settings,
     singleExercise: () => SingleExercise,
-    transitionExplorer: () => TransitionExplorer,
     stateLogViewer: () => StateLogViewer,
 }));
 
