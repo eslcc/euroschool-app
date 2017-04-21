@@ -6,7 +6,7 @@ export async function neutronLogin(email: string, password: string): Promise<boo
     const doFinalForm = async function($) {
         const form2 = $('form');
         let formUrl2 = form2.attr('action');
-        if (formUrl2.indexOf('https') === -1) {
+        if (!formUrl2.startsWith('https')) {
             formUrl2 = `https://sts.eursc.eu${formUrl2}`;
         }
 
