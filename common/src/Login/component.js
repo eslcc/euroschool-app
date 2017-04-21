@@ -47,7 +47,7 @@ export class Login extends Component {
 
         this.state = {
             email: 'polakoma@student.eursc.eu',
-            password: '***REMOVED***',
+            password: 'REMOVED',
             loginState: 0,
         };
     }
