@@ -14,7 +14,7 @@ function mergeArrays(base, top) {
     }
     const result = base.slice(0);
     top.forEach((item) => {
-        const includes = base.reduce((prev, val) => prev || item.id === val.id, false);
+        const includes = base.find(val => item.id === val.id);
         if (!includes) {
             result.push(item);
         }
