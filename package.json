@@ -60,7 +60,7 @@
     "react-native-mock": "^0.3.1",
     "react-test-renderer": "15.5.4",
     "superagent": "^3.4.1",
-    "yargs": "^7.1.0"
+    "yargs": "^8.0.1"
   },
   "jest": {
     "preset": "react-native",
