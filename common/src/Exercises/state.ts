@@ -1,7 +1,8 @@
 import * as moment from 'moment';
+import { Dispatch } from 'redux';
 
-import msmSchedule from '../../lib/msm/schedule';
-import msmExercise from '../../lib/msm/exercises';
+import msmSchedule, { ScheduleEntry } from '../../lib/msm/schedule';
+import msmExercise, { ExerciseDetail } from '../../lib/msm/exercises';
 
 const actionTypes = {
     LOAD_EXERCISES: 'euroschool.LOAD_EXERCISES',
@@ -10,7 +11,15 @@ const actionTypes = {
     EXERCISE_DETAIL_LOADED: 'euroschool.EXERCISE_DETAIL_LOADED',
 };
 
-const initialState = {
+interface State {
+    exercises: ScheduleEntry[];
+    exerciseDetails: { [id: string]: ExerciseDetail };
+    loading: boolean;
+    loadedStart: number;
+    loadedEnd: number;
+}
+
+const initialState: State = {
     exercises: [],
     exerciseDetails: {},
     loading: false,
@@ -19,13 +28,13 @@ const initialState = {
 };
 
 const selectors = {
-    exercises: state => state.exercises.exercises,
-    loading: state => state.exercises.loading,
-    start: state => state.exercises.loadedStart,
-    end: state => state.exercises.loadedEnd,
+    exercises: (state: any) => state.exercises.exercises,
+    loading: (state: any) => state.exercises.loading,
+    start: (state: any) => state.exercises.loadedStart,
+    end: (state: any) => state.exercises.loadedEnd,
 };
 
-const loadExercises = (start = null, end = null) => async dispatch => {
+const loadExercises = (start: number = null, end: number = null) => async (dispatch: Dispatch<any>) => {
     dispatch({
         type: actionTypes.LOAD_EXERCISES,
         start,
@@ -56,7 +65,7 @@ const loadExercises = (start = null, end = null) => async dispatch => {
     });
 };
 
-const loadExerciseDetail = id => async dispatch => {
+const loadExerciseDetail = (id: number) => async (dispatch: Dispatch<any>) => {
     const detail = await msmExercise(id);
 
     dispatch({
@@ -72,7 +81,7 @@ const actions = {
 };
 
 
-function mergeArrays(base, top) {
+function mergeArrays<T extends { id: any }>(base: T[], top: T[]): T[] {
     if (base.length === 0) {
         return top;
     }
@@ -86,7 +95,7 @@ function mergeArrays(base, top) {
     return result;
 }
 
-const reducer = (state = initialState, action) => {
+const reducer = (state = initialState, action: any) => {
     switch (action.type) {
         case actionTypes.LOAD_EXERCISES:
             return {

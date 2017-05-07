@@ -4,9 +4,17 @@
 import { Dimensions } from 'react-native';
 import Orientation from 'react-native-orientation';
 
-let screen = {};
+interface Screen {
+    width: number;
+    height: number;
+}
 
-const setScreenSize = orientation => {
+let screen: Screen = {
+    width: -1,
+    height: -1,
+};
+
+const setScreenSize = (orientation: string): void => {
     const { height, width } = Dimensions.get('window');
     const min = Math.min(height, width);
     const max = Math.max(height, width);
@@ -22,5 +30,5 @@ Orientation.addOrientationListener(setScreenSize);
 setScreenSize(Orientation.getInitialOrientation());
 
 export default {
-    getScreenSize: () => screen,
+    getScreenSize: (): Screen => screen,
 };

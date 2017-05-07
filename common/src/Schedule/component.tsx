@@ -8,15 +8,15 @@ import { connect } from 'react-redux';
 import Orientation from 'react-native-orientation';
 import ScreenService from '../../lib/utils/screenService';
 import Cache from '../../lib/utils/cache';
+import { ScheduleEntry } from '../../lib/msm/schedule';
 
 import GlobalStyles from '../../styles';
 
-import * as actions from './actions';
-import * as selectors from './selectors';
+import { actions, selectors } from './state';
 
 import Day from './Day';
 
-function PortraitSchedule({ schedule }) {
+function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     const style = {
         height: ScreenService.getScreenSize().height,
         width: ScreenService.getScreenSize().width ,
@@ -28,49 +28,46 @@ function PortraitSchedule({ schedule }) {
                 pagingEnabled
                 style={[GlobalStyles.schedule.portraitScheduleContainer, style]}
             >
+                {/* tslint:disable-next-line jsx-no-multiline-js */}
                 {[1, 2, 3, 4, 5].map(num =>
-                    <Day key={`${num}-portrait`} schedule={schedule} day={num}/>
+                    <Day key={`${num}-portrait`} schedule={schedule} day={num} landscape={false}/>
                 )}
             </ScrollView>
         </View>
     );
 }
 
-PortraitSchedule.propTypes = {
-    schedule: PropTypes.array,
-    landscape: PropTypes.bool ,
-};
-
-function LandscapeSchedule({ schedule }) {
+function LandscapeSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     return (
         <View>
-            {[1, 2, 3, 4, 5].map((num) =>
+            {/* tslint:disable-next-line jsx-no-multiline-js */}
+            {[1, 2, 3, 4, 5].map(num =>
                 <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape/>
             )}
         </View>
     );
 }
 
-LandscapeSchedule.propTypes = {
-    schedule: PropTypes.array,
-    landscape: PropTypes.bool ,
-};
+interface ScheduleProps {
+    load: () => void;
+    loading: boolean;
+    refresh: () => void;
+    schedule: ScheduleEntry[];
+}
 
-class Schedule extends Component {
-    static propTypes = {
-        load: React.PropTypes.func,
-        loading: React.PropTypes.bool,
-        refresh: React.PropTypes.func,
-        schedule: React.PropTypes.array ,
-    };
+interface ScheduleState {
+    schedule: ScheduleEntry[];
+    landscape: boolean;
+}
 
+class Schedule extends Component<ScheduleProps, ScheduleState> {
     static route = {
         navigationBar: {
             visible: false ,
         },
     };
 
-    constructor(props) {
+    constructor(props: ScheduleProps) {
         super(props);
         const initial = Orientation.getInitialOrientation();
         this.state = {
@@ -86,16 +83,16 @@ class Schedule extends Component {
             //this.props.refresh();
         }
 
-        Orientation.addOrientationListener((orientation) => {
-            this.setState({ landscape: orientation === 'LANDSCAPE', key: Math.random() });
+        Orientation.addOrientationListener(orientation => {
+            this.setState({ landscape: orientation === 'LANDSCAPE' });
         });
     }
 
     getScheduleForOrientation() {
-        const props = { schedule: this.props.schedule, landscape: this.state.landscape };
+        const { schedule } = this.props;
         return this.state.landscape
-            ? <LandscapeSchedule {...props} />
-            : <PortraitSchedule {...props} />;
+            ? <LandscapeSchedule schedule={schedule} />
+            : <PortraitSchedule  schedule={schedule} />;
     }
 
     componentDidUpdate() {
@@ -113,14 +110,14 @@ class Schedule extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     schedule: selectors.schedule(state),
     loading: selectors.loading(state) ,
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    load: (start, end) => dispatch(actions.loadSchedule(start, end)),
-    refresh: (start, end) => dispatch(actions.refreshScheduleIfNeeded(start, end)) ,
+const mapDispatchToProps = (dispatch: (action: any) => void) => ({
+    load: () => dispatch(actions.loadSchedule(null, null)),
+    refresh: () => dispatch(actions.refreshScheduleIfNeeded(null, null)) ,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);

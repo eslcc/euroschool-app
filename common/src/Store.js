@@ -8,8 +8,6 @@ import createSagaMiddleware from 'redux-saga';
 import RootSaga from './RootSaga';
 import middleware from '../lib/utils/middleware';
 
-/* eslint-disable no-multi-spaces */
-
 import startup   from './Startup/reducer';
 import schedule  from './Schedule/reducer';
 import login     from './Login/reducer';
@@ -18,8 +16,6 @@ import settings  from './Settings/reducer';
 import exercises from './Exercises/reducer';
 import devtools  from './Devtools/reducer';
 import absences  from './Absences/reducer';
-
-/* eslint-enable no-multi-spaces */
 
 const mainReducer = combineReducers({
     startup,
