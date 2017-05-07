@@ -35,7 +35,7 @@ export function buildGridRows(dataIn: (ScheduleEntry | NowMarker)[]) {
 
     let currentLength = 0;
     while (data.length > 0) {
-        if ((data[0] as NowMarker).NOW_MARKER) {
+        if (isNowMarker(data[0])) {
             result.push(data.splice(0, 1));
         } else {
             const thisLength = currentLength < lengths.length ? lengths[currentLength] : defaultLength;
