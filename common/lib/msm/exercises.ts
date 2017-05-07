@@ -3,9 +3,9 @@ import cheerio from 'cheerio-without-node-native';
 
 import { doMsmRequest, METHODS } from '../utils/requestHelpers';
 
-type HtmlString = string;
+export type HtmlString = string;
 
-interface ExerciseDetail {
+export interface ExerciseDetail {
     course: string;
     title: string;
     type: string;

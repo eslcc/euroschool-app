@@ -1,8 +1,5 @@
-// TODO this file is a den of bollocks rapidly in need of refactoring
-// TODO: two months later, still not refactored, wtf
-
 import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import * as moment from 'moment';
 const { ListView, View, Text, TouchableOpacity } = require('@shoutem/ui');
 import { ScheduleEntry } from '../../lib/msm/schedule';
@@ -12,22 +9,22 @@ import { actions, selectors } from './state';
 
 import renderRow from './Row';
 import { Header, Footer } from './HeaderFooter';
-import { buildGridRows } from './helpers';
+import { buildGridRows, NowMarker } from './helpers';
 
 interface ExercisesProps {
-    exercises: ScheduleEntry[];
+    exercises: (ScheduleEntry | NowMarker)[];
     loading: boolean;
     loadExercises: () => void;
 }
 
 interface ExercisesState {
-    rows: ScheduleEntry[][];
+    rows: (ScheduleEntry | NowMarker)[][];
 }
 
 const componentStyles = Object.assign({}, styles.core.screenContainer, styles.exercises.mainView);
 
 export class Exercises extends Component<ExercisesProps, ExercisesState> {
-    constructor(props) {
+    constructor(props: ExercisesProps) {
         super(props);
         this.state = {
             rows: [],
@@ -38,7 +35,7 @@ export class Exercises extends Component<ExercisesProps, ExercisesState> {
         this.props.loadExercises();
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps: ExercisesProps) {
         if (this.props.exercises !== nextProps.exercises) {
             const data = nextProps.exercises.slice(0);
             const rows = buildGridRows(data);
@@ -65,13 +62,13 @@ export class Exercises extends Component<ExercisesProps, ExercisesState> {
     }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
     exercises: selectors.exercises(state),
     loading: selectors.loading(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-    loadExercises: (start = null, end = null) => dispatch(actions.loadExercises(start, end)),
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    loadExercises: (start: number = null, end: number = null) => dispatch(actions.loadExercises(start, end) as any),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Exercises);

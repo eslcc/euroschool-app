@@ -1,28 +1,33 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text, ScrollView } from 'react-native';
-import { connect } from 'react-redux';
+import { connect, Dispatch } from 'react-redux';
 import * as moment from 'moment';
 import HTMLView from 'react-native-htmlview';
 
-import * as actions from './actions';
+import { ExerciseDetail } from '../../lib/msm/exercises';
+import { actions } from './state';
 import styles from '../../styles';
 
-class SingleExercise extends Component {
-    static propTypes = {
-        route: PropTypes.object.isRequired,
-        details: PropTypes.object.isRequired,
-        loadDetail: PropTypes.func.isRequired,
-    };
+interface SingleExerciseProps {
+    route: any;
+    details: ExerciseDetail[];
+    loadDetail: (id: number) => void;
+}
 
+interface SingleExerciseState {
+
+}
+
+class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState> {
     static route = {
         navigationBar: {
-            title(params) {
+            title: (params: any) => {
                 return params.title;
             },
         },
     };
 
-    constructor(props) {
+    constructor(props: SingleExerciseProps) {
         super(props);
         this.state = {
             itemId: props.route.params.item.id,
@@ -35,7 +40,7 @@ class SingleExercise extends Component {
         loadDetail(item.id);
     }
 
-    renderGrade(details) {
+    renderGrade(details: ExerciseDetail) {
         const matches = details.grade.match(/([0-9.]+)\/([0-9.]+)/);
         if (matches) {
             const grade = parseFloat(matches[1]);
@@ -46,12 +51,14 @@ class SingleExercise extends Component {
         return details.grade;
     }
 
-    renderSupportingComment(details) {
+    renderSupportingComment(details: ExerciseDetail) {
         if (details.supportingComment.length > 0) {
-            return (<HTMLView
-                value={details.supportingComment}
-                style={styles.exercises.comment}
-            />);
+            return (
+                <HTMLView
+                    value={details.supportingComment}
+                    style={styles.exercises.comment}
+                />
+            );
         }
         return null;
     }
@@ -69,7 +76,9 @@ class SingleExercise extends Component {
                 <ScrollView style={styles.core.screenContainerNoTabs}>
                     <Text style={styles.core.subText}>{details.type} / {details.course}</Text>
                     <Text style={styles.core.mainText}>{details.title}</Text>
-                    <Text style={styles.core.textMargin}>Due {details.due}, {mmnt < moment ? mmnt.toNow() : mmnt.fromNow()}</Text>
+                    <Text style={styles.core.textMargin}>
+                        Due {details.due}, {mmnt < moment() ? mmnt.toNow() : mmnt.fromNow()}
+                    </Text>
                     <Text style={styles.core.textMargin}>{details.status}</Text>
                     <Text style={styles.core.textMargin}>{this.renderGrade(details)}</Text>
                     {this.renderSupportingComment(details)}
@@ -90,12 +99,12 @@ class SingleExercise extends Component {
 }
 
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: any) => ({
     details: state.exercises.exerciseDetails,
 });
 
-const mapDispatchToProps = dispatch => ({
-    loadDetail: id => dispatch(actions.loadExerciseDetail(id)),
+const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
+    loadDetail: (id: string) => dispatch(actions.loadExerciseDetail(id)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SingleExercise);
+export default connect(mapStateToProps, mapDispatchToProps)(SingleExercise as any);

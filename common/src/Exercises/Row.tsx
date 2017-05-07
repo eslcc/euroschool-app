@@ -4,6 +4,7 @@ const { GridRow, Tile, Title, Caption } = require('@shoutem/ui');
 import * as moment from 'moment';
 import { truncate } from 'lodash';
 
+import { ScheduleEntry } from '../../lib/msm/schedule';
 import styles from '../../styles';
 import Item from './Item';
 
@@ -20,7 +21,7 @@ moment.defineLocale('en-yesterday', {
 });
 
 
-export default function Row(row) {
+export default function Row(row: ScheduleEntry[]) {
     const key = '__' + row.map(item => item.id).join(';');
     return (
         <TouchableHighlight key={key} style={styles.fill}>
@@ -30,7 +31,3 @@ export default function Row(row) {
         </TouchableHighlight>
     );
 }
-
-// Row.propTypes = {
-//     row: PropTypes.object,
-// };

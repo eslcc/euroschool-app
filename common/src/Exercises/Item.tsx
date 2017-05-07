@@ -4,6 +4,9 @@ const { View: ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } = requ
 import * as moment from 'moment';
 import { truncate, sample } from 'lodash';
 const { withNavigation } = require('@expo/ex-navigation');
+
+import { ScheduleEntry } from '../../lib/msm/schedule';
+import { NowMarker, isNowMarker } from './helpers';
 import Router from '../router';
 import styles from '../../styles';
 
@@ -23,11 +26,17 @@ function openItem(navigator, item) {
     navigator.push(Router.getRoute('singleExercise', { title: item.title, item }));
 }
 
+interface ItemProps {
+    item: ScheduleEntry | NowMarker;
+    navigator: any;
+    style: number;
+}
+
 @withNavigation
-export default class Item extends React.Component {
+export default class Item extends React.Component<ItemProps, void> {
     render() {
         const { navigator, item, style } = this.props;
-        if (item.NOW_MARKER) {
+        if (isNowMarker(item)) {
             return (
                 <Tile key="NOW_MARKER">
                     <ShoutemView styleName="content">
@@ -43,7 +52,11 @@ export default class Item extends React.Component {
         switch (style) {
             case 1:
                 return (
-                    <TouchableOpacity onPress={() => openItem(navigator, item)} key={item.id} style={{ flex: 1 }}>
+                    <TouchableOpacity 
+                        onPress={/* tslint:disable-line jsx-no-lambda */() => openItem(navigator, item)}
+                        key={item.id}
+                        style={{ flex: 1 }}
+                    >
                         <Tile styleName="featured" style={{ backgroundColor: sample(styles.colors.tiles), flex: 1 }}>
                             <ShoutemView styleName="content">
                                 <Title styleName="md-gutter-bottom">{item.title}</Title>
@@ -54,19 +67,19 @@ export default class Item extends React.Component {
                 );
             default:
                 return (
-                    <TouchableOpacity onPress={() => openItem(navigator, item)} key={item.id} style={{ backgroundColor: sample(styles.colors.tiles), flex: 1, padding: 8 }}>
+                    <TouchableOpacity
+                        onPress={/* tslint:disable-line jsx-no-lambda */() => openItem(navigator, item)}
+                        key={item.id}
+                        style={{ backgroundColor: sample(styles.colors.tiles), flex: 1, padding: 8 }}
+                    >
                         <Tile styleName="small clear">
-                            <View styleName="content">
+                            <ShoutemView styleName="content">
                                 <Title styleName="md-gutter-bottom">{item.title}</Title>
                                 <Caption>{item.param_1}</Caption>
-                            </View>
+                            </ShoutemView>
                         </Tile>
                     </TouchableOpacity>
                 );
         }
     }
 }
-
-// Row.propTypes = {
-//     item: PropTypes.object,
-// };
