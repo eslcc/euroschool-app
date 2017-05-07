@@ -1,9 +1,9 @@
 import React from 'react';
 import { View } from 'react-native';
-import { View as ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } from '@shoutem/ui';
-import moment from 'moment';
+const { View: ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } = require('@shoutem/ui');
+import * as moment from 'moment';
 import { truncate, sample } from 'lodash';
-import { withNavigation } from '@expo/ex-navigation';
+const { withNavigation } = require('@expo/ex-navigation');
 import Router from '../router';
 import styles from '../../styles';
 

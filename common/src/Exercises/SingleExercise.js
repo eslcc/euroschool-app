@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import * as moment from 'moment';
 import HTMLView from 'react-native-htmlview';
 
 import * as actions from './actions';

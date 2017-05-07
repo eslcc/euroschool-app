@@ -3,7 +3,7 @@ import { put, call } from 'redux-saga/effects';
 
 import Cache from '../../lib/utils/cache';
 import absences from '../../lib/euroschool/absences';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import * as actions from './actions';
 import * as actionTypes from './actionTypes';

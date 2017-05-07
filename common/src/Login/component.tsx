@@ -7,55 +7,68 @@ import {
     StyleSheet,
     Dimensions,
 } from 'react-native';
-import { Button, Spinner } from '@shoutem/ui';
+const { Button, Spinner } = require('@shoutem/ui');
 import { connect } from 'react-redux';
-import * as actions from './actions';
+import autobind from 'autobind-decorator';
+import { actions } from './state';
 
 import GlobalStyles from '../../styles';
 
 const windowSize = Dimensions.get('window');
 
-const loginStates = {
-    WAITING: 0,
-    IN_PROGRESS: 1,
-    SUCCESS: 2,
-    FAILURE: 3,
-    NETWORK_ERROR: 4,
-};
+enum LoginState {
+    WAITING,
+    IN_PROGRESS,
+    SUCCESS,
+    FAILURE,
+    NETWORK_ERROR,
+}
 
 const DumbLoginFailureIndicator = ({ display }) => {
-    if (!(display)) {
+    if (!display) {
         return null;
-    } else {
-        return (
-            <Text style={GlobalStyles.core.error}>Something went wrong. Please check your email and password.</Text>
-        );
     }
+    return (
+        <Text style={GlobalStyles.core.error}>Something went wrong. Please check your email and password.</Text>
+    );
 };
 
-DumbLoginFailureIndicator.propTypes = {
-    display: PropTypes.bool,
-};
-
-const LoginFailureIndicator = connect((state) => ({
+const LoginFailureIndicator = connect(state => ({
     display: state.login.failed,
 }))(DumbLoginFailureIndicator);
 
-export class Login extends Component {
-    constructor(props: object) {
-        super(props);
+interface LoginProps {
+    login: (email: string, password: string) => void;
+}
 
+interface LoginComponentState {
+    email: string;
+    password: string;
+    loginState: LoginState;
+}
+
+export class Login extends Component<LoginProps, LoginComponentState> {
+    constructor(props: LoginProps) {
+        super(props);
         this.state = {
             email: 'polakoma@student.eursc.eu',
-            password: 'REMOVED',
-            loginState: 0,
+            password: 'hunter2',
+            loginState: LoginState.WAITING,
         };
     }
 
-    onInputChange(key: string, value: string) {
-        const state = Object.assign({}, this.state);
-        state[key] = value;
-        this.setState(state);
+    @autobind
+    onInputChange(key: string) {
+        return value => {
+            const state = Object.assign({}, this.state);
+            state[key] = value;
+            this.setState(state);
+        };
+    }
+
+    @autobind
+    login() {
+        this.props.login(this.state.email, this.state.password);
     }
 
     render() {
@@ -69,7 +82,7 @@ export class Login extends Component {
                         <TextInput
                             placeholder="Email"
                             placeholderTextColor="#FFF"
-                            onChangeText={text => this.onInputChange('email', text)}
+                            onChangeText={this.onInputChange('email')}
                             returnKeyType="next"
                             keyboardType="email-address"
                             value={this.state.email}
@@ -78,28 +91,20 @@ export class Login extends Component {
                             secureTextEntry
                             placeholder="Password"
                             placeholderTextColor="#FFF"
-                            onChangeText={text => this.onInputChange('password', text)}
+                            onChangeText={this.onInputChange('password')}
                             returnKeyType="go"
                             value={this.state.password}
                         />
                         <Button
                             styleName="dark"
-                            onPress={() => this.props.login(this.state.email, this.state.password)}
+                            onPress={this.login}
                         >
                             <Text>LOG IN</Text>
                         </Button>
 
-                        {
-                            (this.state.loginState === loginStates.IN_PROGRESS)
-                            && <Spinner />
-                        }
+                        {(this.state.loginState === LoginState.IN_PROGRESS) && <Spinner />}
 
                         <LoginFailureIndicator />
-
-                        {/* // TODO
-                         (this.state.loginState === loginStates.NETWORK_ERROR) &&
-                         <Text style = {styles.failureText}>Something went wrong. Please check your Internet connectivity.</Text>
-                         */}
                     </View>
                 </View>
             </View>
@@ -107,7 +112,7 @@ export class Login extends Component {
     }
 }
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
     login: (email, password) => dispatch(actions.loginAttempt(email, password)),
 });
 

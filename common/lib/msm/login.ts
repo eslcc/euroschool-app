@@ -19,7 +19,7 @@ export async function neutronLogin(email: string, password: string): Promise<boo
         });
 
         return await doRequest(METHODS.POST, formUrl2, payload2);
-    }
+    };
 
     try {
         console.log([email, password]);
@@ -49,32 +49,13 @@ export async function neutronLogin(email: string, password: string): Promise<boo
     }
 }
 
-/**
- * Logs in to the MySchool server.
- * @param  {string} email    The user's email address.
- * @param  {string} password The user's password.
- * @return {Promise<boolean>}          A promise that resolves with the result (success or failure) and rejects after a network error.
- * @MSM-EndpointInfo:
- *  @Params: user_email, user_password
- *  @Resulting-Http-Codes: 302 with Location / in success, Location /login.php on failure
- */
-export function login(email: string, password: string): Promise<boolean> {
-    return doMsmRequest(METHODS.POST, '/', {
-        user_email: email,
-        user_password: password,
-    })
-        .then(
-            (response: Response): boolean => response.url.indexOf('login.php') === -1
-        );
-}
-
-export function logout(): Promise<*> {
+export function logout(): Promise<any> {
     return doMsmRequest(METHODS.GET, '/login.php?m=1', {});
 }
 
 export function getLoginStatus(): Promise<Boolean> {
     return doMsmRequest(METHODS.GET, '/', {})
         .then(
-            (response: Response): boolean => response.url.indexOf('login') === -1
+            (response: Response): boolean => response.url.indexOf('login') === -1,
         );
 }

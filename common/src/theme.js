@@ -1,4 +1,4 @@
-import { getTheme } from '@shoutem/ui';
+const { getTheme } = require('@shoutem/ui');
 
 console.log(JSON.stringify(typeof getTheme()));
 

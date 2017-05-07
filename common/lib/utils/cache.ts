@@ -70,14 +70,16 @@ export default class Cache {
             const result = await AsyncStorage.multiRemove(keysToDelete);
 
             const end = new Date();
-            const time = end - start;
+            const time = end.getTime() - start.getTime();
             console.log(`Master cache GC complete, took ${time}ms.`);
             if (time > 250) {
-                alert(`WARNING! Cache GC performance slow (${time}ms for ${keysToDelete} keys), check yourself!`)
+                console.warn(
+                    `WARNING! Cache GC performance slow (${time}ms for ${keysToDelete} keys), check yourself!`
+                );
             }
             return result;
         } catch(e) {
             console.warn(`GC failed!`, e);
         }
     }
-};
+}

@@ -3,7 +3,7 @@ import {
     Text,
     View,
 } from 'react-native';
-import moment from 'moment';
+import * as moment from 'moment';
 
 import gradientize from '../../lib/utils/gradientize';
 import GlobalStyles, { colors as styleColors } from '../../styles';

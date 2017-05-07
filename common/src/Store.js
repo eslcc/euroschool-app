@@ -2,7 +2,7 @@
 // @flow
 import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore as reduxCreateStore, applyMiddleware, compose } from 'redux';
-import { createNavigationEnabledStore, NavigationReducer } from '@expo/ex-navigation';
+const { createNavigationEnabledStore, NavigationReducer } = require('@expo/ex-navigation');
 import createSagaMiddleware from 'redux-saga';
 
 import RootSaga from './RootSaga';
@@ -37,9 +37,7 @@ function createStore () {
     const sagaMiddleware = createSagaMiddleware();
 
     const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-            /* options */
-        })
+        ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;
 
     const enhancer = composeEnhancers(

@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavigationBar, Title } from '@shoutem/ui';
+const { NavigationBar, Title } = require('@shoutem/ui');
 import { truncate, trim } from 'lodash';
 
 export default (props) => {

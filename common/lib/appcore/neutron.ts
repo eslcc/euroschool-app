@@ -1,19 +1,22 @@
-// @flow
-import Cookie from 'react-native-cookie';
-import moment from 'moment';
-import {doAppcoreRequest, METHODS} from '../utils/requestHelpers';
+const Cookie = require('react-native-cookie');
+import * as moment from 'moment';
+import { doAppcoreRequest, METHODS } from '../utils/requestHelpers';
 
-declare type LoginResult = {
+interface LoginResult {
     error: boolean;
-    cookie: string
+    cookie?: string;
 }
 
-// eslint-disable-next-line import/prefer-default-export
+interface NeutronLoginResponse {
+    error: boolean;
+    cookie?: string;
+}
+
 export async function login(email: string, password: string): Promise<LoginResult> {
     const result = await doAppcoreRequest(METHODS.POST, '/neutron/login', {
         email,
         password,
-    });
+    }) as NeutronLoginResponse;
     if (!result.error) {
         await Cookie.set('https://sms.eursc.eu', 'PHPSESSID', result.cookie, {
             path: '/',

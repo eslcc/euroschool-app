@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Text, ScrollView, RefreshControl } from 'react-native';
-import { Button, Heading, View } from '@shoutem/ui';
+const { Button, Heading, View } = require('@shoutem/ui');
 import TimeAgo from 'react-native-timeago';
 import * as actions from './actions';
 import styles from '../../styles';

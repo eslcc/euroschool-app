@@ -1,6 +1,6 @@
 import React  from 'react';
 import { Text } from 'react-native';
-import { TextInput, Button, Caption, Title } from '@shoutem/ui';
+const { TextInput, Button, Caption, Title } = require('@shoutem/ui');
 import * as actions from './actions';
 import styles from '../../styles';
 import { get } from 'lodash';

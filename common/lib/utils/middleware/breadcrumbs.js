@@ -1,9 +1,12 @@
-import Raven from 'raven-js';
+import { Client } from 'bugsnag-react-native';
+import { pickBy } from 'lodash';
+
+const bugsnag = new Client();
 
 export default store => next => action => {
-    Raven.captureBreadcrumb({
-        category: 'redux',
-        data: action,
+    bugsnag.leaveBreadcrumb('Redux', {
+        action: pickBy(action, o => typeof o !== 'function'),
+        type: 'state',
     })
     return next(action);
 };

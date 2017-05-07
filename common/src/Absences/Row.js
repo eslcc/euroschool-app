@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { View } from '@shoutem/ui';
+const { View } = require('@shoutem/ui');
 
 import styles from '../../styles';
 

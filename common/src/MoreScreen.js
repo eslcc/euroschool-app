@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListView, Button, Text } from '@shoutem/ui';
+const { ListView, Button, Text } = require('@shoutem/ui');
 import autobind from 'autobind-decorator';
 import Router from './router';
 

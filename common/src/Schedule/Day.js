@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Text, View } from 'react-native';
-import moment from 'moment';
+import * as moment from 'moment';
 import { capitalize } from 'lodash';
 
 import { PortraitCourse, LandscapeCourse } from './Course';

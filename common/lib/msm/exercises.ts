@@ -3,9 +3,9 @@ import cheerio from 'cheerio-without-node-native';
 
 import { doMsmRequest, METHODS } from '../utils/requestHelpers';
 
-declare type HtmlString = string;
+type HtmlString = string;
 
-declare type ExerciseDetail = {
+interface ExerciseDetail {
     course: string;
     title: string;
     type: string;
@@ -13,7 +13,7 @@ declare type ExerciseDetail = {
     generalComment: HtmlString;
     grade: string;
     status: string;
-    supportingComment: HtmlString
+    supportingComment: HtmlString;
 }
 
 
@@ -32,20 +32,21 @@ const parse = (html: HtmlString): ExerciseDetail => {
     };
 };
 
-export default (id: number): ExerciseDetail =>
-    doMsmRequest(
+export default async function (id: number): Promise<ExerciseDetail> {
+    const calendarResponse = await doMsmRequest(
         METHODS.GET,
         '/content/common/calendar_for_students.php'
-    )
-    .then((item: Response): HtmlString => item.text())
-    .then((item: string): string => item.match(/<input.*id="user_id".*value="([0-9]+)"/i)[1])
-    .then((userId: string): Response => doMsmRequest(
+    );
+    const calendarString = await calendarResponse.text();
+    const userId = calendarString.match(/<input.*id="user_id".*value="([0-9]+)"/i)[1];
+    const detailResponse = await doMsmRequest(
         METHODS.POST,
         '/data/common_handler.php?action=AssignedExercise::AJAX_U_GetStudentExercise',
         {
             exercise_id: id,
             user_id: userId,
         }
-    ))
-    .then((response: Response): HtmlString => response.text())
-    .then(parse);
+    );
+    const detailText = await detailResponse.text();
+    return parse(detailText);
+}
