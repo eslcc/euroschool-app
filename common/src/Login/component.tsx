@@ -52,7 +52,7 @@ export class Login extends Component<LoginProps, LoginComponentState> {
         super(props);
         this.state = {
             email: 'polakoma@student.eursc.eu',
-            password: 'hunter2',
+            password: '',
             loginState: LoginState.WAITING,
         };
     }
@@ -89,7 +89,7 @@ export class Login extends Component<LoginProps, LoginComponentState> {
                         />
                         <TextInput
                             secureTextEntry
-                            placeholder="Password"
+                            placeholder="hunter2"
                             placeholderTextColor="#FFF"
                             onChangeText={this.onInputChange('password')}
                             returnKeyType="go"
