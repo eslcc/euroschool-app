@@ -1,11 +1,11 @@
-// @flow
-
 import { rgbToString, hexToRgb } from './colors';
+
+type RgbColor = {r: number, g: number, b: number};
 
 const lerp = (a: number, b: number, f: number) => a + f * (b - a);
 
-export default (color1: string | {r: number, g: number, b: number},
-                color2: string | {r: number, g: number, b: number},
+export default (color1: string | RgbColor,
+                color2: string | RgbColor,
                 stops: number) => {
     let c1 = color1;
     let c2 = color2;

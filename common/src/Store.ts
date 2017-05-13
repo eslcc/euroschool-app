@@ -23,10 +23,10 @@ const mainReducer = combineReducers({
     exercises,
     devtools,
     absences,
-    navigation: NavigationReducer ,
+    navigation: NavigationReducer,
 });
 
-function createStore () {
+function createStore() {
     const composeEnhancers = (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
         ? (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;

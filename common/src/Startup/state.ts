@@ -33,9 +33,9 @@ const checkLogin = () => async (dispatch: (action: any) => void, getState: () =>
 };
 
 const actions = {
-    checkLogin
+    checkLogin,
 };
 
 export {
-    actions
+    actions,
 };

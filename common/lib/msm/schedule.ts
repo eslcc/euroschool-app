@@ -36,7 +36,7 @@ export default async (start: number, end: number): Promise<GetScheduleResponse> 
         start,
         end,
     });
-    const data = (await response.json()) as any;
+    const data = (await response.json()) as ScheduleEntry[];
     return {
         schedule: data,
         start,

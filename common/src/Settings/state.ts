@@ -31,5 +31,5 @@ const reducer = (state = initialState, action: any) => {
 export {
     actionTypes,
     actions,
-    reducer
+    reducer,
 };

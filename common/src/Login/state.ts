@@ -65,7 +65,7 @@ const reducer = (state = initialState, action: any) => {
 };
 
 const actions = {
-    loginAttempt
+    loginAttempt,
 };
 
 export {
