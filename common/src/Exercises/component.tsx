@@ -46,14 +46,15 @@ export class Exercises extends Component<ExercisesProps, ExercisesState> {
     }
 
     render() {
+        // tslint:disable jsx-no-lambda
         return (
             <View style={componentStyles}>
                 <ListView
                     data={this.state.rows}
                     loading={this.props.loading}
                     renderRow={renderRow}
-                    renderHeader={Header}
-                    renderFooter={Footer}
+                    renderHeader={() => <Header />}
+                    renderFooter={() => <Footer />}
                     styleName="flexible"
                     style={styles.exercises.list}
                 />

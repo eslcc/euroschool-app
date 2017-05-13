@@ -51,9 +51,9 @@ export class Absences extends React.Component<AbsencesProps, {}> {
 }
 
 const mapStateToProps = (state: any) => ({
-    absences: selectors.absences,
-    loading: selectors.loading,
-    lastUpdate: selectors.lastUpdate,
+    absences: selectors.absences(state),
+    loading: selectors.loading(state),
+    lastUpdate: selectors.lastUpdate(state),
 });
 
 const mapDispatchToProps = (dispatch: (action: any) => void) => ({

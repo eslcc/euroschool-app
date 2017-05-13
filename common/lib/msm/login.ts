@@ -22,12 +22,12 @@ export async function neutronLogin(email: string, password: string): Promise<boo
     };
 
     try {
-        console.log([email, password]);
+        
         const redirectRequest = await doMsmRequest(METHODS.GET, '/sso.php');
         const $1 = cheerio.load(await redirectRequest.text());
         if ($1.html().indexOf('disabled') > -1) {
             const finalResponse = await doFinalForm($1);
-            console.log(JSON.stringify((finalResponse.headers as any)['Set-Cookie']));
+            
             return true; // TODO figure out what happens when bullshit is passed
         }
         const form = $1('#loginForm');
@@ -41,10 +41,10 @@ export async function neutronLogin(email: string, password: string): Promise<boo
 
         const formRequest = await doRequest(METHODS.POST, formUrl, formPayload);
         const finalResponse = await doFinalForm(cheerio.load(await formRequest.text()));
-        console.log(JSON.stringify((finalResponse.headers as any)['Set-Cookie']));
+        
         return true; // TODO figure out what happens when bullshit is passed
     } catch (e) {
-        console.log(`FUCKUP! ${e}`);
+        
         throw e;
     }
 }

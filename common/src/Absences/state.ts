@@ -16,7 +16,7 @@ const loadAbsences = (bustCache = false) => async (dispatch: (action: any) => an
             return;
         }
     }
-    console.log('Not using cached absences');
+    
     const list = await absences();
     const time = new Date().valueOf();
     Cache.set(

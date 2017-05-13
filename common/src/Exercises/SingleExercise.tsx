@@ -60,7 +60,7 @@ class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState>
                 />
             );
         }
-        return null;
+        return <View />;
     }
 
     render() {
@@ -74,6 +74,7 @@ class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState>
             );
             return (
                 <ScrollView style={styles.core.screenContainerNoTabs}>
+                    <Text style={styles.core.heading}>{details.title}</Text>
                     <Text style={styles.core.subText}>{details.type} / {details.course}</Text>
                     <Text style={styles.core.mainText}>{details.title}</Text>
                     <Text style={styles.core.textMargin}>
@@ -81,11 +82,9 @@ class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState>
                     </Text>
                     <Text style={styles.core.textMargin}>{details.status}</Text>
                     <Text style={styles.core.textMargin}>{this.renderGrade(details)}</Text>
-                    {this.renderSupportingComment(details)}
+                    <Text>{details.generalComment.replace(/<\/?(.+?)>/g, '')}</Text>
                     <View style={styles.exercises.comment}>
-                        <HTMLView
-                            value={details.generalComment}
-                        />
+                        <Text>{details.supportingComment.replace(/<\/?(.+?)>/g, '')}</Text>
                     </View>
                 </ScrollView>
             );

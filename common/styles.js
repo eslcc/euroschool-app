@@ -6,7 +6,7 @@ const normalColors = {
     primaryText: '#212121',
     subText: '#727272',
     red: '#D32F2F',
-    accent: '#FFC107',
+    accent: '#d96628',
     schedule: {
         monday: '#ffc400', // Amber
         tuesday: '#FF5722', // deep orange
@@ -74,6 +74,11 @@ const normalStyles = {
         },
         mainText: {
             color: colors.primaryText,
+        },
+        heading: {
+            fontSize: 28,
+            color: colors.primaryText,
+            marginVertical: 3,
         },
         subText: {
             fontSize: 24,
@@ -156,7 +161,7 @@ const normalStyles = {
             flex: 1,
             paddingBottom: 25,
             marginTop: 25,
-            backgroundColor: colors.subText,
+            backgroundColor: colors.secondLevelBackground,
             padding: 4,
         },
         grade: {

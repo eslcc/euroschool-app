@@ -47,7 +47,7 @@ export default class Cache {
      * (~O(1) cache GC instead of O(n)). However, I'm too lazy for it.
      */
     static async gc() {
-        console.log('Starting master cache GC...');
+        
         try {
             const start = new Date();
 
@@ -62,7 +62,7 @@ export default class Cache {
                     keysToDelete.push(keyval[0]);
                 }
             });
-            console.log(`GC found ${keysToDelete.length} keys to prune.`);
+            
             if (keysToDelete.length === 0) {
                 return;
             }
@@ -71,7 +71,7 @@ export default class Cache {
 
             const end = new Date();
             const time = end.getTime() - start.getTime();
-            console.log(`Master cache GC complete, took ${time}ms.`);
+            
             if (time > 250) {
                 console.warn(
                     `WARNING! Cache GC performance slow (${time}ms for ${keysToDelete} keys), check yourself!`
