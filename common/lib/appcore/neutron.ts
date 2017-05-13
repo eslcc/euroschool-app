@@ -1,5 +1,5 @@
 const Cookie = require('react-native-cookie');
-import * as moment from 'moment';
+const moment = require('moment');
 import { doAppcoreRequest, METHODS } from '../utils/requestHelpers';
 
 interface LoginResult {

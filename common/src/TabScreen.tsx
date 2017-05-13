@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
-import {
+const {
     StackNavigation,
     TabNavigation,
-    TabNavigationItem as TabItem,
-} from '@expo/ex-navigation';
+    TabNavigationItem: TabItem,
+} = require('@expo/ex-navigation');
 import styles from '../styles';
 import Router from './router';
+
+const defaultRouteConfig = {
+    navigationBar: {
+        backgroundColor: '#fff',
+    },
+};
 
 export default function TabScreen() {
     return (
@@ -66,15 +72,11 @@ export default function TabScreen() {
                 <StackNavigation
                     id="more"
                     navigatorUID="more"
-                    defaultRouteConfig={{
-                        navigationBar: {
-                            backgroundColor: '#fff',
-                        },
-                    }}
+                    defaultRouteConfig={defaultRouteConfig}
                     initialRoute={Router.getRoute('more')}
                 />
             </TabItem>
 
         </TabNavigation>
-    )
+    );
 }

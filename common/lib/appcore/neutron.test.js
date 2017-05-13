@@ -7,7 +7,7 @@ const neutron = require('./neutron');
 const requestHelpers = require('../utils/requestHelpers');
 const Cookie = require('react-native-cookie');
 import MockDate from 'mockdate';
-import * as moment from 'moment';
+const moment = require('moment');
 
 describe('Neutron', () => {
     beforeEach(() => {

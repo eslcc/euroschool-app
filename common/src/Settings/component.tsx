@@ -5,20 +5,20 @@ import {
 import { connect } from 'react-redux';
 
 import Settings from './settings';
-
 import GlobalStyles from '../../styles';
 
-export class SettingsView extends Component {
-    static propTypes = {
-        settings: PropTypes.object.isRequired,
-        dispatch: PropTypes.func,
-    };
+interface SettingsProps {
+    settings: any;
+    dispatch: (action: any) => void;
+}
+
+export class SettingsView extends Component<SettingsProps, {}> {
 
     static route = {
         navigationBar: {
             title: 'Settings',
         },
-    }
+    };
 
     render() {
         return (
@@ -29,7 +29,7 @@ export class SettingsView extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
     settings: state.settings,
 });
 

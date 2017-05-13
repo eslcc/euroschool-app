@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 const { Text, TouchableOpacity } = require('@shoutem/ui');
 import { connect, Dispatch } from 'react-redux';
-import * as moment from 'moment';
+const moment = require('moment');
 
 import { actions, selectors } from './state';
 import styles from '../../styles';

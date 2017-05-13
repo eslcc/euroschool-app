@@ -21,7 +21,8 @@
     "__tests__",
     "webpack.haul.js",
     "postbuild.js",
-    "coverage"
+    "coverage",
+    "*.test.js"
   ],
   "compileOnSave": true // 3
 }

@@ -1,5 +1,5 @@
-export default function serialize(obj, prefix) {
-    return Object.keys(obj).map((name) => {
+export default function serialize(obj: any, prefix?: string): string {
+    return Object.keys(obj).map(name => {
         const key = prefix ?
             `${prefix}[${name}]` :
             name;

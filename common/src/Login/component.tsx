@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 const { Button, Spinner } = require('@shoutem/ui');
 import { connect } from 'react-redux';
-import autobind from 'autobind-decorator';
-import { actions } from './state';
+const autobind = require('autobind-decorator');
+import { actions, selectors } from './state';
 
 import GlobalStyles from '../../styles';
 
@@ -24,7 +24,7 @@ enum LoginState {
     NETWORK_ERROR,
 }
 
-const DumbLoginFailureIndicator = ({ display }) => {
+const DumbLoginFailureIndicator = ({ display }: { display: boolean }) => {
     if (!display) {
         return null;
     }
@@ -34,7 +34,7 @@ const DumbLoginFailureIndicator = ({ display }) => {
 };
 
 const LoginFailureIndicator = connect(state => ({
-    display: state.login.failed,
+    display: selectors.failed(state),
 }))(DumbLoginFailureIndicator);
 
 interface LoginProps {
@@ -59,8 +59,8 @@ export class Login extends Component<LoginProps, LoginComponentState> {
 
     @autobind
     onInputChange(key: string) {
-        return value => {
-            const state = Object.assign({}, this.state);
+        return (value: string) => {
+            const state: any = Object.assign({}, this.state);
             state[key] = value;
             this.setState(state);
         };
@@ -112,8 +112,8 @@ export class Login extends Component<LoginProps, LoginComponentState> {
     }
 }
 
-const mapDispatchToProps = dispatch => ({
-    login: (email, password) => dispatch(actions.loginAttempt(email, password)),
+const mapDispatchToProps = (dispatch: (action: any) => void) => ({
+    login: (email:string, password: string) => dispatch(actions.loginAttempt(email, password)),
 });
 
 export default connect(null, mapDispatchToProps)(Login);

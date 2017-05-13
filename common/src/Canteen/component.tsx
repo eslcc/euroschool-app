@@ -2,8 +2,8 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { Text, ScrollView, RefreshControl } from 'react-native';
 const { Button, Heading, View } = require('@shoutem/ui');
-import TimeAgo from 'react-native-timeago';
-import * as actions from './actions';
+const TimeAgo = require('react-native-timeago');
+import { actions, selectors } from './state';
 import styles from '../../styles';
 
 // This is the bit where I wank off a horse to make debugging work.
@@ -17,19 +17,18 @@ import styles from '../../styles';
 // XMLHttpRequest = _XHR
 /* eslint-enable */
 
+interface BalanceProps {
+    loadBalance: () => void;
+    loaded: boolean;
+    loading: boolean;
+    loadFailed: boolean;
+    balance: string;
+    refreshBalanceInBackground: () => void;
+    lastUpdate: number;
+}
 
 
-class Balance extends Component {
-    static propTypes = {
-        loadBalance: PropTypes.func,
-        loaded: PropTypes.bool,
-        loading: PropTypes.bool,
-        loadFailed: PropTypes.bool,
-        balance: PropTypes.string,
-        refreshBalanceInBackground: PropTypes.func,
-        lastUpdate: PropTypes.number,
-    };
-
+class Balance extends Component<BalanceProps, void> {
     componentDidMount() {
         this.props.loadBalance();
     }
@@ -40,7 +39,7 @@ class Balance extends Component {
                 <View style={styles.core.screenContainer}>
                     <Text style={styles.t}>Could not access balance.</Text>
                     <Text style={styles.t}>Please make sure you have set your credentials in settings.</Text>
-                    <Button onPress={this.props.loadBalance} styleName="dark">
+                    <Button onPress={this.props.loadBalance}>
                         <Text>RETRY</Text>
                     </Button>
                 </View>
@@ -54,8 +53,8 @@ class Balance extends Component {
                     onRefresh={this.props.loadBalance}
                 />}
             >
-                {/* The double nested view is so the pull-to-refresh appears  */}
-                {/* directly below the navbar but the content still has space */}
+                {/* The double nested view is so the pull-to-refresh appears              */}
+                {/* directly below the navbar but the content still has a margin above it */}
                 <View style={styles.core.screenContainer}>
                     <Heading styleName="" style={{ fontSize: 28, color: styles.colors.primaryText }}>€{this.props.balance}</Heading>
                     <Text style={styles.t}>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
@@ -65,15 +64,15 @@ class Balance extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
-    balance: state.canteen.balance,
-    loading: state.canteen.loadInProgress,
-    loaded: state.canteen.loaded,
-    loadFailed: state.canteen.loadFailed,
-    lastUpdate: state.canteen.lastUpdate,
+const mapStateToProps = (state: any) => ({
+    balance: selectors.balance(state),
+    loading: selectors.loading(state),
+    loaded: selectors.loaded(state),
+    loadFailed: selectors.loadFailed(state),
+    lastUpdate: selectors.lastUpdate(state),
 });
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     loadBalance: () => dispatch(actions.loadBalance()),
     refreshBalanceInBackground: () => dispatch(actions.refreshBalanceInBackground()),
 });

@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 const { GridRow, Tile, Title, Caption } = require('@shoutem/ui');
-import * as moment from 'moment';
+const moment = require('moment');
 import { truncate } from 'lodash';
 
 import { ScheduleEntry } from '../../lib/msm/schedule';

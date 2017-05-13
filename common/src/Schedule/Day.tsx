@@ -1,11 +1,12 @@
 import React, { PropTypes } from 'react';
 import { Text, View } from 'react-native';
-import * as moment from 'moment';
+const moment = require('moment');
 import { capitalize } from 'lodash';
 
 import { PortraitCourse, LandscapeCourse } from './Course';
 import ScreenService from '../../lib/utils/screenService';
 import GlobalStyles from '../../styles';
+import { ScheduleEntry } from '../../lib/msm/schedule';
 
 
 const days = [
@@ -30,7 +31,7 @@ function getHours() {
         });
 }
 
-function getCourse(course, day, landscape) {
+function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
     if (landscape) {
         return <LandscapeCourse key={`${course.start}-portrait`} course={course} day={day} />;
     }
@@ -38,7 +39,9 @@ function getCourse(course, day, landscape) {
     return <PortraitCourse key={`${course.start}-landscape`} course={course} day={day} />;
 }
 
-export default function Day({ schedule, day, landscape }) {
+type DayProps = { schedule: ScheduleEntry[], day: number, landscape?: boolean };
+
+export default function Day({ schedule, day, landscape }: DayProps) {
     const courses = schedule.filter(
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
@@ -55,7 +58,7 @@ export default function Day({ schedule, day, landscape }) {
 
     const style = [
         GlobalStyles.schedule.day,
-        GlobalStyles.schedule[dayName],
+        (GlobalStyles.schedule as any)[dayName],
         styles.day,
         landscape ? styles.landscapeDay : {},
         landscape ? { left: landscapeLeft } : {},
@@ -68,13 +71,7 @@ export default function Day({ schedule, day, landscape }) {
             </View>
 
             {courses.map(course => getCourse(course, day, landscape))}
-            {landscape ? null : getHours() }
+            {landscape ? null : getHours()}
         </View>
     );
 }
-
-Day.propTypes = {
-    schedule: PropTypes.array,
-    day: PropTypes.number,
-    landscape: PropTypes.bool,
-};

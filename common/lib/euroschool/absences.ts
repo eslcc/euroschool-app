@@ -1,9 +1,8 @@
-// @flow
 import { load as loadHTML } from 'cheerio-without-node-native';
 
 const URL = 'http://www.euroschool.lu/luxschool/absences_student.php';
 
-const parse = html =>
+const parse = (html: string) =>
     Array.from(loadHTML(html)('img'))
     .map(star => star.nextSibling.nodeValue.trim());
 

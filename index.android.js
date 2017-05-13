@@ -1,5 +1,5 @@
 import { AppRegistry } from 'react-native';
-import Euroschool from './common/src';
+import Euroschool from './build/src';
 import Raven from 'raven-js';
 import { Client } from 'bugsnag-react-native';
 

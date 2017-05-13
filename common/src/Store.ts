@@ -2,23 +2,20 @@
 // @flow
 import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore as reduxCreateStore, applyMiddleware, compose } from 'redux';
+import ReduxThunk from 'redux-thunk';
 const { createNavigationEnabledStore, NavigationReducer } = require('@expo/ex-navigation');
-import createSagaMiddleware from 'redux-saga';
 
-import RootSaga from './RootSaga';
 import middleware from '../lib/utils/middleware';
 
-import startup   from './Startup/reducer';
-import schedule  from './Schedule/reducer';
-import login     from './Login/reducer';
-import canteen   from './Canteen/reducer';
-import settings  from './Settings/reducer';
-import exercises from './Exercises/reducer';
-import devtools  from './Devtools/reducer';
-import absences  from './Absences/reducer';
+import { reducer as schedule  } from './Schedule/state';
+import { reducer as login     } from './Login/state';
+import { reducer as canteen   } from './Canteen/state';
+import { reducer as settings  } from './Settings/state';
+import { reducer as exercises } from './Exercises/state';
+import   devtools               from './Devtools/reducer';
+import { reducer as absences  } from './Absences/state';
 
 const mainReducer = combineReducers({
-    startup,
     schedule,
     login,
     canteen,
@@ -30,14 +27,12 @@ const mainReducer = combineReducers({
 });
 
 function createStore () {
-    const sagaMiddleware = createSagaMiddleware();
-
-    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    const composeEnhancers = (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;
 
     const enhancer = composeEnhancers(
-        applyMiddleware(sagaMiddleware, ...middleware)
+        applyMiddleware(ReduxThunk, ...middleware)
     );
 
     const createStoreWithNavigation = createNavigationEnabledStore({
@@ -47,8 +42,6 @@ function createStore () {
 
     // const store = createStoreWithNavigation(reducer, enhancer);
     const store = createStoreWithNavigation(mainReducer, enhancer);
-
-    sagaMiddleware.run(RootSaga);
 
     return store;
 }

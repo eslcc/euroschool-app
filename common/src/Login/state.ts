@@ -14,47 +14,53 @@ const initialState = {
     inProgress: false,
 };
 
-const loginAttempt = (email: string, password: string) => async (dispatch, getState) => {
-    const navigatorUID = getState().navigation.currentNavigatorUID;
-
-    dispatch({ type: actionTypes.LOGIN_ATTEMPT });
-
-    const result = await msmLogin.neutronLogin(email, password);
-    if (result) {
-        Cache.set(
-            'logindata',
-            { email, password },
-            { expires: (new Date().getTime() / 1000) + 2678400 }, // 31 days
-        );
-
-        dispatch({ type: actionTypes.LOGIN_SUCCESS });
-        dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('tabScreen')));
-    } else {
-        dispatch({ type: actionTypes.LOGIN_FAILED });
-    }
+const selectors = {
+    inProgress: (state: any) => state.login.inProgress,
+    failed: (state: any) => state.login.failed,
 };
 
+const loginAttempt = (email: string, password: string) =>
+    async (dispatch: (action: any) => void, getState: () => any) => {
+        const navigatorUID = getState().navigation.currentNavigatorUID;
 
-const reducer = (state = initialState, action) => {
+        dispatch({ type: actionTypes.LOGIN_ATTEMPT });
+
+        const result = await msmLogin.neutronLogin(email, password);
+        if (result) {
+            Cache.set(
+                'logindata',
+                { email, password },
+                { expires: (new Date().getTime() / 1000) + 2678400 }, // 31 days
+            );
+
+            dispatch({ type: actionTypes.LOGIN_SUCCESS });
+            dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('tabScreen')));
+        } else {
+            dispatch({ type: actionTypes.LOGIN_FAILED });
+        }
+    };
+
+
+const reducer = (state = initialState, action: any) => {
     switch (action.type) {
-    case actionTypes.LOGIN_FAILED:
-        return {
-            ...state,
-            failed: true,
-        };
-    case actionTypes.LOGIN_ATTEMPT:
-        return {
-            ...state,
-            failed: false,
-            inProgress: true,
-        };
-    case actionTypes.LOGIN_SUCCESS:
-        return {
-            ...state,
-            inProgress: false,
-        };
-    default:
-        return state;
+        case actionTypes.LOGIN_FAILED:
+            return {
+                ...state,
+                failed: true,
+            };
+        case actionTypes.LOGIN_ATTEMPT:
+            return {
+                ...state,
+                failed: false,
+                inProgress: true,
+            };
+        case actionTypes.LOGIN_SUCCESS:
+            return {
+                ...state,
+                inProgress: false,
+            };
+        default:
+            return state;
     }
 };
 
@@ -65,5 +71,6 @@ const actions = {
 export {
     actionTypes,
     actions,
-    reducer
+    reducer,
+    selectors,
 };

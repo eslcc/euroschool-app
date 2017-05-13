@@ -1,4 +1,4 @@
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 const normalColors = {
     background: '#F9F9F9',
@@ -42,9 +42,9 @@ const darkColors = {
     subText: 'rgba(255, 255, 255, 0.87)',
 };
 
-global.secretDarkThemeDoNotUseOrYouWillBeFired = false;
+(global as any).secretDarkThemeDoNotUseOrYouWillBeFired = false;
 
-export const colors = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalColors, darkColors) : normalColors; //eslint-disable-line
+export const colors = ((global as any).secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalColors, darkColors) : normalColors; // tslint:disable-line
 
 const normalStyles = {
     t: {
@@ -252,7 +252,11 @@ const normalStyles = {
 
 const secretDarkStyles = {};
 
-module.exports = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalStyles, secretDarkStyles) : normalStyles; // TODO change first normalStyles to secretDarkStyles
-module.exports.default = (global.secretDarkThemeDoNotUseOrYouWillBeFired) ? Object.assign(normalStyles, secretDarkStyles)  : normalStyles;
+module.exports = (global.secretDarkThemeDoNotUseOrYouWillBeFired)
+    ? Object.assign(normalStyles, secretDarkStyles)
+    : normalStyles; // TODO change first normalStyles to secretDarkStyles
+module.exports.default = (global.secretDarkThemeDoNotUseOrYouWillBeFired)
+    ? Object.assign(normalStyles, secretDarkStyles) 
+    : normalStyles;
 module.exports.colors = colors;
 module.exports.dark = global.secretDarkThemeDoNotUseOrYouWillBeFired;

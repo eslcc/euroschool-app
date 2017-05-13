@@ -1,28 +1,28 @@
 import React from 'react';
 import { connect, Provider } from 'react-redux';
-import {
+const {
     NavigationProvider,
     StackNavigation,
     NavigationContext,
-} from '@expo/ex-navigation';
+} = require ('@expo/ex-navigation');
 import { Text } from 'react-native';
-import { StyleProvider } from '@shoutem/theme';
+const { StyleProvider } = require('@shoutem/theme');
 
 import styles from '../styles';
 import store from './Store';
 import Router from './router';
 import theme from './theme';
 
-const TabIcon = (props) => (
+interface TabIconProps {
+    selected: boolean;
+    title: string;
+}
+
+const TabIcon = (props: TabIconProps) => (
     <Text style={{ color: props.selected ? 'red' : styles.colors.subText }}>
         {props.title}
     </Text>
 );
-
-TabIcon.propTypes = {
-    selected: React.PropTypes.bool,
-    title: React.PropTypes.string,
-};
 
 // const {whyDidYouUpdate} = require('why-did-you-update')
 // whyDidYouUpdate(React, { exclude: /(Navigation|MK|Touchable)/ })

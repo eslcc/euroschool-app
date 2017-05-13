@@ -17,7 +17,7 @@ function parseHiddenFields(html: string): { [key: string]: string } {
         field.slice(Math.max(field.length - 2, 1))
     );
     // convert into {key: value, ...}
-    const hiddenFields = hiddenFieldKeyValuePairs.reduce((result, kvPair) => {
+    const hiddenFields = hiddenFieldKeyValuePairs.reduce((result: any, kvPair) => {
         const key = kvPair[0];
         result[key] = kvPair[1];
         return result;

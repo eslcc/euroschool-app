@@ -12,7 +12,7 @@ export default class Cache {
             key => key.startsWith(CACHE_KEY_PARENT)
         );
     }
-    static async get(key, defaultReturn = null) {
+    static async get(key: string, defaultReturn: any = null) {
         const result = await AsyncStorage.getItem(CACHE_KEY_PARENT + key);
         const item = JSON.parse(result);
         if (item) {
@@ -21,7 +21,7 @@ export default class Cache {
             return defaultReturn;
         }
     }
-    static async set(key, value, options = DEFAULT_OPTIONS) {
+    static async set(key: string, value: any, options = DEFAULT_OPTIONS) {
         return await AsyncStorage.setItem(CACHE_KEY_PARENT + key, JSON.stringify({
             _cachemeta: {
                 expires: (new Date().getTime() / 1000) + options.expires ,
@@ -29,7 +29,7 @@ export default class Cache {
             ...value ,
         }));
     }
-    static async remove(key) {
+    static async remove(key: string) {
         return await AsyncStorage.removeItem(CACHE_KEY_PARENT + key);
     }
     static async clear() {
@@ -53,7 +53,7 @@ export default class Cache {
 
             const keys = await Cache._getAllMyKeys();
             const values = await AsyncStorage.multiGet(keys);
-            const keysToDelete = [];
+            const keysToDelete: string[] = [];
 
             // If keys are expired, mark them for deletion
             values.forEach(keyval => {

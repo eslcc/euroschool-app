@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+const moment = require('moment');
 import { ScheduleEntry } from '../../lib/msm/schedule';
 
 export type NowMarker = { NOW_MARKER: number, start: any; };

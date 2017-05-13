@@ -1,8 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { connect, Dispatch } from 'react-redux';
-import * as moment from 'moment';
-import HTMLView from 'react-native-htmlview';
+const moment = require('moment');
+const HTMLView = require('react-native-htmlview');
 
 import { ExerciseDetail } from '../../lib/msm/exercises';
 import { actions } from './state';
@@ -103,8 +103,8 @@ const mapStateToProps = (state: any) => ({
     details: state.exercises.exerciseDetails,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<any>) => ({
-    loadDetail: (id: string) => dispatch(actions.loadExerciseDetail(id)),
+const mapDispatchToProps = (dispatch: (action: any) => void) => ({
+    loadDetail: (id: number) => dispatch(actions.loadExerciseDetail(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SingleExercise as any);

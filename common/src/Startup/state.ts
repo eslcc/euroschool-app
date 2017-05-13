@@ -3,9 +3,7 @@ import * as msm from '../../lib/msm/login';
 const { NavigationActions } = require('@expo/ex-navigation');
 import Router from '../router';
 
-export const CHECK_LOGIN = 'euroschool.CHECK_LOGIN';
-
-export const checkLogin = () => async (dispatch, getState) => {
+const checkLogin = () => async (dispatch: (action: any) => void, getState: () => any) => {
     Cache.clear();
     const navigatorUID = getState().navigation.currentNavigatorUID;
 
@@ -20,18 +18,24 @@ export const checkLogin = () => async (dispatch, getState) => {
         if (cachedLogin) {
             const { email, password } = cachedLogin;
             const loginResult = await msm.neutronLogin(email, password);
-            if (result) {
+            if (loginResult) {
                 // Login with cached credentials succeeded
                 dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('tabScreen')));
             } else {
                 // Cached credentials invalid
-                dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('login')))
+                dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('login')));
             }
         } else {
             // No cached credentials
-            dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('login')))
+            dispatch(NavigationActions.replace(navigatorUID, Router.getRoute('login')));
         }
     }
 };
 
+const actions = {
+    checkLogin
+};
 
+export {
+    actions
+};

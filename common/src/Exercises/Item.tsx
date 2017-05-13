@@ -1,7 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
 const { View: ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } = require('@shoutem/ui');
-import * as moment from 'moment';
+const moment = require('moment');
 import { truncate, sample } from 'lodash';
 const { withNavigation } = require('@expo/ex-navigation');
 
@@ -22,13 +22,13 @@ moment.defineLocale('en-yesterday', {
     },
 });
 
-function openItem(navigator, item) {
+function openItem(navigator: any, item: ScheduleEntry) {
     navigator.push(Router.getRoute('singleExercise', { title: item.title, item }));
 }
 
 interface ItemProps {
     item: ScheduleEntry | NowMarker;
-    navigator: any;
+    navigator?: any;
     style: number;
 }
 

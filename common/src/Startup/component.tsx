@@ -6,10 +6,14 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
-import { checkLogin } from './actions';
+import { actions } from './state';
 import styles from '../../styles'; // eslint-disable-line
 
-export class Startup extends React.Component {
+interface StartupProps {
+    loadApp: () => void;
+}
+
+export class Startup extends React.Component<StartupProps, {}> {
 
     componentDidMount() {
         this.props.loadApp();
@@ -25,12 +29,8 @@ export class Startup extends React.Component {
     }
 }
 
-Startup.propTypes = {
-    loadApp: PropTypes.func,
-};
-
-const mapDispatchToProps = (dispatch) => ({
-    loadApp: () => dispatch(checkLogin()),
+const mapDispatchToProps = (dispatch: (action: any) => void) => ({
+    loadApp: () => dispatch(actions.checkLogin()),
 });
 
 export default connect(null, mapDispatchToProps)(Startup);

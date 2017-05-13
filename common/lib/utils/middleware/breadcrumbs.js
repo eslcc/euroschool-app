@@ -5,7 +5,7 @@ const bugsnag = new Client();
 
 export default store => next => action => {
     bugsnag.leaveBreadcrumb('Redux', {
-        action: pickBy(action, o => typeof o !== 'function'),
+        action: JSON.stringify(action),
         type: 'state',
     })
     return next(action);

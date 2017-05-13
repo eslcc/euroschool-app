@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect, Dispatch } from 'react-redux';
-import * as moment from 'moment';
+const moment = require('moment');
 const { ListView, View, Text, TouchableOpacity } = require('@shoutem/ui');
 import { ScheduleEntry } from '../../lib/msm/schedule';
 

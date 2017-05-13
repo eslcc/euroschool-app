@@ -1,4 +1,4 @@
-import * as moment from 'moment';
+const moment = require('moment');
 import { Dispatch } from 'redux';
 
 import msmSchedule, { ScheduleEntry } from '../../lib/msm/schedule';

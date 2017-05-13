@@ -77,11 +77,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
     }
 
     componentDidMount() {
-        if (this.props.loading) {
-            this.props.load();
-        } else {
-            //this.props.refresh();
-        }
+        this.props.load();
 
         Orientation.addOrientationListener(orientation => {
             this.setState({ landscape: orientation === 'LANDSCAPE' });

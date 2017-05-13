@@ -8,9 +8,11 @@ const BALANCE_FAIL_TEXT = `{"Message":"Erreur lors du traitement de la demande."
 
 // These integration tests run the actual code, and thus require actual credentials.
 // To avoid flaky runs, it is disabled.
-// To run them, change the `false` below to `true`
+// To run them, change the line below
 // and add your credentials in the `moneweb.login` line.
-if (false) {
+const RUN_INTEGRATION_TESTS = false;
+
+if (RUN_INTEGRATION_TESTS) {
     describe('Moneweb login (integration)', () => {
         it('works (remove me later)', async() => {
             global.fetch = fetch;
@@ -18,6 +20,8 @@ if (false) {
             expect(response).toEqual(true);
         });
     });
+} else {
+    describe('Moneweb login (integration) (skipped', () => {});
 }
 
 describe('Moneweb balance', () => {
