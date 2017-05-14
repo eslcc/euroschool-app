@@ -1,10 +1,9 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
     Image,
     TextInput,
-    StyleSheet,
     Dimensions,
 } from 'react-native';
 const { Button, Spinner } = require('@shoutem/ui');
@@ -13,8 +12,6 @@ const autobind = require('autobind-decorator');
 import { actions, selectors } from './state';
 
 import GlobalStyles from '../../styles';
-
-const windowSize = Dimensions.get('window');
 
 enum LoginState {
     WAITING,

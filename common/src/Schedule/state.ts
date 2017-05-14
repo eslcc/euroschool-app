@@ -78,7 +78,7 @@ const reducer = (state = initialState, action: any) => {
 
 const actions = {
     loadSchedule,
-    refreshScheduleIfNeeded
+    refreshScheduleIfNeeded,
 };
 
 export {

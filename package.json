@@ -5,10 +5,11 @@
   "binaries": 1,
   "private": true,
   "scripts": {
-    "start": "concurrently \"tsc -w\" \"node node_modules/react-native/local-cli/cli.js start\"",
+    "start": "concurrently \"tsc -w\" \"node node_modules/react-native/local-cli/cli.js start --skipflow --transformer node_modules/react-native-sm-transformer\"",
     "test": "jest",
     "cover": "jest --coverage",
-    "hau": "yarn run haul start -- --platform android"
+    "hau": "yarn run haul start -- --platform android",
+    "lint": "tslint --type-check --project tsconfig.json --fix -t stylish common/**/*.{j,t}s{,x}"
   },
   "dependencies": {
     "@expo/ex-navigation": "^2.9.0",
@@ -63,6 +64,7 @@
     "jest": "19.0.2",
     "mockdate": "^2.0.1",
     "node-fetch": "^1.6.3",
+    "react-native-sm-transformer": "^1.0.3",
     "react-test-renderer": "15.5.4",
     "superagent": "^3.4.1",
     "tslint": "^5.2.0",

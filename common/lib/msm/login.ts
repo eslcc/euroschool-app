@@ -26,7 +26,7 @@ export async function neutronLogin(email: string, password: string): Promise<boo
         const redirectRequest = await doMsmRequest(METHODS.GET, '/sso.php');
         const $1 = cheerio.load(await redirectRequest.text());
         if ($1.html().indexOf('disabled') > -1) {
-            const finalResponse = await doFinalForm($1);
+            await doFinalForm($1);
             
             return true; // TODO figure out what happens when bullshit is passed
         }
@@ -40,7 +40,7 @@ export async function neutronLogin(email: string, password: string): Promise<boo
         debugger;
 
         const formRequest = await doRequest(METHODS.POST, formUrl, formPayload);
-        const finalResponse = await doFinalForm(cheerio.load(await formRequest.text()));
+        await doFinalForm(cheerio.load(await formRequest.text()));
         
         return true; // TODO figure out what happens when bullshit is passed
     } catch (e) {
@@ -56,6 +56,6 @@ export function logout(): Promise<any> {
 export function getLoginStatus(): Promise<Boolean> {
     return doMsmRequest(METHODS.GET, '/', {})
         .then(
-            (response: Response): boolean => response.url.indexOf('login') === -1,
+            (response: Response): boolean => response.url.indexOf('login') === -1
         );
 }

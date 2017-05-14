@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {
     Text,
     View,
@@ -63,7 +63,7 @@ interface ScheduleState {
 class Schedule extends Component<ScheduleProps, ScheduleState> {
     static route = {
         navigationBar: {
-            visible: false ,
+            visible: false,
         },
     };
 

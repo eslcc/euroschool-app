@@ -30,7 +30,7 @@ const loginAttempt = (email: string, password: string) =>
             Cache.set(
                 'logindata',
                 { email, password },
-                { expires: (new Date().getTime() / 1000) + 2678400 }, // 31 days
+                { expires: (new Date().getTime() / 1000) + 2678400 } // 31 days
             );
 
             dispatch({ type: actionTypes.LOGIN_SUCCESS });

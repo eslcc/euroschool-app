@@ -35,7 +35,7 @@ const absencesLoaded = (list: string[], time?: number) => ({
 
 const actions = {
     loadAbsences,
-    absencesLoaded
+    absencesLoaded,
 };
 
 interface AbsencesState {
@@ -53,7 +53,7 @@ const initialState: AbsencesState = {
 const selectors = {
     absences: (state: any) => state.absences.list,
     loading: (state: any) => state.absences.loading,
-    lastUpdate: (state: any) => state.absences.lastUpdate
+    lastUpdate: (state: any) => state.absences.lastUpdate,
 };
 
 const reducer = (state = initialState, action: any) => {

@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Text, View } from 'react-native';
 const moment = require('moment');
 import { capitalize } from 'lodash';

@@ -2,7 +2,7 @@ import React from 'react';
 import { View } from 'react-native';
 const { View: ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } = require('@shoutem/ui');
 const moment = require('moment');
-import { truncate, sample } from 'lodash';
+import { sample } from 'lodash';
 const { withNavigation } = require('@expo/ex-navigation');
 
 import { ScheduleEntry } from '../../lib/msm/schedule';

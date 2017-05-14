@@ -22,14 +22,14 @@ export function doRequest(method: string,
     };
 
     switch (method) {
-    case METHODS.GET:
-        return fetch(url, args);
+        case METHODS.GET:
+            return fetch(url, args);
 
-    case METHODS.POST:
-        return fetch(url, { body: serialize(params), ...args });
+        case METHODS.POST:
+            return fetch(url, { body: serialize(params), ...args });
 
-    default:
-        throw new Error(`Unexpected request method (allowed GET and POST, given ${method})`);
+        default:
+            throw new Error(`Unexpected request method (allowed GET and POST, given ${method})`);
     }
 }
 

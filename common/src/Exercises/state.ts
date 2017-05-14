@@ -54,7 +54,7 @@ const loadExercises = (start: number = null, end: number = null) => async (dispa
     const data = (await msmSchedule(loadStart, loadEnd)).schedule;
     
     const filtered = data.filter(
-        item => item.entry_type === 'Exercise',
+        item => item.entry_type === 'Exercise'
     );
 
     dispatch({

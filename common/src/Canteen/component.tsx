@@ -45,19 +45,24 @@ class Balance extends Component<BalanceProps, void> {
                 </View>
             );
         }
+
+        // Currently broken
+        // const refresh = new RefreshControl({ refreshing: this.props.loading, onRefresh: this.props.loadBalance });
+
         return (
             <ScrollView
                 style={styles.core.screenContainer}
-                refreshControl={<RefreshControl
-                    refreshing={this.props.loading}
-                    onRefresh={this.props.loadBalance}
-                />}
             >
                 {/* The double nested view is so the pull-to-refresh appears              */}
                 {/* directly below the navbar but the content still has a margin above it */}
                 <View style={styles.core.screenContainer}>
-                    <Heading styleName="" style={{ fontSize: 28, color: styles.colors.primaryText }}>€{this.props.balance}</Heading>
+                    <Heading styleName="" style={{ fontSize: 28, color: styles.colors.primaryText }}>
+                        €{this.props.balance}
+                    </Heading>
                     <Text style={styles.t}>Last updated <TimeAgo time={this.props.lastUpdate} /></Text>
+                    <Button onPress={this.props.loadBalance}>
+                        <Text>REFRESH</Text>
+                    </Button>
                 </View>
             </ScrollView>
         );
