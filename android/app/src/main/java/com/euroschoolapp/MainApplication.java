@@ -3,6 +3,7 @@ package com.euroschoolapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.bugsnag.BugsnagReactNative;
 import com.github.yamill.orientation.OrientationPackage;
 import im.shimo.react.cookie.CookieManagerPackage;
 import cl.json.RNSharePackage;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            BugsnagReactNative.getPackage(),
             new OrientationPackage(),
             new CookieManagerPackage(),
             new RNSharePackage(),

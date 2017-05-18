@@ -5,22 +5,30 @@
   "binaries": 1,
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "concurrently \"tsc -w\" \"node node_modules/react-native/local-cli/cli.js start --skipflow --transformer node_modules/react-native-sm-transformer\"",
     "test": "jest",
     "cover": "jest --coverage",
-    "hau": "yarn run haul start -- --platform android"
+    "hau": "yarn run haul start -- --platform android",
+    "lint": "tslint --type-check --project tsconfig.json --fix -t stylish common/**/*.{j,t}s{,x}"
   },
   "dependencies": {
     "@expo/ex-navigation": "^2.9.0",
     "@shoutem/theme": "^0.9.0",
     "@shoutem/ui": "^0.13.0",
+    "@types/cheerio": "^0.22.1",
+    "@types/lodash": "^4.14.64",
+    "@types/react": "^15.0.24",
+    "@types/react-native": "^0.43.11",
+    "@types/react-native-orientation": "^5.0.0",
+    "@types/react-redux": "^4.4.40",
     "autobind-decorator": "^1.3.4",
     "awesome-typescript-loader": "^3.1.2",
     "babel-plugin-transform-inline-environment-variables": "^0.0.2",
     "babel-preset-react-native-stage-0": "^1.0.1",
+    "bugsnag-react-native": "^2.2.3",
     "cheerio-without-node-native": "^0.20.2",
     "lodash": "^4.17.2",
-    "moment": "^2.17.1",
+    "moment": "^2.18.1",
     "moment.distance": "^1.0.1",
     "raven-js": "^3.10.0",
     "react": "16.0.0-alpha.6",
@@ -32,8 +40,7 @@
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
     "redux-persist": "^4.0.0-beta1",
-    "redux-saga": "^0.14.7",
-    "redux-thunk": "^2.1.0",
+    "redux-thunk": "^2.2.0",
     "remote-redux-devtools": "^0.5.7"
   },
   "devDependencies": {
@@ -57,9 +64,13 @@
     "jest": "19.0.2",
     "mockdate": "^2.0.1",
     "node-fetch": "^1.6.3",
-    "react-native-mock": "^0.3.1",
+    "react-native-sm-transformer": "^1.0.3",
     "react-test-renderer": "15.5.4",
     "superagent": "^3.4.1",
+    "tslint": "^5.2.0",
+    "tslint-eslint-rules": "^4.0.0",
+    "tslint-react": "^3.0.0",
+    "typescript": "^2.3.2",
     "yargs": "^7.1.0"
   },
   "jest": {

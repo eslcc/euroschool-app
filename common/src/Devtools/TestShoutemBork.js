@@ -1,9 +1,9 @@
 // TODO this file is a den of bollocks rapidly in need of refactoring
 // TODO: two months later, still not refactored, wtf
 
-import React, {Component, PropTypes} from 'react';
-import {View} from 'react-native';
-import {ListView, TouchableOpacity, Text, Row} from '@shoutem/ui';
+import React, { Component, PropTypes } from 'react';
+import { View } from 'react-native';
+const { ListView, TouchableOpacity, Text, Row } = require('@shoutem/ui');
 
 import styles from '../../styles';
 

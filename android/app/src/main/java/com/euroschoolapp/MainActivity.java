@@ -2,6 +2,9 @@ package com.euroschoolapp;
 
 import com.facebook.react.ReactActivity;
 
+import com.bugsnag.BugsnagReactNative;
+import android.os.Bundle;
+
 public class MainActivity extends ReactActivity {
 
     /**
@@ -11,5 +14,11 @@ public class MainActivity extends ReactActivity {
     @Override
     protected String getMainComponentName() {
         return "euroschoolApp";
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        BugsnagReactNative.start(this);
     }
 }
