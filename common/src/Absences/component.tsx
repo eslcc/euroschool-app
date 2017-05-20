@@ -17,6 +17,15 @@ interface AbsencesProps {
     bustCache: () => void;
 }
 
+/*
+<FlatList
+                    data={absences}
+                    renderItem={row}
+                    onRefresh={bustCache}
+                    refreshing={loading}
+                />
+                */
+
 export class Absences extends React.Component<AbsencesProps, {}> {
     componentDidMount() {
         if (!this.props.absences) {
@@ -38,12 +47,7 @@ export class Absences extends React.Component<AbsencesProps, {}> {
         return (
             <View style={styles.core.screenContainer}>
                 <Text>Last updated <TimeAgo time={lastUpdate} /></Text>
-                <FlatList
-                    data={absences}
-                    renderItem={row}
-                    onRefresh={bustCache}
-                    refreshing={loading}
-                />
+                <Text>{typeof absences}</Text>
             </View>
         );
         

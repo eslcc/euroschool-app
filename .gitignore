@@ -60,3 +60,6 @@ coverage/
 #
 haul-debug.log
 .happypack
+
+android/app/eslcc.jks
+android/gradle.properties

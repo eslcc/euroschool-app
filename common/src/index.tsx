@@ -7,6 +7,7 @@ const {
 } = require ('@expo/ex-navigation');
 
 const { StyleProvider } = require('@shoutem/theme');
+import CodePush from "react-native-code-push";
 
 
 import store from './Store';
@@ -22,14 +23,23 @@ const navigationContext = new NavigationContext({
 });
 
 
-const Euroschool = () => (
-    <Provider store={store}>
-        <NavigationProvider context={navigationContext}>
-            <StyleProvider style={theme}>
-                <StackNavigation navigatorUID="index" initialRoute={Router.getRoute('startup')}/>
-            </StyleProvider>
-        </NavigationProvider>
-    </Provider>
-);
+class Euroschool extends React.Component<{}, {}> {
+    componentDidMount() {
+        CodePush.sync({ updateDialog: true, installMode: CodePush.InstallMode.IMMEDIATE });
+    }
+
+    render() {
+        return (
+            <Provider store={store}>
+                <NavigationProvider context={navigationContext}>
+                    <StyleProvider style={theme}>
+                        <StackNavigation navigatorUID="index" initialRoute={Router.getRoute('startup')}/>
+                    </StyleProvider>
+                </NavigationProvider>
+            </Provider>
+
+        );
+    }
+}
 
 export default Euroschool;

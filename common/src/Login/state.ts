@@ -19,6 +19,11 @@ const selectors = {
     failed: (state: any) => state.login.failed,
 };
 
+// const EMAIL_WHITELIST = [
+//     'polakoma@student.eursc.eu',
+//     'mikucivi@student.eursc.eu',
+// ];
+
 const loginAttempt = (email: string, password: string) =>
     async (dispatch: (action: any) => void, getState: () => any) => {
         const navigatorUID = getState().navigation.currentNavigatorUID;

@@ -22,7 +22,8 @@
     "webpack.haul.js",
     "postbuild.js",
     "coverage",
-    "*.test.js"
+    "*.test.js",
+    "deploy-alpha.android.js"
   ],
   "compileOnSave": true
 }

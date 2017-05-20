@@ -16,4 +16,8 @@ export default [
     types.button('Open State Transition Explorer (BROKEN, DO NOT USE!)', () => {
         throw new Error('What did I just say?');
     }),
+
+    types.header('Meta'),
+    
+    types.label('Version $$RELEASE$$'),
 ];
