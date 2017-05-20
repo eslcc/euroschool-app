@@ -59,6 +59,8 @@
 		FC868DC0DB014B8AB2F34408 /* Rubik-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BE72DD31CC864881A69855F6 /* Rubik-Medium.ttf */; };
 		406B143A342B48268F81742D /* Rubik-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 388305B0323D49F69FE0FB9C /* Rubik-MediumItalic.ttf */; };
 		55BDB6E20F2C4E9F824CDD8D /* Rubik-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73969AD0694A43BCA7B1BA8E /* Rubik-Regular.ttf */; };
+		083B5CC577A14BDFA3421392 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DD55D870C4C01A6C5C969 /* libBugsnagReactNative.a */; };
+		0245EFFBCF4D4E6FAFAF14F7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4966EC949604898B7D58678 /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -307,6 +309,9 @@
 		BE72DD31CC864881A69855F6 /* Rubik-Medium.ttf */ = {isa = PBXFileReference; name = "Rubik-Medium.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		388305B0323D49F69FE0FB9C /* Rubik-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-MediumItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		73969AD0694A43BCA7B1BA8E /* Rubik-Regular.ttf */ = {isa = PBXFileReference; name = "Rubik-Regular.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F55C11A1F081426D83B2C19C /* BugsnagReactNative.xcodeproj */ = {isa = PBXFileReference; name = "BugsnagReactNative.xcodeproj"; path = "../node_modules/bugsnag-react-native/cocoa/BugsnagReactNative.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		6B2DD55D870C4C01A6C5C969 /* libBugsnagReactNative.a */ = {isa = PBXFileReference; name = "libBugsnagReactNative.a"; path = "libBugsnagReactNative.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		D4966EC949604898B7D58678 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -338,6 +343,8 @@
 				A602C903AEC9448985EF5ED3 /* libRNShare.a in Frameworks */,
 				850F87A51F1E4ABA9520CB32 /* libRNCookieManager.a in Frameworks */,
 				DF04324C069E420EA3D59608 /* libRCTOrientation.a in Frameworks */,
+				083B5CC577A14BDFA3421392 /* libBugsnagReactNative.a in Frameworks */,
+				0245EFFBCF4D4E6FAFAF14F7 /* libz.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -509,6 +516,7 @@
 				549EAE454AF04F20B71EE630 /* RNShare.xcodeproj */,
 				3499F30D1E4248D69D3195AA /* RNCookieManager.xcodeproj */,
 				816D07D47F74443E82C78AF5 /* RCTOrientation.xcodeproj */,
+				F55C11A1F081426D83B2C19C /* BugsnagReactNative.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -530,6 +538,7 @@
 				00E356EF1AD99517003FC87E /* euroschoolAppTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				E05375BF4E9247D188169905 /* Resources */,
+				C683DE82EDA940A98398EC8A /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -570,6 +579,15 @@
 				73969AD0694A43BCA7B1BA8E /* Rubik-Regular.ttf */,
 			);
 			name = Resources;
+			path = "";
+			sourceTree = "<group>";
+		};
+		C683DE82EDA940A98398EC8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D4966EC949604898B7D58678 /* libz.tbd */,
+			);
+			name = Frameworks;
 			path = "";
 			sourceTree = "<group>";
 		};
@@ -1088,6 +1106,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 				);
 			};
 			name = Debug;
@@ -1113,6 +1136,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 				);
 			};
 			name = Release;
@@ -1132,6 +1160,10 @@
 				);
 				PRODUCT_NAME = euroschoolApp;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
+				);
 			};
 			name = Debug;
 		};
@@ -1149,6 +1181,10 @@
 				);
 				PRODUCT_NAME = euroschoolApp;
 				VERSIONING_SYSTEM = "apple-generic";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
+				);
 			};
 			name = Release;
 		};
@@ -1182,6 +1218,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 				);
 			};
 			name = Debug;
@@ -1216,6 +1257,11 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 				);
 			};
 			name = Release;
@@ -1245,6 +1291,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1269,6 +1316,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
