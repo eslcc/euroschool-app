@@ -36,6 +36,7 @@ const LoginFailureIndicator = connect(state => ({
 
 interface LoginProps {
     login: (email: string, password: string) => void;
+    progress: string[];
 }
 
 interface LoginComponentState {
@@ -109,8 +110,12 @@ export class Login extends Component<LoginProps, LoginComponentState> {
     }
 }
 
+const mapStateToProps = (state: any) => ({
+    progress: selectors.progress(state),
+});
+
 const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     login: (email:string, password: string) => dispatch(actions.loginAttempt(email, password)),
 });
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
