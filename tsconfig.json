@@ -23,7 +23,8 @@
     "postbuild.js",
     "coverage",
     "*.test.js",
-    "deploy-alpha.android.js"
+    "deploy-alpha.android.js",
+    "build-debug-apk.js"
   ],
   "compileOnSave": true
 }
