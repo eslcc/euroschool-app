@@ -1,8 +1,17 @@
-// @flow
-import cheerio from 'cheerio-without-node-native';
+const cheerio = require('cheerio-without-node-native');
 import { doMsmRequest, doRequest, METHODS } from '../utils/requestHelpers';
 
-export async function neutronLogin(email: string, password: string): Promise<boolean> {
+export async function neutronLogin(
+    email: string,
+    password: string,
+    progressCallback?: (progress: string) => void
+    ): Promise<boolean> {
+
+    const reportProgress = (progress: string) => {
+        if (progressCallback) {
+            progressCallback(progress);
+        }
+    };
     const doFinalForm = async function($: any) {
         const form2 = $('form');
         let formUrl2 = form2.attr('action');
@@ -18,17 +27,20 @@ export async function neutronLogin(email: string, password: string): Promise<boo
             payload2[el.attribs.name] = el.attribs.value;
         });
 
-        return await doRequest(METHODS.POST, formUrl2, payload2);
+        const result = await doRequest(METHODS.POST, formUrl2, payload2);
+        reportProgress(`Final form URL: ${result.url}`);
+        return result;
     };
 
     try {
-        
         const redirectRequest = await doMsmRequest(METHODS.GET, '/sso.php');
+        reportProgress('Sent redirect request');
         const $1 = cheerio.load(await redirectRequest.text());
         if ($1.html().indexOf('disabled') > -1) {
+            reportProgress('Short-circuiting because disabled');
             await doFinalForm($1);
             
-            return true; // TODO figure out what happens when bullshit is passed
+            return await getLoginStatus();
         }
         const form = $1('#loginForm');
         const formUrl = `https://sts.eursc.eu${form.attr('action')}`;
@@ -37,12 +49,13 @@ export async function neutronLogin(email: string, password: string): Promise<boo
             UserName: email,
             Password: password,
         };
-        debugger;
 
         const formRequest = await doRequest(METHODS.POST, formUrl, formPayload);
+        reportProgress('Sent second request');
         await doFinalForm(cheerio.load(await formRequest.text()));
+        reportProgress('Sent final form');
         
-        return true; // TODO figure out what happens when bullshit is passed
+        return await getLoginStatus();
     } catch (e) {
         
         throw e;
@@ -53,7 +66,7 @@ export function logout(): Promise<any> {
     return doMsmRequest(METHODS.GET, '/login.php?m=1', {});
 }
 
-export function getLoginStatus(): Promise<Boolean> {
+export function getLoginStatus(): Promise<boolean> {
     return doMsmRequest(METHODS.GET, '/', {})
         .then(
             (response: Response): boolean => response.url.indexOf('login') === -1

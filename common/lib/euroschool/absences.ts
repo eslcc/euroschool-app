@@ -1,9 +1,9 @@
-import { load as loadHTML } from 'cheerio-without-node-native';
+const { load: loadHTML } = require('cheerio-without-node-native');
 
 const URL = 'http://www.euroschool.lu/luxschool/absences_student.php';
 
 const parse = (html: string) =>
-    Array.from(loadHTML(html)('img'))
+    Array.from<any>(loadHTML(html)('img'))
     .map(star => star.nextSibling.nodeValue.trim());
 
 export default function getAbsences() {

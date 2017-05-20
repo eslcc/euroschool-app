@@ -1,5 +1,4 @@
-// @flow
-import cheerio from 'cheerio-without-node-native';
+const cheerio = require('cheerio-without-node-native');
 
 import { doMsmRequest, METHODS } from '../utils/requestHelpers';
 

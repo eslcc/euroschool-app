@@ -66,6 +66,7 @@ import com.android.build.OutputFile
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -84,7 +85,7 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.1'
 
     defaultConfig {
         applicationId "com.euroschoolapp"
@@ -106,14 +107,26 @@ android {
     }
     signingConfigs {
         release {
-            storeFile file(MYAPP_RELEASE_STORE_FILE)
-            storePassword MYAPP_RELEASE_STORE_PASSWORD
-            keyAlias MYAPP_RELEASE_KEY_ALIAS
-            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+            storeFile file(APP_RELEASE_STORE_FILE)
+            storePassword APP_RELEASE_STORE_PASSWORD
+            keyAlias APP_RELEASE_KEY_ALIAS
+            keyPassword APP_RELEASE_KEY_PASSWORD
         }
     }
     buildTypes {
+        debug {
+            buildConfigField "String", "CODEPUSH_KEY", '""'
+            applicationIdSuffix ".debug"
+        }
+        releaseStaging {
+            initWith release
+            signingConfig signingConfigs.release
+            buildConfigField "String", "CODEPUSH_KEY", '"ojbYvxl-6getjoiW7wWKgJAmdgaLEylhOFTzem"'
+            applicationIdSuffix ".staging"
+        }
         release {
+            signingConfig signingConfigs.release
+            buildConfigField "String", "CODEPUSH_KEY", '"fBzCyzVDCM-AjgE57O2qjKjQ4IpHEylhOFTzem"'
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
@@ -134,6 +147,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-code-push')
     compile project(':bugsnag-react-native')
     compile project(':react-native-orientation')
     compile project(':react-native-cookie')
