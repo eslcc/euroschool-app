@@ -1,7 +1,6 @@
 import { Client } from 'bugsnag-react-native';
 import { pickBy } from 'lodash';
-
-const bugsnag = new Client();
+import bugsnag from '../bugsnag';
 
 export default store => next => action => {
     bugsnag.leaveBreadcrumb('Redux', {

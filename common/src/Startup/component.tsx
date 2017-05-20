@@ -24,6 +24,7 @@ export class Startup extends React.Component<StartupProps, {}> {
             <View style={styles.core.screenContainer}>
                 <Image source={require('./assets/StunningPicture.jpg')} />
                 <Text>The app is loading, please wait...</Text>
+                <Text>Version $$RELEASE$$</Text>
             </View>
         );
     }
