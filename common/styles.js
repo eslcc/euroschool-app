@@ -191,6 +191,14 @@ const normalStyles = {
             flexDirection: 'row',
             backgroundColor: colors.background,
         },
+        landscapeScheduleContainer: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            flex: 1,
+            flexDirection: 'column',
+            backgroundColor: colors.background,
+        },
         day: {
             height: 64,
             alignItems: 'center',
