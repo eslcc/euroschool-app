@@ -3,6 +3,7 @@ package com.euroschoolapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.walmartreact.ReactOrientationListener.*;
 import com.microsoft.codepush.react.CodePush;
 import com.bugsnag.BugsnagReactNative;
 import com.github.yamill.orientation.OrientationPackage;
@@ -37,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactOrientationListener(),
             new CodePush(BuildConfig.CODEPUSH_KEY, getApplicationContext(), BuildConfig.DEBUG),
             BugsnagReactNative.getPackage(),
             new OrientationPackage(),

@@ -5,7 +5,7 @@ import {
     ScrollView ,
 } from 'react-native';
 import { connect } from 'react-redux';
-import Orientation, { getOrientation, orientation } from 'react-native-orientation';
+// import { Orientation } from 'react-native-orientation-listener';
 import ScreenService from '../../lib/utils/screenService';
 import Cache from '../../lib/utils/cache';
 import { ScheduleEntry } from '../../lib/msm/schedule';
@@ -15,6 +15,9 @@ import GlobalStyles from '../../styles';
 import { actions, selectors } from './state';
 
 import Day from './Day';
+import { specificOrientation } from "react-native-orientation";
+
+var Orientation = require('react-native-orientation-listener');
 
 function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     const style = {
@@ -38,22 +41,12 @@ function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
 }
 
 function LandscapeSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
-    const style = {
-        height: ScreenService.getScreenSize().height,
-        width: ScreenService.getScreenSize().width,
-    };
     return (
         <View>
-            <ScrollView
-                horizontal
-                pagingEnabled
-                style={[GlobalStyles.schedule.landscapeScheduleContainer, style]}
-            >
-                {/* tslint:disable-next-line jsx-no-multiline-js */}
-                {[1, 2, 3, 4, 5].map(num =>
-                    <Day key={`${num}-portrait`} schedule={schedule} day={num} landscape={false}/>
-                )}
-            </ScrollView>
+            {/* tslint:disable-next-line jsx-no-multiline-js */}
+            {[1, 2, 3, 4, 5].map(num =>
+                <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape/>
+            )}
         </View>
     );
 }
@@ -108,11 +101,16 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
 
     constructor(props: ScheduleProps) {
         super(props);
-        const initial = Orientation.getInitialOrientation();
-        this.state = {
-            schedule: null,
-            landscape: initial === 'LANDSCAPE' ,
-        };
+        console.warn(Orientation !== undefined);
+        Orientation.getOrientation(
+            (orientation:any, device:any) => {
+                this.state = {
+                    schedule: null,
+                    landscape: orientation === 'LANDSCAPE' ,
+                };
+            }
+        );
+        this._orientationDidChange = this._orientationDidChange.bind(this);
     }
 
     _orientationDidChange (orientation:any) {
@@ -121,30 +119,38 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
     }
 
     componentWillMount() {
-        //The getOrientation method is async. It happens sometimes that
-        //you need the orientation at the moment the js starts running on device.
-        //getInitialOrientation returns directly because its a constant set at the
-        //beginning of the js code.
-        var initial = Orientation.getInitialOrientation();
-        if (initial === 'PORTRAIT') {
-            this.setState({ landscape: false });
-        }
+
     }
 
     componentDidMount() {
         this.props.load();
+        //The getOrientation method is async. It happens sometimes that
+        //you need the orientation at the moment the js starts running on device.
+        //getInitialOrientation returns directly because its a constant set at the
+        //beginning of the js code.
+        Orientation.getOrientation(
+            (orientation:any, device:any) => {
+                this.state = {
+                    schedule: null,
+                    landscape: orientation === 'LANDSCAPE' ,
+                };
+            }
+        );
+        Orientation.getOrientation(
+            (deviceOrientation:any, applicationOrientation:any, device:any, size:any) => {
+                console.warn(deviceOrientation, applicationOrientation, device, size);
+            }
+        );
 
-        // Orientation.lockToPortrait(); //this will lock the view to Portrait
-        // Orientation.lockToLandscape(); //this will lock the view to Landscape
-        Orientation.unlockAllOrientations(); //this will unlock the view to all Orientations
-
-        Orientation.addOrientationListener(this._orientationDidChange);
+        Orientation.addListener(this._orientationDidChange);
     }
 
     componentWillUnmount () {
-        Orientation.getOrientation((err,orientation)=> {
-            console.log("Current Device Orientation: ", orientation);
-        });
+        Orientation.getOrientation(
+            (deviceOrientation:any, applicationOrientation:any, device:any, size:any) => {
+                console.log(deviceOrientation, applicationOrientation, device, size);
+            }
+        );
         Orientation.removeOrientationListener(this._orientationDidChange);
     }
 
@@ -171,6 +177,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         const { schedule } = this.props;
         return (
             <AdaptiveSchedule landscape={this.state.landscape} schedule={schedule} />
+            // this.getScheduleForOrientation()
         );
     }
 }

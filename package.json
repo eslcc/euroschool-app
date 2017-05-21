@@ -37,6 +37,7 @@
     "react-native-cookie": "^0.1.0",
     "react-native-htmlview": "^0.9.0",
     "react-native-orientation": "git+https://github.com/yamill/react-native-orientation.git#2782917",
+    "react-native-orientation-listener": "git+https://git@github.com/iRoachie/react-native-orientation-listener.git",
     "react-native-timeago": "^0.3.0",
     "react-redux": "^5.0.1",
     "redux": "^3.6.0",
