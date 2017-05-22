@@ -101,7 +101,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
 
     constructor(props: ScheduleProps) {
         super(props);
-        console.warn(Orientation !== undefined);
+        // console.warn(Orientation !== undefined);
         Orientation.getOrientation(
             (orientation:any, device:any) => {
                 this.state = {
@@ -113,9 +113,10 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         this._orientationDidChange = this._orientationDidChange.bind(this);
     }
 
-    _orientationDidChange (orientation:any) {
-        console.warn('_orientationChange');
-        this.setState({ landscape: orientation === 'LANDSCAPE' });
+    _orientationDidChange (data:any) {
+        console.warn('_orientationChange'+data.orientation);
+        this.setState({ landscape: data.orientation === 'LANDSCAPE' });
+        ScreenService.setScreenSize(data.orientation);
     }
 
     componentWillMount() {
@@ -129,20 +130,17 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         //getInitialOrientation returns directly because its a constant set at the
         //beginning of the js code.
         Orientation.getOrientation(
-            (orientation:any, device:any) => {
+            (data:any) => {
+                ScreenService.setScreenSize(data.orientation);
                 this.state = {
                     schedule: null,
-                    landscape: orientation === 'LANDSCAPE' ,
+                    landscape: data.orientation === 'LANDSCAPE' ,
                 };
-            }
-        );
-        Orientation.getOrientation(
-            (deviceOrientation:any, applicationOrientation:any, device:any, size:any) => {
-                console.warn(deviceOrientation, applicationOrientation, device, size);
             }
         );
 
         Orientation.addListener(this._orientationDidChange);
+        // Orientation.addListener(ScreenService.setScreenSize);
     }
 
     componentWillUnmount () {
