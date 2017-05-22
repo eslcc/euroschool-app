@@ -5,7 +5,7 @@
   "binaries": 1,
   "private": true,
   "scripts": {
-    "start": "concurrently \"tsc -w\" \"node node_modules/react-native/local-cli/cli.js start --skipflow --transformer node_modules/react-native-sm-transformer\"",
+    "start": "concurrently \"tsc -w\" \"node node_modules/react-native/local-cli/cli.js start\"",
     "test": "jest",
     "cover": "jest --coverage",
     "hau": "yarn run haul start -- --platform android",
