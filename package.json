@@ -69,6 +69,7 @@
     "mockdate": "^2.0.1",
     "ncp": "^2.0.0",
     "node-fetch": "^1.6.3",
+    "progress": "^2.0.0",
     "react-native-sm-transformer": "^1.0.3",
     "react-test-renderer": "15.5.4",
     "recursive-copy": "^2.0.6",
