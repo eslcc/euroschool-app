@@ -142,7 +142,7 @@ const normalStyles = {
     exercises: {
         mainView: {
             // marginTop: 80,
-            // paddingBottom: 80,
+            paddingBottom: -10,
         },
         list: {
             flex: 1,
