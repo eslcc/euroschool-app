@@ -61,7 +61,7 @@ export function LandscapeCourse({ course, day }: { course: ScheduleEntry, day: n
         {
             left: ((day - 1) * oneDayWidth) + 2,
             width: oneDayWidth - 4,
-            top: 44 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
+            top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
             height: (45 * oneMinuteHeight),
             backgroundColor: colors[day - 1][period - 1],
         },

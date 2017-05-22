@@ -28,23 +28,10 @@ const setScreenSize = (orientation: string): void => {
     };
 };
 
-const update = (): void => {
-    Orientation.getOrientation(
-        (device:any, orientation:any) => {
-            // console.error(device, orientation);
-            console.warn('o: '+orientation);
-            setScreenSize(orientation);
-        }
-    );
-};
-
-// Orientation.addListener(update);
-
 
 
 
 export default {
     getScreenSize: (): Screen => screen,
-    update: (): void => update(),
     setScreenSize: (orientation:any): void  => setScreenSize(orientation),
 };

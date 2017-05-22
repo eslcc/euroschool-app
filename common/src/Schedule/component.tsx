@@ -42,7 +42,7 @@ function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
 
 function LandscapeSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     return (
-        <View>
+        <View style={GlobalStyles.schedule.landscapeScheduleContainer}>
             {/* tslint:disable-next-line jsx-no-multiline-js */}
             {[1, 2, 3, 4, 5].map(num =>
                 <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape/>

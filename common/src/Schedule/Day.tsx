@@ -32,11 +32,12 @@ function getHours() {
 }
 
 function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
+    console.warn(course.start);
     if (landscape) {
-        return <LandscapeCourse key={`${course.start}-portrait`} course={course} day={day} />;
+        return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} />;
     }
 
-    return <PortraitCourse key={`${course.start}-landscape`} course={course} day={day} />;
+    return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} />;
 }
 
 type DayProps = { schedule: ScheduleEntry[], day: number, landscape?: boolean };
