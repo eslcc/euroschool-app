@@ -45,7 +45,7 @@ interface AbsencesState {
 }
 
 const initialState: AbsencesState = {
-    list: null,
+    list: [],
     lastUpdate: -1,
     loading: false,
 };

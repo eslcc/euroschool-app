@@ -4,9 +4,9 @@ const { View } = require('@shoutem/ui');
 
 import styles from '../../styles';
 
-export default function (item: string) {
+export default function ({ item }: { item: string }) {
     return (
-        <View>
+        <View key={item}>
             <Text style={styles.t}>{item}</Text>
         </View>
     );
