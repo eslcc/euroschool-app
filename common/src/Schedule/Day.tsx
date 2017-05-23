@@ -23,7 +23,7 @@ function getHours() {
     return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
         .map((hour, index) => {
             const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
-            const top = 64 + (oneHourHeight * (index));
+            const top = oneHourHeight * (index) - (oneHourHeight)/4;
             const style = {
                 top,
             };
@@ -33,10 +33,10 @@ function getHours() {
 
 function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
     if (landscape) {
-        return <LandscapeCourse key={`${course.start}-portrait`} course={course} day={day} />;
+        return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} />;
     }
 
-    return <PortraitCourse key={`${course.start}-landscape`} course={course} day={day} />;
+    return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} />;
 }
 
 type DayProps = { schedule: ScheduleEntry[], day: number, landscape?: boolean };
@@ -46,7 +46,6 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
     const dayName = days[day];
-    const landscapeLeft = ((ScreenService.getScreenSize().width / 5) * (day - 1));
     const styles = {
         day: {
             width: ScreenService.getScreenSize().width,
@@ -56,22 +55,21 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         },
     };
 
-    const style = [
+    const headingStyle = [
         GlobalStyles.schedule.day,
         (GlobalStyles.schedule as any)[dayName],
         styles.day,
         landscape ? styles.landscapeDay : {},
-        landscape ? { left: landscapeLeft } : {},
     ];
-
     return (
-        <View>
-            <View style={style}>
+        <View style={GlobalStyles.schedule.dayColumn}>
+            <View style={headingStyle}>
                 <Text>{capitalize(dayName)}</Text>
             </View>
-
-            {courses.map(course => getCourse(course, day, landscape))}
-            {landscape ? null : getHours()}
+            <View style={GlobalStyles.schedule.dayTruePositioning}>
+                {courses.map(course => getCourse(course, day, landscape))}
+                {landscape ? null : getHours()}
+            </View>
         </View>
     );
 }

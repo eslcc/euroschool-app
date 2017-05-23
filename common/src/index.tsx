@@ -6,7 +6,6 @@ const {
     NavigationContext,
 } = require ('@expo/ex-navigation');
 
-const { Text } = require('@shoutem/ui');
 const { StyleProvider } = require('@shoutem/theme');
 import CodePush from "react-native-code-push";
 
@@ -14,9 +13,6 @@ import CodePush from "react-native-code-push";
 import store from './Store';
 import Router from './router';
 import theme from './theme';
-
-// const {whyDidYouUpdate} = require('why-did-you-update')
-// whyDidYouUpdate(React, { exclude: /(Navigation|MK|Touchable)/ })
 
 const navigationContext = new NavigationContext({
     router: Router,

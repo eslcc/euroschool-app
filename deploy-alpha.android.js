@@ -125,7 +125,7 @@ rimraf('build', () => {
                                         fs.writeFileSync('APP_LAST_RELEASE', `Alpha-${release}`);
                                         console.log('Done!');
                                     });
-                               });
+                                });
                             }
                         }
                     })
@@ -133,4 +133,3 @@ rimraf('build', () => {
         });
     });
 });
-
