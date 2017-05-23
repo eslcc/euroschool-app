@@ -63,3 +63,4 @@ haul-debug.log
 
 android/app/eslcc.jks
 android/gradle.properties
+release-build/

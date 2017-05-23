@@ -37,7 +37,6 @@ class Euroschool extends React.Component<void, AppState> {
         CodePush.sync({
             updateDialog: true,
             installMode: CodePush.InstallMode.IMMEDIATE,
-            deploymentKey: 'ojbYvxl-6getjoiW7wWKgJAmdgaLEylhOFTzem',
         }, () => {}, progress => {
             this.setState({
                 downloaded: progress.receivedBytes,
