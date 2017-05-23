@@ -39,7 +39,6 @@ function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
         </View>
     );
 }
-
 function LandscapeSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     return (
         <View style={GlobalStyles.schedule.landscapeScheduleContainer}>
@@ -50,35 +49,26 @@ function LandscapeSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
         </View>
     );
 }
-
-
-
 interface AdaptiveScheduleProps {
     landscape: boolean;
     schedule: ScheduleEntry[];
 }
-
 interface AdaptiveScheduleState {
-
 }
-
 class AdaptiveSchedule extends  Component<AdaptiveScheduleProps, AdaptiveScheduleState> {
     constructor(props: AdaptiveScheduleProps) {
         super(props);
     }
-
     getScheduleForOrientation() {
         const { schedule } = this.props;
         return this.props.landscape
             ? <LandscapeSchedule schedule={schedule} />
             : <PortraitSchedule  schedule={schedule} />;
     }
-
     render() {
         return this.getScheduleForOrientation();
     }
 }
-
 interface ScheduleProps {
     load: () => void;
     loading: boolean;
@@ -86,18 +76,15 @@ interface ScheduleProps {
     schedule: ScheduleEntry[];
     event : any;
 }
-
 interface ScheduleState {
     landscape: boolean;
 }
-
 class Schedule extends Component<ScheduleProps, ScheduleState> {
     static route = {
         navigationBar: {
             visible: false,
         },
     };
-
     constructor(props: ScheduleProps) {
         super(props);
         const dimens = Dimensions.get('window');
@@ -105,66 +92,52 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
             landscape: dimens.width > dimens.height,
         };
     }
-
     _orientationDidChange (orientation: Orientation.orientation) {
-        console.log(JSON.stringify(orientation));
-        // console.warn('_orientationChange'+data.orientation);
         this.setState({ landscape: orientation === 'LANDSCAPE' });
         ScreenService.setScreenSize(orientation);
     }
-
     componentWillMount() {
-
     }
-
     componentDidMount() {
         this.props.load();
     }
-
     getScheduleForOrientation() {
         const { schedule } = this.props;
         return this.state.landscape
             ? <LandscapeSchedule schedule={schedule} />
             : <PortraitSchedule  schedule={schedule} />;
     }
-
     componentDidUpdate() {
         if (!this.props.loading) {
             Cache.set('schedule', this.props.schedule);
         }
     }
-
     onLayout = (event: any) => {
         this._orientationDidChange(
             event.nativeEvent.layout.height > event.nativeEvent.layout.width
-            ? 'PORTRAIT'
-            : 'LANDSCAPE'
+                ? 'PORTRAIT'
+                : 'LANDSCAPE'
         );
     }
-
     render() {
         if (this.props.loading) {
             return <Text>Loading</Text>;
         }
-        // console.warn('re-render');
         const { schedule } = this.props;
         return (
             <View onLayout={this.onLayout} style={{ flex: 1 }}>
-              <AdaptiveSchedule landscape={this.state.landscape} schedule={schedule} />
+                <AdaptiveSchedule landscape={this.state.landscape} schedule={schedule} />
             </View>
-            // this.getScheduleForOrientation()
         );
     }
 }
-
 const mapStateToProps = (state: any) => ({
     schedule: selectors.schedule(state),
     loading: selectors.loading(state) ,
 });
-
 const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     load: () => dispatch(actions.loadSchedule(null, null)),
     refresh: () => dispatch(actions.refreshScheduleIfNeeded(null, null)) ,
 });
-
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
+

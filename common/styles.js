@@ -141,7 +141,6 @@ const normalStyles = {
     }),
     exercises: {
         mainView: {
-            // marginTop: 80,
             paddingBottom: -10,
         },
         list: {
@@ -196,7 +195,7 @@ const normalStyles = {
             margin: 0,
             top: 0,
             left: 0,
-            display: 'flex',
+            flex: 1,
             flexDirection: 'row',
             backgroundColor: colors.background,
         },
@@ -205,6 +204,7 @@ const normalStyles = {
             height: 64,
             alignItems: 'center',
             justifyContent: 'center',
+            zIndex: 5000,
         },
         // the heading, right ?
         landscapeDay: {
@@ -256,27 +256,16 @@ const normalStyles = {
         },
         landscapeCourse: {
             position: 'absolute',
-            marginRight: 16,
             borderRadius: 2,
-            paddingLeft: 8,
             paddingTop: 0,
             elevation: 1,
-            marginBottom: 16,
         },
-        dayRow: {
-            // backgroundColor: 'yellow',
-            // padding: '5px',
-            // width: '200px',
-            // marginTop: '10px',
-
-            // lineHeight: 150,
-            // color: 'white',
-            // fontSize: '1em',
-            // textAlign: 'center',
+        dayTruePositioning: {
             flexDirection: 'column',
         },
-        coursesStyle: {
-            // backgroundColor: 'yellow',
+        dayColumn: {
+            justifyContent: 'flex-start',
+            flexDirection: 'column'
         },
     }),
 };
