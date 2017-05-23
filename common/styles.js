@@ -197,7 +197,8 @@ const normalStyles = {
             margin: 0,
             top: 0,
             left: 0,
-            display: 'flex',
+            // display: 'flex',
+            flex: 1,
             flexDirection: 'row',
             backgroundColor: colors.background,
         },
@@ -258,24 +259,19 @@ const normalStyles = {
         },
         landscapeCourse: {
             position: 'absolute',
-            marginRight: 16,
+            // marginRight: 16,
             borderRadius: 2,
-            paddingLeft: 8,
+            // paddingLeft: 8,
             paddingTop: 0,
             elevation: 1,
-            marginBottom: 16,
+            // marginBottom: 16,
         },
-        dayRow: {
-            // backgroundColor: 'yellow',
-            // padding: '5px',
-            // width: '200px',
-            // marginTop: '10px',
-
-            // lineHeight: 150,
-            // color: 'white',
-            // fontSize: '1em',
-            // textAlign: 'center',
+        dayTruePositioning: {
             flexDirection: 'column',
+        },
+        dayColumn: {
+            justifyContent: 'flex-start',
+            flexDirection: 'column'
         },
     }),
 };

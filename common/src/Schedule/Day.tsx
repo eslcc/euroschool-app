@@ -64,11 +64,11 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         // landscape ? { left: landscapeLeft } : {},
     ];
     return (
-        <View style={landscape ? GlobalStyles.schedule.dayRow : {}}>
+        <View style={GlobalStyles.schedule.dayColumn}>
             <View style={headingStyle}>
                 <Text>{capitalize(dayName)}</Text>
             </View>
-            <View>
+            <View style={GlobalStyles.schedule.dayTruePositioning}>
                 {courses.map(course => getCourse(course, day, landscape))}
                 {landscape ? null : getHours()}
             </View>
