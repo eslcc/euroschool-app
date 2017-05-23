@@ -91,6 +91,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         this.state = {
             landscape: dimens.width > dimens.height,
         };
+        console.log(this.props.schedule);
     }
     _orientationDidChange (orientation: Orientation.orientation) {
         console.log(JSON.stringify(orientation));
