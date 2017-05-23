@@ -24,7 +24,8 @@
     "coverage",
     "*.test.js",
     "deploy-alpha.android.js",
-    "build-debug-apk.js"
+    "build-debug-apk.js",
+    "copy-assets.js"
   ],
   "compileOnSave": true
 }

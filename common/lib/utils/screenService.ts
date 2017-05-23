@@ -18,14 +18,14 @@ let screen: Screen = {
 
 // var currentOrientation:string = "";
 
-const setScreenSize = (currentOrientation:number): void => {
+const setScreenSize = (currentOrientation:string): void => {
     // setTimeout(function () {
-    console.warn('orient:'+currentOrientation);
+    // console.warn('orient:'+currentOrientation);
     // NativeModules.OrientationListener.getOrientation(console.warn());
     const { height, width } = Dimensions.get('window');
     const min = Math.min(height, width);
     const max = Math.max(height, width);
-    const isLandscape = currentOrientation !== 0;
+    const isLandscape = currentOrientation === 'LANDSCAPE';
     // screen = {
     //     height: isLandscape ? min : max,
     //     width: isLandscape ? max : min,
@@ -43,5 +43,5 @@ const setScreenSize = (currentOrientation:number): void => {
 
 export default {
     getScreenSize: (): Screen => screen,
-    setScreenSize: (orientation: number) => setScreenSize(orientation),
+    setScreenSize: (orientation:string)  => setScreenSize(orientation),
 };

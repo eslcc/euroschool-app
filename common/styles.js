@@ -190,6 +190,7 @@ const normalStyles = {
             flex: 1,
             flexDirection: 'row',
             backgroundColor: colors.background,
+            // justifyContent: 'flex-start',
         },
         landscapeScheduleContainer: {
             padding: 0,
@@ -204,7 +205,7 @@ const normalStyles = {
         day: {
             height: 64,
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-start',
         },
         // the heading, right ?
         landscapeDay: {
