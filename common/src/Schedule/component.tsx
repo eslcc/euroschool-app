@@ -109,7 +109,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
                     schedule: null,
                     landscape: orientation === 'LANDSCAPE' ,
                 };
-                ScreenService.setOrientation(orientation.orientation);
+                ScreenService.setScreenSize(orientation.orientation);
             }
         );
         this._orientationDidChange = this._orientationDidChange.bind(this);
@@ -118,7 +118,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
     _orientationDidChange (data:any) {
         // console.warn('_orientationChange'+data.orientation);
         this.setState({ landscape: data.orientation === 'LANDSCAPE' });
-        ScreenService.setOrientation(data.orientation);
+        ScreenService.setScreenSize(data.orientation);
     }
 
     componentWillMount() {
@@ -133,8 +133,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         //beginning of the js code.
         Orientation.getOrientation(
             (data:any) => {
-                console.warn(data.orientation);
-                ScreenService.setOrientation(data.orientation);
+                ScreenService.setScreenSize(data.orientation);
                 this.state = {
                     schedule: null,
                     landscape: data.orientation === 'LANDSCAPE' ,
