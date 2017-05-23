@@ -32,7 +32,6 @@ function getHours() {
 }
 
 function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
-    console.warn(course.start);
     if (landscape) {
         return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} />;
     }
@@ -47,7 +46,7 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
     const dayName = days[day];
-    const landscapeLeft = ((ScreenService.getScreenSize().width / 5) * (day - 1));
+    // const landscapeLeft = ((ScreenService.getScreenSize().width / 5) * (day - 1));
     const styles = {
         day: {
             width: ScreenService.getScreenSize().width,
@@ -57,22 +56,23 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         },
     };
 
-    const style = [
+    const headingStyle = [
         GlobalStyles.schedule.day,
         (GlobalStyles.schedule as any)[dayName],
         styles.day,
         landscape ? styles.landscapeDay : {},
-        landscape ? { left: landscapeLeft } : {},
+        // landscape ? { left: landscapeLeft } : {},
     ];
 
     return (
-        <View>
-            <View style={style}>
+        <View style={landscape ? GlobalStyles.schedule.dayRow : {}}>
+            <View style={headingStyle}>
                 <Text>{capitalize(dayName)}</Text>
             </View>
-
-            {courses.map(course => getCourse(course, day, landscape))}
-            {landscape ? null : getHours()}
+            <View style={landscape ? GlobalStyles.schedule.coursesStyle : {}}>
+                {courses.map(course => getCourse(course, day, landscape))}
+                {landscape ? null : getHours()}
+            </View>
         </View>
     );
 }

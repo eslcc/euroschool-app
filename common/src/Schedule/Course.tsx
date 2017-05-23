@@ -66,6 +66,7 @@ export function LandscapeCourse({ course, day }: { course: ScheduleEntry, day: n
             backgroundColor: colors[day - 1][period - 1],
         },
     ] as any;
+    // console.warn(period);
     return (
         <View style={style.course}>
             <Text>{course.title}</Text>

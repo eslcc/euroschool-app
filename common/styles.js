@@ -192,24 +192,25 @@ const normalStyles = {
             backgroundColor: colors.background,
         },
         landscapeScheduleContainer: {
-            position: 'absolute',
+            padding: 0,
+            margin: 0,
             top: 0,
             left: 0,
             display: 'flex',
             flexDirection: 'row',
             backgroundColor: colors.background,
         },
+        // the heading, right ?
         day: {
             height: 64,
             alignItems: 'center',
             justifyContent: 'center',
         },
+        // the heading, right ?
         landscapeDay: {
-            flex: 1,
-            flexDirection: 'column',
             height: 64,
-            // alignItems: 'center',
-            // justifyContent: 'center',
+            alignItems: 'center',
+            justifyContent: 'center',
             top: 0,
             position: 'absolute',
         },
@@ -261,6 +262,21 @@ const normalStyles = {
             paddingTop: 0,
             elevation: 1,
             marginBottom: 16,
+        },
+        dayRow: {
+            // backgroundColor: 'yellow',
+            // padding: '5px',
+            // width: '200px',
+            // marginTop: '10px',
+
+            // lineHeight: 150,
+            // color: 'white',
+            // fontSize: '1em',
+            // textAlign: 'center',
+            flexDirection: 'column',
+        },
+        coursesStyle: {
+            // backgroundColor: 'yellow',
         },
     }),
 };

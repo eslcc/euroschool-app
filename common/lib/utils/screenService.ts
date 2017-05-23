@@ -1,7 +1,7 @@
 // Workaround for Dimensions issue on Android.
 // Source: https://github.com/facebook/react-native/issues/8587#issuecomment-231595674
 
-import { Dimensions } from 'react-native';
+import { Dimensions, NativeModules } from 'react-native';
 // import { orientation, specificOrientation } from "react-native-orientation";
 
 var Orientation = require('react-native-orientation-listener');
@@ -16,22 +16,37 @@ let screen: Screen = {
     height: -1,
 };
 
-const setScreenSize = (orientation: string): void => {
-    console.warn('orient'+orientation);
+var currentOrientation:string = "";
+
+const setScreenSize = (): void => {
+    // setTimeout(function () {
+    console.warn('orient:'+currentOrientation);
+    // NativeModules.OrientationListener.getOrientation(console.warn());
     const { height, width } = Dimensions.get('window');
     const min = Math.min(height, width);
     const max = Math.max(height, width);
-    const isLandscape = orientation === 'LANDSCAPE';
+    const isLandscape = currentOrientation === 'LANDSCAPE';
+    // screen = {
+    //     height: isLandscape ? min : max,
+    //     width: isLandscape ? max : min,
+    // };
     screen = {
-        height: isLandscape ? min : max,
-        width: isLandscape ? max : min,
+        height: height,
+        width: width,
     };
+    // }, 1000);
+
 };
 
 
 
 
 export default {
-    getScreenSize: (): Screen => screen,
-    setScreenSize: (orientation:any): void  => setScreenSize(orientation),
+    getScreenSize: (): Screen => {
+        setScreenSize(); return screen;
+    },
+    setOrientation: (orientation:string)  => {
+        console.warn('orienting'+orientation);
+        currentOrientation = orientation;
+    },
 };
