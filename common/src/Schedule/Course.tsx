@@ -31,7 +31,7 @@ export function PortraitCourse({ course, day }: { course: ScheduleEntry, day: nu
         GlobalStyles.schedule.portraitCourse,
         {
             width: ScreenService.getScreenSize().width - 16 - 80 - 8,
-            top: 64 + ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
+            top: ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
             height: 45 * oneMinuteHeight,
             backgroundColor: colors[day - 1][period - 1],
         },

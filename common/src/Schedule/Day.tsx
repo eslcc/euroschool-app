@@ -23,7 +23,7 @@ function getHours() {
     return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
         .map((hour, index) => {
             const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
-            const top = 64 + (oneHourHeight * (index));
+            const top = (oneHourHeight * (index)) - (oneHourHeight)/4;
             const style = {
                 top,
             };
@@ -63,13 +63,12 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         landscape ? styles.landscapeDay : {},
         // landscape ? { left: landscapeLeft } : {},
     ];
-
     return (
         <View style={landscape ? GlobalStyles.schedule.dayRow : {}}>
             <View style={headingStyle}>
                 <Text>{capitalize(dayName)}</Text>
             </View>
-            <View style={landscape ? GlobalStyles.schedule.coursesStyle : {}}>
+            <View>
                 {courses.map(course => getCourse(course, day, landscape))}
                 {landscape ? null : getHours()}
             </View>

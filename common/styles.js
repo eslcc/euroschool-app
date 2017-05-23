@@ -205,7 +205,8 @@ const normalStyles = {
         day: {
             height: 64,
             alignItems: 'center',
-            justifyContent: 'flex-start',
+            justifyContent: 'center',
+            zIndex: 5000,
         },
         // the heading, right ?
         landscapeDay: {
@@ -275,9 +276,6 @@ const normalStyles = {
             // fontSize: '1em',
             // textAlign: 'center',
             flexDirection: 'column',
-        },
-        coursesStyle: {
-            // backgroundColor: 'yellow',
         },
     }),
 };
