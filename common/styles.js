@@ -141,7 +141,6 @@ const normalStyles = {
     }),
     exercises: {
         mainView: {
-            // marginTop: 80,
             paddingBottom: -10,
         },
         list: {
@@ -190,14 +189,12 @@ const normalStyles = {
             flex: 1,
             flexDirection: 'row',
             backgroundColor: colors.background,
-            // justifyContent: 'flex-start',
         },
         landscapeScheduleContainer: {
             padding: 0,
             margin: 0,
             top: 0,
             left: 0,
-            // display: 'flex',
             flex: 1,
             flexDirection: 'row',
             backgroundColor: colors.background,
@@ -259,12 +256,9 @@ const normalStyles = {
         },
         landscapeCourse: {
             position: 'absolute',
-            // marginRight: 16,
             borderRadius: 2,
-            // paddingLeft: 8,
             paddingTop: 0,
             elevation: 1,
-            // marginBottom: 16,
         },
         dayTruePositioning: {
             flexDirection: 'column',

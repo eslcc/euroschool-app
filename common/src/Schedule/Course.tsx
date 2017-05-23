@@ -52,7 +52,6 @@ export function PortraitCourse({ course, day }: { course: ScheduleEntry, day: nu
 
 export function LandscapeCourse({ course, day }: { course: ScheduleEntry, day: number }) {
     const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 11;
-        // (ScreenService.getScreenSize().height - 64)/9;
     const oneMinuteHeight = oneHourHeight / 60;
     const oneDayWidth = (ScreenService.getScreenSize().width / 5);
     const start = moment(course.start.substring(0, course.start.length - 1));
@@ -60,14 +59,12 @@ export function LandscapeCourse({ course, day }: { course: ScheduleEntry, day: n
     const style = [
         GlobalStyles.schedule.landscapeCourse,
         {
-            // left: ((day - 1) * oneDayWidth) + 2,
             width: oneDayWidth - 4,
             top: ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
             height: (45 * oneMinuteHeight),
             backgroundColor: colors[day - 1][period - 1],
         },
     ] as any;
-    // console.warn(period);
     return (
         <View style={style}>
             <Text>{course.title}</Text>

@@ -91,11 +91,8 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         this.state = {
             landscape: dimens.width > dimens.height,
         };
-        console.log(this.props.schedule);
     }
     _orientationDidChange (orientation: Orientation.orientation) {
-        console.log(JSON.stringify(orientation));
-        // console.warn('_orientationChange'+data.orientation);
         this.setState({ landscape: orientation === 'LANDSCAPE' });
         ScreenService.setScreenSize(orientation);
     }
@@ -126,13 +123,11 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         if (this.props.loading) {
             return <Text>Loading</Text>;
         }
-        // console.warn('re-render');
         const { schedule } = this.props;
         return (
             <View onLayout={this.onLayout} style={{ flex: 1 }}>
                 <AdaptiveSchedule landscape={this.state.landscape} schedule={schedule} />
             </View>
-            // this.getScheduleForOrientation()
         );
     }
 }
