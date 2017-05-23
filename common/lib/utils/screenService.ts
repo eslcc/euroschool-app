@@ -44,4 +44,4 @@ const setScreenSize = (currentOrientation:number): void => {
 export default {
     getScreenSize: (): Screen => screen,
     setScreenSize: (orientation: number) => setScreenSize(orientation),
-}
+};
