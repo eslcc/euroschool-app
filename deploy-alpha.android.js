@@ -6,7 +6,7 @@ const replace = require('replace-in-file');
 const request = require('superagent');
 const rimraf = require('rimraf');
 const copy = require('recursive-copy');
-const logUpdate = require('log-update');
+const ProgressBar = require('progress');
 
 const argv = require('yargs').argv;
 
@@ -77,21 +77,33 @@ rimraf('build', () => {
 
                 console.log('Uploading to bugsnag...');
 
+                let bar;
+                let soFar = 0;
+
                 request
                     .post('https://upload.bugsnag.com/')
                     .type('form')
                     .field('apiKey', 'a27061605ff410fe9b91bee65969ff85')
                     .field('codeBundleId', `Alpha-${release}`)
-                    .field('minifiedUrl', 'index.android.bundle')
+                    .field('minifiedUrl', '*index.android.bundle')
                     .field('overwrite', true)
                     .attach('minifiedFile', './release-build/index.android.bundle')
                     .attach('sourceMap', './release-build/index.android.bundle.map')
                     .attach('index.android.js', './index.android.js')
                     .on('progress', e => {
-                        logUpdate(`Bundle uploaded ${((e.loaded / e.total) * 100).toFixed(2)}%`)
+                        if (!bar) {
+                            bar = new ProgressBar('Upload progress [:bar] :percent :etas', {
+                                complete: '=',
+                                incomplete: ' ',
+                                width: 50,
+                                total: e.total
+                            });
+                        }
+                        bar.tick(e.loaded - soFar);
+                        soFar = e.loaded;
                     })
                     .end((err, res) => {
-                        logUpdate.done();
+                        console.log('\n');
                         if (err) {
                             console.error(`Bugsnag errored: ${JSON.stringify(err)}`);
                         } else {
@@ -113,7 +125,7 @@ rimraf('build', () => {
                                         fs.writeFileSync('APP_LAST_RELEASE', `Alpha-${release}`);
                                         console.log('Done!');
                                     });
-                               });
+                                });
                             }
                         }
                     })
@@ -121,4 +133,3 @@ rimraf('build', () => {
         });
     });
 });
-

@@ -32,7 +32,7 @@ const loadSchedule = (start: number = null, end: number = null) => async (dispat
             .set({ hour: 0, minute: 0, second: 0 })
             .unix(),
         end || moment() // last day of this week
-            .isoWeekday(7)
+            .isoWeekday(5)
             .set({ hour: 23, minute: 59, second: 59 })
             .unix()
     );
