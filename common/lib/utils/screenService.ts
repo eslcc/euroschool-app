@@ -3,8 +3,6 @@
 
 import { Dimensions } from 'react-native';
 
-var Orientation = require('react-native-orientation-listener');
-
 interface Screen {
     width: number;
     height: number;
@@ -17,9 +15,6 @@ let screen: Screen = {
 
 const setScreenSize = (currentOrientation:string): void => {
     const { height, width } = Dimensions.get('window');
-    const min = Math.min(height, width);
-    const max = Math.max(height, width);
-    const isLandscape = currentOrientation === 'LANDSCAPE';
     screen = {
         height: height,
         width: width,
