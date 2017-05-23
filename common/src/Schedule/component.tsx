@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import {
     Text,
     View,
-    ScrollView ,
+    ScrollView,
+    Dimensions,
 } from 'react-native';
 import { connect } from 'react-redux';
-// import { Orientation } from 'react-native-orientation-listener';
+import Orientation from "react-native-orientation";
+
 import ScreenService from '../../lib/utils/screenService';
 import Cache from '../../lib/utils/cache';
 import { ScheduleEntry } from '../../lib/msm/schedule';
@@ -15,9 +17,7 @@ import GlobalStyles from '../../styles';
 import { actions, selectors } from './state';
 
 import Day from './Day';
-import { specificOrientation } from "react-native-orientation";
 
-var Orientation = require('react-native-orientation-listener');
 
 function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     const style = {
@@ -88,7 +88,6 @@ interface ScheduleProps {
 }
 
 interface ScheduleState {
-    schedule: ScheduleEntry[];
     landscape: boolean;
 }
 
@@ -101,24 +100,17 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
 
     constructor(props: ScheduleProps) {
         super(props);
-        // console.warn(Orientation !== undefined);
-        Orientation.getOrientation(
-            (orientation:any, device:any) => {
-                console.warn(orientation.orientation);
-                this.state = {
-                    schedule: null,
-                    landscape: orientation === 'LANDSCAPE' ,
-                };
-                ScreenService.setScreenSize(orientation.orientation);
-            }
-        );
-        this._orientationDidChange = this._orientationDidChange.bind(this);
+        const dimens = Dimensions.get('window');
+        this.state = {
+            landscape: dimens.width > dimens.height,
+        };
     }
 
-    _orientationDidChange (data:any) {
+    _orientationDidChange (orientation: Orientation.orientation) {
+        console.log(JSON.stringify(orientation));
         // console.warn('_orientationChange'+data.orientation);
-        this.setState({ landscape: data.orientation === 'LANDSCAPE' });
-        ScreenService.setScreenSize(data.orientation);
+        this.setState({ landscape: orientation === 'LANDSCAPE' });
+        ScreenService.setScreenSize(orientation);
     }
 
     componentWillMount() {
@@ -127,34 +119,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
 
     componentDidMount() {
         this.props.load();
-        //The getOrientation method is async. It happens sometimes that
-        //you need the orientation at the moment the js starts running on device.
-        //getInitialOrientation returns directly because its a constant set at the
-        //beginning of the js code.
-        Orientation.getOrientation(
-            (data:any) => {
-                ScreenService.setScreenSize(data.orientation);
-                this.state = {
-                    schedule: null,
-                    landscape: data.orientation === 'LANDSCAPE' ,
-                };
-            }
-        );
-
-        Orientation.addListener(this._orientationDidChange);
-        // Orientation.addListener(ScreenService.setScreenSize);
     }
-
-    componentWillUnmount () {
-        Orientation.getOrientation(
-            (deviceOrientation:any, applicationOrientation:any, device:any, size:any) => {
-                console.log(deviceOrientation, applicationOrientation, device, size);
-            }
-        );
-        Orientation.removeOrientationListener(this._orientationDidChange);
-    }
-
-
 
     getScheduleForOrientation() {
         const { schedule } = this.props;
@@ -169,6 +134,14 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         }
     }
 
+    onLayout = (event: any) => {
+        this._orientationDidChange(
+            event.nativeEvent.layout.height > event.nativeEvent.layout.width
+            ? 'PORTRAIT'
+            : 'LANDSCAPE'
+        );
+    }
+
     render() {
         if (this.props.loading) {
             return <Text>Loading</Text>;
@@ -176,7 +149,9 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         // console.warn('re-render');
         const { schedule } = this.props;
         return (
-            <AdaptiveSchedule landscape={this.state.landscape} schedule={schedule} />
+            <View onLayout={this.onLayout} style={{ flex: 1 }}>
+              <AdaptiveSchedule landscape={this.state.landscape} schedule={schedule} />
+            </View>
             // this.getScheduleForOrientation()
         );
     }

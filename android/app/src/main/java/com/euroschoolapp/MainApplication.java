@@ -6,7 +6,6 @@ import com.facebook.react.ReactApplication;
 import com.walmartreact.ReactOrientationListener.*;
 import com.microsoft.codepush.react.CodePush;
 import com.bugsnag.BugsnagReactNative;
-import com.github.yamill.orientation.OrientationPackage;
 import im.shimo.react.cookie.CookieManagerPackage;
 import cl.json.RNSharePackage;
 import com.BV.LinearGradient.LinearGradientPackage;
@@ -48,7 +47,6 @@ public class MainApplication extends Application implements ReactApplication {
             new ReactOrientationListener(),
             new CodePush(BuildConfig.CODEPUSH_KEY, getApplicationContext(), BuildConfig.DEBUG),
             BugsnagReactNative.getPackage(),
-            new OrientationPackage(),
             new CookieManagerPackage(),
             new RNSharePackage(),
             new LinearGradientPackage(),

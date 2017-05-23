@@ -20,7 +20,7 @@ let screen: Screen = {
 
 const setScreenSize = (currentOrientation:string): void => {
     // setTimeout(function () {
-    console.warn('orient:'+currentOrientation);
+    // console.warn('orient:'+currentOrientation);
     // NativeModules.OrientationListener.getOrientation(console.warn());
     const { height, width } = Dimensions.get('window');
     const min = Math.min(height, width);
@@ -44,3 +44,4 @@ const setScreenSize = (currentOrientation:string): void => {
 export default {
     getScreenSize: (): Screen => screen,
     setScreenSize: (orientation:string)  => setScreenSize(orientation),
+};

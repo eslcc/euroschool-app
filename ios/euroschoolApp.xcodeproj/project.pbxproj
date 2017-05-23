@@ -47,7 +47,6 @@
 		8BEFB0A195604D57A113B16A /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 92D8D549B7D2441BB86FBFED /* libBVLinearGradient.a */; };
 		A602C903AEC9448985EF5ED3 /* libRNShare.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 48DCB019C31E41D99293D9CC /* libRNShare.a */; };
 		850F87A51F1E4ABA9520CB32 /* libRNCookieManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DAB7B8441BA4A5299AFB0E9 /* libRNCookieManager.a */; };
-		DF04324C069E420EA3D59608 /* libRCTOrientation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EA0613BEBF047B7AA842CD0 /* libRCTOrientation.a */; };
 		236CECE3966F49AE93958B2C /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CD13249482D6439BBFCA5635 /* rubicon-icon-font.ttf */; };
 		23A1EE97A01946C1B1FA0570 /* Rubik-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0AD0D30CC68D4A12B8E7AAB7 /* Rubik-Black.ttf */; };
 		AFEF98E0BD9241E9AC40207A /* Rubik-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D2DDB4C8B4245E19430E36E /* Rubik-BlackItalic.ttf */; };
@@ -62,7 +61,6 @@
 		083B5CC577A14BDFA3421392 /* libBugsnagReactNative.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B2DD55D870C4C01A6C5C969 /* libBugsnagReactNative.a */; };
 		0245EFFBCF4D4E6FAFAF14F7 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = D4966EC949604898B7D58678 /* libz.tbd */; };
 		7C6AF197B5E44ECBB5B5098A /* libCodePush.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83847A0EBF68487599914555 /* libCodePush.a */; };
-		1BA1C2463DD945F5A22ADDD2 /* libRCTOrientationListener.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EAD1081A5E34FE48FDDC882 /* libRCTOrientationListener.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,8 +296,6 @@
 		48DCB019C31E41D99293D9CC /* libRNShare.a */ = {isa = PBXFileReference; name = "libRNShare.a"; path = "libRNShare.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		3499F30D1E4248D69D3195AA /* RNCookieManager.xcodeproj */ = {isa = PBXFileReference; name = "RNCookieManager.xcodeproj"; path = "../node_modules/react-native-cookie/ios/RNCookieManager.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		8DAB7B8441BA4A5299AFB0E9 /* libRNCookieManager.a */ = {isa = PBXFileReference; name = "libRNCookieManager.a"; path = "libRNCookieManager.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		816D07D47F74443E82C78AF5 /* RCTOrientation.xcodeproj */ = {isa = PBXFileReference; name = "RCTOrientation.xcodeproj"; path = "../node_modules/react-native-orientation/iOS/RCTOrientation.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		0EA0613BEBF047B7AA842CD0 /* libRCTOrientation.a */ = {isa = PBXFileReference; name = "libRCTOrientation.a"; path = "libRCTOrientation.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		CD13249482D6439BBFCA5635 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; name = "rubicon-icon-font.ttf"; path = "../node_modules/@shoutem/ui/fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		0AD0D30CC68D4A12B8E7AAB7 /* Rubik-Black.ttf */ = {isa = PBXFileReference; name = "Rubik-Black.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-Black.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 		8D2DDB4C8B4245E19430E36E /* Rubik-BlackItalic.ttf */ = {isa = PBXFileReference; name = "Rubik-BlackItalic.ttf"; path = "../node_modules/@shoutem/ui/fonts/Rubik-BlackItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
@@ -316,8 +312,6 @@
 		D4966EC949604898B7D58678 /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 		94F335113F8942DF960FFACF /* CodePush.xcodeproj */ = {isa = PBXFileReference; name = "CodePush.xcodeproj"; path = "../node_modules/react-native-code-push/ios/CodePush.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		83847A0EBF68487599914555 /* libCodePush.a */ = {isa = PBXFileReference; name = "libCodePush.a"; path = "libCodePush.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
-		57E5CF2FED4043F393842EB4 /* RCTOrientationListener.xcodeproj */ = {isa = PBXFileReference; name = "RCTOrientationListener.xcodeproj"; path = "../node_modules/react-native-orientation-listener/RCTOrientationListener.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
-		7EAD1081A5E34FE48FDDC882 /* libRCTOrientationListener.a */ = {isa = PBXFileReference; name = "libRCTOrientationListener.a"; path = "libRCTOrientationListener.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,11 +342,9 @@
 				8BEFB0A195604D57A113B16A /* libBVLinearGradient.a in Frameworks */,
 				A602C903AEC9448985EF5ED3 /* libRNShare.a in Frameworks */,
 				850F87A51F1E4ABA9520CB32 /* libRNCookieManager.a in Frameworks */,
-				DF04324C069E420EA3D59608 /* libRCTOrientation.a in Frameworks */,
 				083B5CC577A14BDFA3421392 /* libBugsnagReactNative.a in Frameworks */,
 				0245EFFBCF4D4E6FAFAF14F7 /* libz.tbd in Frameworks */,
 				7C6AF197B5E44ECBB5B5098A /* libCodePush.a in Frameworks */,
-				1BA1C2463DD945F5A22ADDD2 /* libRCTOrientationListener.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -523,10 +515,8 @@
 				3B847D631E904A418A88C9FA /* BVLinearGradient.xcodeproj */,
 				549EAE454AF04F20B71EE630 /* RNShare.xcodeproj */,
 				3499F30D1E4248D69D3195AA /* RNCookieManager.xcodeproj */,
-				816D07D47F74443E82C78AF5 /* RCTOrientation.xcodeproj */,
 				F55C11A1F081426D83B2C19C /* BugsnagReactNative.xcodeproj */,
 				94F335113F8942DF960FFACF /* CodePush.xcodeproj */,
-				57E5CF2FED4043F393842EB4 /* RCTOrientationListener.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1111,20 +1101,11 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/euroschoolApp.app/euroschoolApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
-					"$(SRCROOT)\..\node_modules\react-native-orientation-listener",
 				);
 			};
 			name = Debug;
@@ -1145,20 +1126,11 @@
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/euroschoolApp.app/euroschoolApp";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
-					"$(SRCROOT)\..\node_modules\react-native-orientation-listener",
 				);
 			};
 			name = Release;
@@ -1182,7 +1154,6 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
-					"$(SRCROOT)\..\node_modules\react-native-orientation-listener",
 				);
 			};
 			name = Debug;
@@ -1205,7 +1176,6 @@
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
-					"$(SRCROOT)\..\node_modules\react-native-orientation-listener",
 				);
 			};
 			name = Release;
@@ -1235,20 +1205,11 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
-					"$(SRCROOT)\..\node_modules\react-native-orientation-listener",
 				);
 			};
 			name = Debug;
@@ -1278,20 +1239,11 @@
 				TVOS_DEPLOYMENT_TARGET = 9.2;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)\..\node_modules\bugsnag-react-native\cocoa/**",
 					"$(SRCROOT)\..\node_modules\react-native-code-push\ios\CodePush/**",
-					"$(SRCROOT)\..\node_modules\react-native-orientation-listener",
 				);
 			};
 			name = Release;
@@ -1316,14 +1268,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1348,14 +1292,6 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
-					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Release;
