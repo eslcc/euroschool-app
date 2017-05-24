@@ -3,8 +3,8 @@ import { Text, View } from 'react-native';
 const moment = require('moment');
 import { capitalize } from 'lodash';
 
+import { AppScreen } from  './component';
 import { PortraitCourse, LandscapeCourse } from './Course';
-import ScreenService from '../../lib/utils/screenService';
 import GlobalStyles from '../../styles';
 import { ScheduleEntry } from '../../lib/msm/schedule';
 
@@ -19,10 +19,10 @@ const days = [
 ];
 
 
-function getHours() {
-    return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
+function getHours(screen:AppScreen) {
+    return ['', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00'] //No 08:00, it doesn't fit
         .map((hour, index) => {
-            const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
+            const oneHourHeight = (screen.height - 64 - 8) / 10;
             const top = oneHourHeight * (index) - (oneHourHeight)/4;
             const style = {
                 top,
@@ -31,27 +31,27 @@ function getHours() {
         });
 }
 
-function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
-    if (landscape) {
-        return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} />;
+function getCourse(course: ScheduleEntry, day: number, screen: AppScreen) {
+    if (screen.landscape) {
+        return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} screen={screen} />;
     }
 
-    return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} />;
+    return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} screen={screen} />;
 }
 
-type DayProps = { schedule: ScheduleEntry[], day: number, landscape?: boolean };
+type DayProps = { schedule: ScheduleEntry[], day: number, screen: AppScreen };
 
-export default function Day({ schedule, day, landscape }: DayProps) {
+export default function Day({ schedule, day, screen }: DayProps) {
     const courses = schedule.filter(
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
     const dayName = days[day];
     const styles = {
         day: {
-            width: ScreenService.getScreenSize().width,
+            width: screen.width,
         },
         landscapeDay: {
-            width: ((ScreenService.getScreenSize().width) / 5),
+            width: (screen.width) / 5,
         },
     };
 
@@ -59,7 +59,7 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         GlobalStyles.schedule.day,
         (GlobalStyles.schedule as any)[dayName],
         styles.day,
-        landscape ? styles.landscapeDay : {},
+        screen.landscape ? styles.landscapeDay : {},
     ];
     return (
         <View style={GlobalStyles.schedule.dayColumn}>
@@ -67,8 +67,8 @@ export default function Day({ schedule, day, landscape }: DayProps) {
                 <Text>{capitalize(dayName)}</Text>
             </View>
             <View style={GlobalStyles.schedule.dayTruePositioning}>
-                {courses.map(course => getCourse(course, day, landscape))}
-                {landscape ? null : getHours()}
+                {courses.map(course => getCourse(course, day, screen))}
+                {screen.landscape ? null : getHours(screen)}
             </View>
         </View>
     );
