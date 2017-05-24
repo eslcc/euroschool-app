@@ -1,3 +1,4 @@
+import {Dimensions} from "react-native";
 const moment = require('moment');
 import { Dispatch } from 'react-redux';
 
@@ -7,7 +8,7 @@ const actionTypes = {
     LOAD_SCHEDULE: 'euroschool.LOAD_SCHEDULE',
     SCHEDULE_LOADED: 'euroschool.SCHEDULE_LOADED',
     REFRESH_SCHEDULE_IF_NEEDED: 'euroschool.REFRESH_SCHEDULE_IF_NEEDED',
-    ORIENT_SCHEDULE: '',
+    ORIENT_SCHEDULE: 'euroschool.ORIENT_SCHEDULE',
 };
 
 const initialState = {
@@ -22,6 +23,12 @@ const initialState = {
     start: -1,
     end: -1,
 };
+
+export interface AppScreen {
+    width: number;
+    height: number;
+    landscape: boolean;
+}
 
 const selectors = {
     schedule: (state: any) => state.schedule.schedule,
@@ -60,18 +67,18 @@ const refreshScheduleIfNeeded = (dispatch: Dispatch<any>, getState: () => any) =
     }
 };
 
-const orientSchedule = (event: any) => async (dispatch: Dispatch<any>) => {
+const orientSchedule = (event: any) => {
     console.warn('orient'+event);
     let height = event.nativeEvent.layout.height;
     let width = event.nativeEvent.layout.width;
-    dispatch({
+    return {
         type: actionTypes.ORIENT_SCHEDULE,
         screen: {
             height: height,
             width: width,
             landscape: height > width,
         }
-    });
+    };
 
 };
 
@@ -93,8 +100,15 @@ const reducer = (state = initialState, action: any) => {
                 end: action.end,
             };
         case actionTypes.ORIENT_SCHEDULE:
+            // const dimens = Dimensions.get('window');
             return {
-
+                ...state,
+                screen: action.screen,
+                // {
+                //     width: dimens.width,
+                //     height: dimens.height,
+                //     landscape: dimens.height > dimens.width,
+                // }
             };
 
         default:

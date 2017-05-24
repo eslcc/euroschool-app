@@ -13,7 +13,7 @@ import { ScheduleEntry } from '../../lib/msm/schedule';
 
 import GlobalStyles from '../../styles';
 
-import { actions, selectors } from './state';
+import {actions, AppScreen, selectors} from './state';
 
 import Day from './Day';
 
@@ -69,11 +69,7 @@ class AdaptiveSchedule extends  Component<AdaptiveScheduleProps, AdaptiveSchedul
     }
 }
 
-export interface AppScreen {
-    width: number;
-    height: number;
-    landscape: boolean;
-}
+
 
 // let screen: AppScreen = {
 //     width: -1,
@@ -151,7 +147,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
         }
         const { schedule } = this.props;
         return (
-            <View onLayout={this.onLayout} style={{ flex: 1 }}>
+            <View onLayout={this.props.orient} style={{ flex: 1 }}>
                 <AdaptiveSchedule screen={this.state.screen} schedule={schedule} />
             </View>
         );
@@ -165,7 +161,7 @@ const mapStateToProps = (state: any) => ({
 const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     load: () => dispatch(actions.loadSchedule(null, null)),
     refresh: () => dispatch(actions.refreshScheduleIfNeeded(null, null)) ,
-    orient: () => dispatch(actions.orientSchedule(null)),
+    orient: (event: any) => dispatch(actions.orientSchedule(event)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
 
