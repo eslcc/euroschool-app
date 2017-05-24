@@ -87,6 +87,8 @@ interface ScheduleProps {
     refresh: () => void;
     schedule: ScheduleEntry[];
     event : any;
+    orient: any;
+    screen: AppScreen;
 }
 interface ScheduleState {
     screen: AppScreen;
@@ -142,7 +144,7 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
                 ? 'PORTRAIT'
                 : 'LANDSCAPE'
         );
-    }
+    };
     render() {
         if (this.props.loading) {
             return <Text>Loading</Text>;
@@ -158,10 +160,12 @@ class Schedule extends Component<ScheduleProps, ScheduleState> {
 const mapStateToProps = (state: any) => ({
     schedule: selectors.schedule(state),
     loading: selectors.loading(state) ,
+    screen: selectors.orient(state),
 });
 const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     load: () => dispatch(actions.loadSchedule(null, null)),
     refresh: () => dispatch(actions.refreshScheduleIfNeeded(null, null)) ,
+    orient: () => dispatch(actions.orientSchedule(null)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Schedule);
 

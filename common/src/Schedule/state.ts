@@ -7,11 +7,17 @@ const actionTypes = {
     LOAD_SCHEDULE: 'euroschool.LOAD_SCHEDULE',
     SCHEDULE_LOADED: 'euroschool.SCHEDULE_LOADED',
     REFRESH_SCHEDULE_IF_NEEDED: 'euroschool.REFRESH_SCHEDULE_IF_NEEDED',
+    ORIENT_SCHEDULE: '',
 };
 
 const initialState = {
     schedule: (null as ScheduleEntry[]),
     scheduleLoading: true,
+    screen: {
+        width: -1,
+        height: -1,
+        landscape: false,
+    },
     lastUpdate: -1,
     start: -1,
     end: -1,
@@ -21,6 +27,7 @@ const selectors = {
     schedule: (state: any) => state.schedule.schedule,
     lastUpdate: (state: any) => state.schedule.lastUpdate,
     loading: (state: any) => state.schedule.scheduleLoading,
+    orient: (state: any) => state.schedule.screen,
 };
 
 const loadSchedule = (start: number = null, end: number = null) => async (dispatch: Dispatch<any>) => {
@@ -53,6 +60,21 @@ const refreshScheduleIfNeeded = (dispatch: Dispatch<any>, getState: () => any) =
     }
 };
 
+const orientSchedule = (event: any) => async (dispatch: Dispatch<any>) => {
+    console.warn('orient'+event);
+    let height = event.nativeEvent.layout.height;
+    let width = event.nativeEvent.layout.width;
+    dispatch({
+        type: actionTypes.ORIENT_SCHEDULE,
+        screen: {
+            height: height,
+            width: width,
+            landscape: height > width,
+        }
+    });
+
+};
+
 
 const reducer = (state = initialState, action: any) => {
     switch (action.type) {
@@ -70,6 +92,10 @@ const reducer = (state = initialState, action: any) => {
                 start: action.start,
                 end: action.end,
             };
+        case actionTypes.ORIENT_SCHEDULE:
+            return {
+
+            };
 
         default:
             return state;
@@ -79,6 +105,7 @@ const reducer = (state = initialState, action: any) => {
 const actions = {
     loadSchedule,
     refreshScheduleIfNeeded,
+    orientSchedule,
 };
 
 export {
