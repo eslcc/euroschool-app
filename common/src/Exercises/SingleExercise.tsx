@@ -3,6 +3,7 @@ import { View, Text, ScrollView } from 'react-native';
 import { connect, Dispatch } from 'react-redux';
 const moment = require('moment');
 const HTMLView = require('react-native-htmlview');
+const { RichMedia } = require('@shoutem/ui');
 
 import { ExerciseDetail } from '../../lib/msm/exercises';
 import { actions } from './state';
@@ -82,10 +83,8 @@ class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState>
                     </Text>
                     <Text style={styles.core.textMargin}>{details.status}</Text>
                     <Text style={styles.core.textMargin}>{this.renderGrade(details)}</Text>
-                    <Text>{details.generalComment.replace(/<\/?(.+?)>/g, '')}</Text>
-                    <View style={styles.exercises.comment}>
-                        <Text>{details.supportingComment.replace(/<\/?(.+?)>/g, '')}</Text>
-                    </View>
+                    <RichMedia body={details.generalComment} />
+                    <RichMedia body={details.supportingComment} />
                 </ScrollView>
             );
         }
