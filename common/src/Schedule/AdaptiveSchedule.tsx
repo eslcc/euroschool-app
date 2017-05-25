@@ -8,7 +8,8 @@ import {
 import { connect } from 'react-redux';
 import Orientation from "react-native-orientation";
 
-import ScreenService from '../../lib/utils/screenService';
+import store from '../Store'
+// import ScreenService from '../../lib/utils/screenService';
 import Cache from '../../lib/utils/cache';
 import { ScheduleEntry } from '../../lib/msm/schedule';
 
@@ -19,7 +20,7 @@ import { actions, selectors } from './state';
 import Day from './Day';
 
 
-function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
+/*function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     const style = {
         height: ScreenService.getScreenSize().height,
         width: ScreenService.getScreenSize().width ,
@@ -31,7 +32,7 @@ function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
                 pagingEnabled
                 style={[GlobalStyles.schedule.portraitScheduleContainer, style]}
             >
-                {/* tslint:disable-next-line jsx-no-multiline-js */}
+                {/!* tslint:disable-next-line jsx-no-multiline-js *!/}
                 {[1, 2, 3, 4, 5].map(num =>
                     <Day key={`${num}-portrait`} schedule={schedule} day={num} landscape={false}/>
                 )}
@@ -42,13 +43,13 @@ function PortraitSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
 function LandscapeSchedule({ schedule }: { schedule: ScheduleEntry[] }) {
     return (
         <View style={GlobalStyles.schedule.landscapeScheduleContainer}>
-            {/* tslint:disable-next-line jsx-no-multiline-js */}
+            {/!* tslint:disable-next-line jsx-no-multiline-js *!/}
             {[1, 2, 3, 4, 5].map(num =>
                 <Day key={`${num}-landscape`} schedule={schedule} day={num} landscape/>
             )}
         </View>
     );
-}
+}*/
 
 interface AdaptiveScheduleProps {
     schedule: ScheduleEntry[];
@@ -66,30 +67,41 @@ export default class AdaptiveSchedule extends  Component<AdaptiveScheduleProps, 
         this.state = {
             landscape: dimens.width > dimens.height,
         };
-        this.update = this.update.bind(this);
+        this.updateOrientLayout = this.updateOrientLayout.bind(this);
     }
 
-    getScheduleForOrientation() {
+    componentDidMount() {
+        console.warn('mounted');
+    }
+
+    /*getScheduleForOrientation() {
         const { schedule } = this.props;
         return this.state.landscape
             ? <LandscapeSchedule schedule={schedule} />
             : <PortraitSchedule  schedule={schedule} />;
-    }
+    }*/
 
-    update(event: any) {
-        console.warn(event);
-        this.setState({ landscape: event.nativeEvent.layout.height < event.nativeEvent.layout.width });
+    updateOrientLayout(event: any) {
+        console.warn(event.nativeEvent);
+        let landscape = event.nativeEvent.layout.height < event.nativeEvent.layout.width;
+        this.setState({ landscape: landscape });
     }
     render() {
-        console.warn(this.state.landscape);
-        let daySuffix = this.state.landscape ? '-landscape' : '-portrait';
+        const dimens = Dimensions.get('window');
+        const style = {
+            height: dimens.height,
+            width: dimens.width ,
+        };
+        let landscape = store.getState().screen.landscape;
+        console.warn(landscape);
+        let daySuffix = store.getState().screen.landscape ? '-landscape' : '-portrait';
         return(
-            <ScrollView horizontal pagingEnabled={!this.state.landscape} scrollEnabled={!this.state.landscape}
-                        onLayout={this.update} style={this.state.landscape ? GlobalStyles.schedule.landscapeScheduleContainer :
-                GlobalStyles.schedule.portraitScheduleContainer}>
+            <ScrollView horizontal pagingEnabled={!store.getState().screen.landscape}
+                        onLayout={this.updateOrientLayout} style={[store.getState().screen.landscape ? GlobalStyles.schedule.landscapeScheduleContainer :
+                GlobalStyles.schedule.portraitScheduleContainer, style]}>
                 {/* tslint:disable-next-line jsx-no-multiline-js */}
                 {[1, 2, 3, 4, 5].map(num =>
-                    <Day key={`${num}`+daySuffix} schedule={this.props.schedule} day={num} landscape={this.state.landscape}/>
+                    <Day key={`${num}`+daySuffix} schedule={this.props.schedule} day={num} />
                 )}
             </ScrollView>
         )

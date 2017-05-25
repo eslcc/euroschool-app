@@ -85,7 +85,7 @@ rimraf('build', () => {
                     .type('form')
                     .field('apiKey', 'a27061605ff410fe9b91bee65969ff85')
                     .field('codeBundleId', `Alpha-${release}`)
-                    .field('minifiedUrl', 'index.android.bundle')
+                    .field('minifiedUrl', '*index.android.bundle')
                     .field('overwrite', true)
                     .attach('minifiedFile', './release-build/index.android.bundle')
                     .attach('sourceMap', './release-build/index.android.bundle.map')

@@ -13,10 +13,6 @@ export default [
 
     types.dispatchButton('Purge Local State', () => ({ type: 'debug.RESET_STATE' })),
 
-    types.button('Open State Transition Explorer (BROKEN, DO NOT USE!)', () => {
-        throw new Error('What did I just say?');
-    }),
-
     types.header('Meta'),
     
     types.label('Version $$RELEASE$$'),

@@ -9,6 +9,7 @@ import gradientize from '../../lib/utils/gradientize';
 import GlobalStyles from '../../styles';
 import { ScheduleEntry } from '../../lib/msm/schedule';
 
+import store from '../Store'
 import ScreenService from '../../lib/utils/screenService';
 
 const { monday, tuesday, wednesday, thursday, friday, base } = GlobalStyles.colors.schedule;
@@ -22,7 +23,7 @@ const colors = [
 ];
 
 export function PortraitCourse({ course, day }: { course: ScheduleEntry, day: number }) {
-    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 54 - 16) / 9;
+    const oneHourHeight = (store.getState().screen.height - 64 - 54 - 16) / 9;
     const oneMinuteHeight = oneHourHeight / 60;
     // Get rid of the naughty Z at the end that messes with Moment
     const start = moment(course.start.substring(0, course.start.length - 1));
@@ -30,7 +31,7 @@ export function PortraitCourse({ course, day }: { course: ScheduleEntry, day: nu
     const style = [
         GlobalStyles.schedule.portraitCourse,
         {
-            width: ScreenService.getScreenSize().width - 16 - 80 - 8,
+            width: store.getState().screen.width - 16 - 80 - 8,
             top: ((start.hours() - 8) * oneHourHeight) + (start.minutes() * oneMinuteHeight),
             height: 45 * oneMinuteHeight,
             backgroundColor: colors[day - 1][period - 1],
@@ -51,9 +52,9 @@ export function PortraitCourse({ course, day }: { course: ScheduleEntry, day: nu
 }
 
 export function LandscapeCourse({ course, day }: { course: ScheduleEntry, day: number }) {
-    const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 11;
+    const oneHourHeight = (store.getState().screen.height - 64 - 8) / 11;
     const oneMinuteHeight = oneHourHeight / 60;
-    const oneDayWidth = (ScreenService.getScreenSize().width / 5);
+    const oneDayWidth = (store.getState().screen.width / 5);
     const start = moment(course.start.substring(0, course.start.length - 1));
     const period = parseInt(course.param_2.replace(/Period ([1-9]) {10}-/, '$1'), 10);
     const style = [

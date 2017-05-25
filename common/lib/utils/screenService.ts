@@ -6,11 +6,13 @@ import { Dimensions } from 'react-native';
 interface Screen {
     width: number;
     height: number;
+    landscape: boolean;
 }
 
 let screen: Screen = {
     width: -1,
     height: -1,
+    landscape: false,
 };
 
 const setScreenSize = (currentOrientation:string): void => {
@@ -18,6 +20,7 @@ const setScreenSize = (currentOrientation:string): void => {
     screen = {
         height: height,
         width: width,
+        landscape: width > height,
     };
 
 };
@@ -26,6 +29,6 @@ const setScreenSize = (currentOrientation:string): void => {
 
 
 export default {
-    getScreenSize: (): Screen => screen,
-    setScreenSize: (orientation:string)  => setScreenSize(orientation),
+    getScreenInfo: (): Screen => screen,
+    orient: (orientation:string)  => setScreenSize(orientation),
 };

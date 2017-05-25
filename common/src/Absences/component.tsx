@@ -2,6 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 import { View, FlatList, Text, RefreshControl } from 'react-native';
+const { Button } = require('@shoutem/ui');
 const TimeAgo = require('react-native-timeago');
 
 import styles from '../../styles';
@@ -44,10 +45,25 @@ export class Absences extends React.Component<AbsencesProps, {}> {
             );
         }
 
+        if (absences.length === 0) {
+            return (
+                <View style={styles.core.screenContainer}>
+                    <Text>No absences :(</Text>
+                    <Button onPress={load}><Text>REFRESH</Text></Button>
+                </View>
+            );
+        }
+
         return (
             <View style={styles.core.screenContainer}>
                 <Text>Last updated <TimeAgo time={lastUpdate} /></Text>
-                <Text>{typeof absences}</Text>
+                <FlatList
+                    data={absences}
+                    renderItem={row}
+                    onRefresh={bustCache}
+                    refreshing={loading}
+                />
+                <Button onPress={load}><Text>REFRESH</Text></Button>
             </View>
         );
         

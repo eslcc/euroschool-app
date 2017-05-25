@@ -4,7 +4,8 @@ const moment = require('moment');
 import { capitalize } from 'lodash';
 
 import { PortraitCourse, LandscapeCourse } from './Course';
-import ScreenService from '../../lib/utils/screenService';
+import store from '../Store'
+// import ScreenService from '../../lib/utils/screenService';
 import GlobalStyles from '../../styles';
 import { ScheduleEntry } from '../../lib/msm/schedule';
 
@@ -22,7 +23,7 @@ const days = [
 function getHours() {
     return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
         .map((hour, index) => {
-            const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
+            const oneHourHeight = (store.getState().screen.height - 64 - 8) / 10;
             const top = oneHourHeight * (index) - (oneHourHeight)/4;
             const style = {
                 top,
@@ -31,27 +32,27 @@ function getHours() {
         });
 }
 
-function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
-    if (landscape) {
+function getCourse(course: ScheduleEntry, day: number) {
+    if (store.getState().screen.landscape) {
         return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} />;
     }
 
     return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} />;
 }
 
-type DayProps = { schedule: ScheduleEntry[], day: number, landscape?: boolean };
+type DayProps = { schedule: ScheduleEntry[], day: number };
 
-export default function Day({ schedule, day, landscape }: DayProps) {
+export default function Day({ schedule, day }: DayProps) {
     const courses = schedule.filter(
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
     );
     const dayName = days[day];
     const styles = {
         day: {
-            width: ScreenService.getScreenSize().width,
+            width: store.getState().screen.width,
         },
         landscapeDay: {
-            width: ((ScreenService.getScreenSize().width) / 5),
+            width: ((store.getState().screen.width) / 5),
         },
     };
 
@@ -59,7 +60,7 @@ export default function Day({ schedule, day, landscape }: DayProps) {
         GlobalStyles.schedule.day,
         (GlobalStyles.schedule as any)[dayName],
         styles.day,
-        landscape ? styles.landscapeDay : {},
+        store.getState().screen.landscape ? styles.landscapeDay : {},
     ];
     return (
         <View style={GlobalStyles.schedule.dayColumn}>
@@ -67,8 +68,8 @@ export default function Day({ schedule, day, landscape }: DayProps) {
                 <Text>{capitalize(dayName)}</Text>
             </View>
             <View style={GlobalStyles.schedule.dayTruePositioning}>
-                {courses.map(course => getCourse(course, day, landscape))}
-                {landscape ? null : getHours()}
+                {courses.map(course => getCourse(course, day))}
+                {store.getState().screen.landscape ? null : getHours()}
             </View>
         </View>
     );
