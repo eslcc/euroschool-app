@@ -1,6 +1,5 @@
 // eslint-disable no-underscore-dangle
 // @flow
-import { AsyncStorage } from 'react-native';
 import { combineReducers, createStore as reduxCreateStore, applyMiddleware, compose } from 'redux';
 import ReduxThunk from 'redux-thunk';
 const { createNavigationEnabledStore, NavigationReducer } = require('@expo/ex-navigation');
