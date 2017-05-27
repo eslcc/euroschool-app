@@ -9,10 +9,11 @@ const {
 const { StyleProvider } = require('@shoutem/theme');
 import CodePush from "react-native-code-push";
 
-
 import store from './Store';
 import Router from './router';
 import theme from './theme';
+
+import LayoutHelper from './Helpers/Layout/component';
 
 const navigationContext = new NavigationContext({
     router: Router,
@@ -50,8 +51,9 @@ class Euroschool extends React.Component<void, AppState> {
             <Provider store={store}>
                 <NavigationProvider context={navigationContext}>
                     <StyleProvider style={theme}>
-                        <StackNavigation navigatorUID="index" initialRoute={Router.getRoute('startup')}/>
-                        {/*{this.state.downloaded && <Text>{this.state.downloaded} of {this.state.total}</Text>}*/}
+                        <LayoutHelper>
+                            <StackNavigation navigatorUID="index" initialRoute={Router.getRoute('startup')}/>
+                        </LayoutHelper>
                     </StyleProvider>
                 </NavigationProvider>
             </Provider>

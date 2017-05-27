@@ -33,7 +33,7 @@
 		"jsx-alignment": true,
 		"jsx-wrap-multiline": true,
 		"jsx-self-close": true,
-		"jsx-no-multiline-js": true,
+		"jsx-no-multiline-js": false,
 		"jsx-no-lambda": true,
 		"jsx-no-bind": true,
 		"jsx-curly-spacing": [true, "never"],

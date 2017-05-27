@@ -8,8 +8,9 @@ import { PortraitCourse, LandscapeCourse } from './Course';
 // import ScreenService from '../../lib/utils/screenService';
 import GlobalStyles from '../../styles';
 import { ScheduleEntry } from '../../lib/msm/schedule';
-import {actions, AppScreen, selectors} from "./state";
-import {connect} from "react-redux";
+import { actions, selectors } from "./state";
+import { Screen, selectors as LayoutSelectors, Orientation } from '../Helpers/Layout/state';
+import { connect } from "react-redux";
 
 
 const days = [
@@ -22,7 +23,7 @@ const days = [
 ];
 
 
-function getHours(screen: AppScreen) {
+function getHours(screen: Screen) {
     return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
         .map((hour, index) => {
             const oneHourHeight = (screen.height - 64 - 8) / 10;
@@ -34,25 +35,31 @@ function getHours(screen: AppScreen) {
         });
 }
 
-function getCourse(course: ScheduleEntry, day: number, screen:AppScreen) {
-    const { store } = this.context;
-    if (store.getState().screen.landscape) {
+function getCourse(course: ScheduleEntry, day: number, screen: Screen, orientation: Orientation) {
+    if (orientation === 'LANDSCAPE') {
         return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} screen={screen} />;
     }
 
     return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} screen={screen} />;
 }
 
-interface DayProps {
-    day: number, schedule: ScheduleEntry[], screen: any
-};
+interface DayReduxProps {
+    screen: any;
+    orientation: Orientation;
+    schedule: ScheduleEntry[];
+}
 
-class Day extends Component<DayProps, {}> {
-    // const { store } = this.context;
+interface DayPassedProps {
+    day: number;
+}
+
+abstract class Day extends Component<DayPassedProps & DayReduxProps, {}> {
     courses = this.props.schedule.filter(
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === this.props.day
     );
+    
     dayName = days[this.props.day];
+
     styles = {
         day: {
             width: this.props.screen.width,
@@ -69,9 +76,7 @@ class Day extends Component<DayProps, {}> {
         // this.props.screen.landscape ? this.styles.landscapeDay : {},
     ];
 
-    mainBody() {
-        return;
-    };
+    abstract mainBody(): JSX.Element;
 
     render() {
         return (
@@ -79,61 +84,59 @@ class Day extends Component<DayProps, {}> {
                 <View style={this.headingStyle}>
                     <Text>{capitalize(this.dayName)}</Text>
                 </View>
-                {/*<View style={GlobalStyles.schedule.dayTruePositioning}>
-                    {this.courses.map(course => getCourse(course, this.props.day))}
-                    {this.props.screen.landscape ? null : getHours()}
-                </View>*/}
-                { this.mainBody() }
+                {this.mainBody()}
             </View>
-        )
-    };
+        );
+    }
 }
 
-/*const mapStateToProps = (state: any) => ({
-    schedule: selectors.schedule(state),
-    screen: selectors.screen(state),
-});
-const mapDispatchToProps = (dispatch: (action: any) => void) => ({
-    // orient: (event: any) => dispatch(actions.orientSchedule(event)),
-});
-
-const mergeProps = (stateProps:Object, dispatchProps:Object, ownProps:Object) => {
-    return {
-        ...ownProps,
-        stateProps,
-        dispatchProps
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps, mergeProps)(Day as any);*/
-
-export class PortraitDay extends Day {
+class DumbPortraitDay extends Day {
     mainBody() {
         return (
             <View style={GlobalStyles.schedule.dayTruePositioning}>
                 {this.courses.map(course =>
-                    <PortraitCourse key={`${course.start}-portrait`} course={course} day={this.props.day} screen={this.props.screen} />
+                    <PortraitCourse
+                        key={`${course.start}-portrait`}
+                        course={course}
+                        day={this.props.day}
+                        screen={this.props.screen}
+                    />
                 )}
             </View>
-        )
+        );
     }
 }
 
-export class LandscapeDay extends Day {
+class DumbLandscapeDay extends Day {
 
     headingStyle:Object[] = [
         ...this.headingStyle,
-        this.styles.landscapeDay
+        this.styles.landscapeDay,
     ];
 
     mainBody() {
         return (
             <View style={GlobalStyles.schedule.dayTruePositioning}>
                 {this.courses.map(course =>
-                    <LandscapeCourse key={`${course.start}-portrait`} course={course} day={this.props.day} screen={this.props.screen}/>
+                    <LandscapeCourse
+                        key={`${course.start}-portrait`}
+                        course={course}
+                        day={this.props.day}
+                        screen={this.props.screen}
+                    />
                 )}
-                { getHours(this.props.screen) }
+                {getHours(this.props.screen)}
             </View>
-        )
+        );
     }
 }
+
+const mapStateToProps = (state: any) => ({
+    schedule: selectors.schedule(state),
+    screen: LayoutSelectors.screen(state),
+    orientation: LayoutSelectors.orientation(state),
+});
+
+export const PortraitDay = connect<DayReduxProps, {}, DayPassedProps>(mapStateToProps)(DumbPortraitDay);
+export const LandscapeDay = connect<DayReduxProps, {}, DayPassedProps>(mapStateToProps)(DumbLandscapeDay);
+

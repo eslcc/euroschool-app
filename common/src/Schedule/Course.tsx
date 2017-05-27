@@ -8,7 +8,7 @@ const moment = require('moment');
 import gradientize from '../../lib/utils/gradientize';
 import GlobalStyles from '../../styles';
 import { ScheduleEntry } from '../../lib/msm/schedule';
-import {AppScreen} from "./state";
+import { Screen } from '../Helpers/Layout/state';
 
 // import ScreenService from '../../lib/utils/screenService';
 
@@ -22,7 +22,7 @@ const colors = [
     gradientize(friday, base, 9),
 ];
 
-export function PortraitCourse({ course, day, screen }: { course: ScheduleEntry, day: number, screen:AppScreen }) {
+export function PortraitCourse({ course, day, screen }: { course: ScheduleEntry, day: number, screen: Screen }) {
     const oneHourHeight = (screen.height - 64 - 54 - 16) / 9;
     const oneMinuteHeight = oneHourHeight / 60;
     // Get rid of the naughty Z at the end that messes with Moment
@@ -51,7 +51,7 @@ export function PortraitCourse({ course, day, screen }: { course: ScheduleEntry,
     );
 }
 
-export function LandscapeCourse({ course, day, screen }: { course: ScheduleEntry, day: number, screen:AppScreen }) {
+export function LandscapeCourse({ course, day, screen }: { course: ScheduleEntry, day: number, screen: Screen }) {
     const oneHourHeight = (screen.height - 64 - 8) / 11;
     const oneMinuteHeight = oneHourHeight / 60;
     const oneDayWidth = (screen.width / 5);

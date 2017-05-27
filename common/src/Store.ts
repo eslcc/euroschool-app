@@ -7,13 +7,14 @@ const { createNavigationEnabledStore, NavigationReducer } = require('@expo/ex-na
 
 import middleware from '../lib/utils/middleware';
 
-import { reducer as schedule  } from './Schedule/state';
-import { reducer as login     } from './Login/state';
-import { reducer as canteen   } from './Canteen/state';
-import { reducer as settings  } from './Settings/state';
-import { reducer as exercises } from './Exercises/state';
-import   devtools               from './Devtools/reducer';
-import { reducer as absences  } from './Absences/state';
+import { reducer as schedule  }   from './Schedule/state';
+import { reducer as login     }   from './Login/state';
+import { reducer as canteen   }   from './Canteen/state';
+import { reducer as settings  }   from './Settings/state';
+import { reducer as exercises }   from './Exercises/state';
+import   devtools                 from './Devtools/reducer';
+import { reducer as absences  }   from './Absences/state';
+import { reducer as layout } from './Helpers/Layout/state';
 
 const mainReducer = combineReducers({
     schedule,
@@ -24,6 +25,7 @@ const mainReducer = combineReducers({
     devtools,
     absences,
     navigation: NavigationReducer,
+    layout,
 });
 
 function createStore() {
