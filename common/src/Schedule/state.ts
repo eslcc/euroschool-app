@@ -1,3 +1,4 @@
+import {Dimensions} from "react-native";
 const moment = require('moment');
 import { Dispatch } from 'react-redux';
 
@@ -33,7 +34,7 @@ const selectors = {
     schedule: (state: any) => state.schedule.schedule,
     lastUpdate: (state: any) => state.schedule.lastUpdate,
     loading: (state: any) => state.schedule.scheduleLoading,
-    orient: (state: any) => state.schedule.screen,
+    screen: (state: any) => state.schedule.screen,
 };
 
 const loadSchedule = (start: number = null, end: number = null) => async (dispatch: Dispatch<any>) => {
@@ -99,15 +100,15 @@ const reducer = (state = initialState, action: any) => {
                 end: action.end,
             };
         case actionTypes.ORIENT_SCHEDULE:
-             // const dimens = Dimensions.get('window');
+             const dimens = Dimensions.get('window');
              return {
                  ...state,
-                 screen: action.screen,
-                 // {
-                 //     width: dimens.width,
-                 //     height: dimens.height,
-                 //     landscape: dimens.height > dimens.width,
-                 // }
+                 screen: // action.screen,
+                 {
+                     width: dimens.width,
+                     height: dimens.height,
+                     landscape: dimens.height > dimens.width,
+                 }
              };
 
         default:
