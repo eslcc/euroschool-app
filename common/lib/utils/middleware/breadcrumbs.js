@@ -1,6 +1,4 @@
-import { Client } from 'bugsnag-react-native';
 import { pickBy } from 'lodash';
-import bugsnag from '../bugsnag';
 
 const FILTER = [
     'moneweb.username',
@@ -14,9 +12,6 @@ export default store => next => action => {
     if (filtered) {
         actionString = `[FILTERED (${filtered})]`;
     }
-    bugsnag.leaveBreadcrumb('Redux', {
-        action: actionString,
-        type: 'state',
-    })
+    // insert sentry here
     return next(action);
 };

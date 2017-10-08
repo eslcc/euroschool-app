@@ -29,8 +29,8 @@ const mainReducer = combineReducers({
 });
 
 function createStore() {
-    const composeEnhancers = (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-        ? (global as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
+    const composeEnhancers = global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+        ? global.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
         : compose;
 
     const enhancer = composeEnhancers(

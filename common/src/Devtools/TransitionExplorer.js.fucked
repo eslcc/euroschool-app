@@ -1,4 +1,4 @@
-import React, {
+import * as React, {
   Component,
 } from 'react';
 
@@ -14,7 +14,7 @@ import GlobalStyles from '../../styles';
 
 import { routes } from '../';
 
-export default class TransitionExplorer extends Component {
+export default class TransitionExplorer extends React.Component {
 
     static propTypes = {};
 

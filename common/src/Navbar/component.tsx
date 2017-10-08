@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 const { NavigationBar, Title } = require('@shoutem/ui');
 import { truncate, trim } from 'lodash';
 

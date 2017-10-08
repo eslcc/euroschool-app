@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 
 import { connect } from 'react-redux';
 import { View, FlatList, Text, RefreshControl } from 'react-native';

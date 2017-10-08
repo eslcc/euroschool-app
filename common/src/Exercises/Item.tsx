@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 const { View: ShoutemView, TouchableOpacity, Text, Tile, Title, Caption } = require('@shoutem/ui');
 const moment = require('moment');
@@ -39,8 +39,7 @@ interface ItemProps {
     style: number;
 }
 
-@withNavigation
-export default class Item extends React.Component<ItemProps, void> {
+class Item extends React.Component<ItemProps, void> {
     render() {
         const { navigator, item, style } = this.props;
         if (isNowMarker(item)) {
@@ -92,3 +91,5 @@ export default class Item extends React.Component<ItemProps, void> {
         }
     }
 }
+
+export default withNavigation(Item);

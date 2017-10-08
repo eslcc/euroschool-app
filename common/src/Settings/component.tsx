@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
     View,
 } from 'react-native';
@@ -12,7 +12,7 @@ interface SettingsProps {
     dispatch: (action: any) => void;
 }
 
-export class SettingsView extends Component<SettingsProps, {}> {
+export class SettingsView extends React.Component<SettingsProps, {}> {
 
     static route = {
         navigationBar: {

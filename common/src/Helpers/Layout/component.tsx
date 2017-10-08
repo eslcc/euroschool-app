@@ -26,4 +26,4 @@ const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     layoutChange: (screen: Screen) => dispatch(actions.layoutChange(screen)),
 });
 
-export default connect(null, mapDispatchToProps)(OrientationHelper);
+export default connect<void, Props, void>(null, mapDispatchToProps)(OrientationHelper);

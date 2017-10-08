@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 const { ListView, Button, Text } = require('@shoutem/ui');
 const autobind = require('autobind-decorator');
 import Router from './router';
@@ -14,7 +14,7 @@ interface MoreProps {
     navigator: any;
 }
 
-export default class MoreScreen extends Component<MoreProps, {}> {
+export default class MoreScreen extends React.Component<MoreProps, {}> {
     _goToItem: (item: any) => () => void;
 
     constructor(props: MoreProps) {
@@ -22,8 +22,7 @@ export default class MoreScreen extends Component<MoreProps, {}> {
         this._goToItem = (item: any) => () => this.props.navigator.push(Router.getRoute(item.route));
     }
 
-    @autobind
-    renderItem(item: any) {
+    renderItem = (item: any) => {
         return (
             <Button onPress={this._goToItem(item)}>
                 <Text>{item.label}</Text>

@@ -1,7 +1,7 @@
 // TODO this file is a den of bollocks rapidly in need of refactoring
 // TODO: two months later, still not refactored, wtf
 
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import { View } from 'react-native';
 const { ListView, TouchableOpacity, Text, Row } = require('@shoutem/ui');
 
@@ -19,7 +19,7 @@ function renderRow(row) {
     );
 }
 
-export class Exercises extends Component {
+export class Exercises extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

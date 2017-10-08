@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
     Text,
     View,
@@ -45,7 +45,7 @@ interface LoginComponentState {
     loginState: LoginState;
 }
 
-export class Login extends Component<LoginProps, LoginComponentState> {
+export class Login extends React.Component<LoginProps, LoginComponentState> {
     constructor(props: LoginProps) {
         super(props);
         this.state = {
@@ -55,8 +55,7 @@ export class Login extends Component<LoginProps, LoginComponentState> {
         };
     }
 
-    @autobind
-    onInputChange(key: string) {
+    onInputChange = (key: string) => {
         return (value: string) => {
             const state: any = Object.assign({}, this.state);
             state[key] = value;
@@ -64,8 +63,7 @@ export class Login extends Component<LoginProps, LoginComponentState> {
         };
     }
 
-    @autobind
-    login() {
+    login = () => {
         this.props.login(this.state.email, this.state.password);
     }
 

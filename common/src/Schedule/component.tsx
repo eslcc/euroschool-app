@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {
     Text,
     View,
@@ -16,7 +16,7 @@ import GlobalStyles from '../../styles';
 import { actions, AppScreen, selectors } from './state';
 import { selectors as layoutSelectors, Orientation, Screen } from '../Helpers/Layout/state';
 
-import Day, { LandscapeDay, PortraitDay } from './Day';
+import { LandscapeDay, PortraitDay } from './Day';
 
 
 function DumbPortraitSchedule({ screen }: { screen: Screen }) {
@@ -66,7 +66,7 @@ interface ScheduleProps {
     orientation: Orientation;
 }
 
-class Schedule extends Component<ScheduleProps, {}> {
+class Schedule extends React.Component<ScheduleProps, {}> {
     static route = {
         navigationBar: {
             visible: false,

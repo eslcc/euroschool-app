@@ -1,5 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import { Provider } from 'react-redux';
+const { Font } = require('expo');
 const {
     NavigationProvider,
     StackNavigation,
@@ -7,7 +8,6 @@ const {
 } = require ('@expo/ex-navigation');
 
 const { StyleProvider } = require('@shoutem/theme');
-import CodePush from "react-native-code-push";
 
 import store from './Store';
 import Router from './router';
@@ -21,8 +21,8 @@ const navigationContext = new NavigationContext({
 });
 
 interface AppState {
-    downloaded: number;
-    total: number;
+    downloaded?: number;
+    total?: number;
 }
 
 class Euroschool extends React.Component<void, AppState> {
@@ -34,16 +34,20 @@ class Euroschool extends React.Component<void, AppState> {
         };
     }
 
-    componentDidMount() {
-        CodePush.sync({
-            updateDialog: true,
-            installMode: CodePush.InstallMode.IMMEDIATE,
-        }, () => {}, progress => {
-            this.setState({
-                downloaded: progress.receivedBytes,
-                total: progress.totalBytes,
-            });
-        });
+    async componentWillMount() {
+        await Font.loadAsync({
+            'Rubik-Black': require('../../assets/fonts/Rubik-Black.ttf'),
+            'Rubik-BlackItalic': require('../../assets/fonts/Rubik-BlackItalic.ttf'),
+            'Rubik-Bold': require('../../assets/fonts/Rubik-Bold.ttf'),
+            'Rubik-BoldItalic': require('../../assets/fonts/Rubik-BoldItalic.ttf'),
+            'Rubik-Italic': require('../../assets/fonts/Rubik-Italic.ttf'),
+            'Rubik-Light': require('../../assets/fonts/Rubik-Light.ttf'),
+            'Rubik-LightItalic': require('../../assets/fonts/Rubik-LightItalic.ttf'),
+            'Rubik-Medium': require('../../assets/fonts/Rubik-Medium.ttf'),
+            'Rubik-MediumItalic': require('../../assets/fonts/Rubik-MediumItalic.ttf'),
+            'Rubik-Regular': require('../../assets/fonts/Rubik-Regular.ttf'),
+            'rubicon-icon-font': require('../../assets/fonts/rubicon-icon-font.ttf'),
+          });
     }
 
     render() {

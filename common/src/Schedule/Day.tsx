@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
 const moment = require('moment');
 import { capitalize } from 'lodash';
@@ -53,7 +53,7 @@ interface DayPassedProps {
     day: number;
 }
 
-abstract class Day extends Component<DayPassedProps & DayReduxProps, {}> {
+abstract class Day extends React.Component<DayPassedProps & DayReduxProps, {}> {
     courses = this.props.schedule.filter(
         thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === this.props.day
     );

@@ -33,7 +33,7 @@ const selectors = {
 const layoutChange = (newScreen: Screen) => ({
     type: actionTypes.layoutChange,
     screen: newScreen,
-    orientation: screen.height > screen.width
+    orientation: newScreen.height > newScreen.width
                 ? 'PORTRAIT'
                 : 'LANDSCAPE',
 });
