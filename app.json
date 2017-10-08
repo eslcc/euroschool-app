@@ -3,7 +3,7 @@
     "name": "euroschool-app",
     "description": "An empty new project",
     "slug": "euroschool-app",
-    "privacy": "public",
+    "privacy": "unlisted",
     "sdkVersion": "21.0.0",
     "version": "1.0.0",
     "orientation": "portrait",
