@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect, Dispatch } from 'react-redux';
 const { ListView, View } = require('@shoutem/ui');
 import { ScheduleEntry } from '../../lib/msm/schedule';
@@ -22,7 +22,7 @@ interface ExercisesState {
 
 const componentStyles = Object.assign({}, styles.core.screenContainer, styles.exercises.mainView);
 
-export class Exercises extends Component<ExercisesProps, ExercisesState> {
+export class Exercises extends React.Component<ExercisesProps, ExercisesState> {
     constructor(props: ExercisesProps) {
         super(props);
         this.state = {

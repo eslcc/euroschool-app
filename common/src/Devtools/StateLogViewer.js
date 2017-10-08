@@ -1,7 +1,4 @@
-import React, {
-  Component,
-  PropTypes,
-} from 'react';
+import * as React from 'react';
 
 import {
   ListView,
@@ -16,14 +13,7 @@ import { connect } from 'react-redux';
 
 import GlobalStyles from '../../styles';
 
-export class StateLogViewer extends Component {
-
-    static propTypes = {
-        log: PropTypes.arrayOf(PropTypes.shape({
-            action: PropTypes.object,
-            diff: PropTypes.object,
-        })),
-    }
+export class StateLogViewer extends React.Component {
 
     constructor(props) {
         super(props);

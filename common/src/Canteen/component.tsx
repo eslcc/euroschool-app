@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Text, ScrollView, RefreshControl } from 'react-native';
 const { Button, Heading, View } = require('@shoutem/ui');
@@ -28,7 +28,7 @@ interface BalanceProps {
 }
 
 
-class Balance extends Component<BalanceProps, void> {
+class Balance extends React.Component<BalanceProps, void> {
     componentDidMount() {
         this.props.loadBalance();
     }
@@ -82,4 +82,4 @@ const mapDispatchToProps = (dispatch: (action: any) => void) => ({
     refreshBalanceInBackground: () => dispatch(actions.refreshBalanceInBackground()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Balance);
+export default connect(mapStateToProps, mapDispatchToProps)(Balance as any);

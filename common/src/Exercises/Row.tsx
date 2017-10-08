@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import * as React from 'react';
 import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 const { GridRow, Tile, Title, Caption } = require('@shoutem/ui');
 const moment = require('moment');

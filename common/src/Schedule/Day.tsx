@@ -1,12 +1,16 @@
-import React from 'react';
+import * as React from 'react';
 import { Text, View } from 'react-native';
 const moment = require('moment');
 import { capitalize } from 'lodash';
 
 import { PortraitCourse, LandscapeCourse } from './Course';
-import ScreenService from '../../lib/utils/screenService';
+
+// import ScreenService from '../../lib/utils/screenService';
 import GlobalStyles from '../../styles';
 import { ScheduleEntry } from '../../lib/msm/schedule';
+import { actions, selectors } from "./state";
+import { Screen, selectors as LayoutSelectors, Orientation } from '../Helpers/Layout/state';
+import { connect } from "react-redux";
 
 
 const days = [
@@ -19,10 +23,10 @@ const days = [
 ];
 
 
-function getHours() {
+function getHours(screen: Screen) {
     return ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00']
         .map((hour, index) => {
-            const oneHourHeight = (ScreenService.getScreenSize().height - 64 - 8) / 10;
+            const oneHourHeight = (screen.height - 64 - 8) / 10;
             const top = oneHourHeight * (index) - (oneHourHeight)/4;
             const style = {
                 top,
@@ -31,45 +35,108 @@ function getHours() {
         });
 }
 
-function getCourse(course: ScheduleEntry, day: number, landscape?: boolean) {
-    if (landscape) {
-        return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} />;
+function getCourse(course: ScheduleEntry, day: number, screen: Screen, orientation: Orientation) {
+    if (orientation === 'LANDSCAPE') {
+        return <LandscapeCourse key={`${course.start}-lanscape`} course={course} day={day} screen={screen} />;
     }
 
-    return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} />;
+    return <PortraitCourse key={`${course.start}-portrait`} course={course} day={day} screen={screen} />;
 }
 
-type DayProps = { schedule: ScheduleEntry[], day: number, landscape?: boolean };
+interface DayReduxProps {
+    screen: any;
+    orientation: Orientation;
+    schedule: ScheduleEntry[];
+}
 
-export default function Day({ schedule, day, landscape }: DayProps) {
-    const courses = schedule.filter(
-        thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === day
+interface DayPassedProps {
+    day: number;
+}
+
+abstract class Day extends React.Component<DayPassedProps & DayReduxProps, {}> {
+    courses = this.props.schedule.filter(
+        thing => thing.entry_type === 'Course' && moment(thing.start).isoWeekday() === this.props.day
     );
-    const dayName = days[day];
-    const styles = {
+    
+    dayName = days[this.props.day];
+
+    styles = {
         day: {
-            width: ScreenService.getScreenSize().width,
+            width: this.props.screen.width,
         },
         landscapeDay: {
-            width: ((ScreenService.getScreenSize().width) / 5),
+            width: ((this.props.screen.width) / 5),
         },
     };
 
-    const headingStyle = [
+    headingStyle = [
         GlobalStyles.schedule.day,
-        (GlobalStyles.schedule as any)[dayName],
-        styles.day,
-        landscape ? styles.landscapeDay : {},
+        (GlobalStyles.schedule as any)[this.dayName],
+        this.styles.day,
+        // this.props.screen.landscape ? this.styles.landscapeDay : {},
     ];
-    return (
-        <View style={GlobalStyles.schedule.dayColumn}>
-            <View style={headingStyle}>
-                <Text>{capitalize(dayName)}</Text>
+
+    abstract mainBody(): JSX.Element;
+
+    render() {
+        return (
+            <View style={GlobalStyles.schedule.dayColumn}>
+                <View style={this.headingStyle}>
+                    <Text>{capitalize(this.dayName)}</Text>
+                </View>
+                {this.mainBody()}
             </View>
-            <View style={GlobalStyles.schedule.dayTruePositioning}>
-                {courses.map(course => getCourse(course, day, landscape))}
-                {landscape ? null : getHours()}
-            </View>
-        </View>
-    );
+        );
+    }
 }
+
+class DumbPortraitDay extends Day {
+    mainBody() {
+        return (
+            <View style={GlobalStyles.schedule.dayTruePositioning}>
+                {this.courses.map(course =>
+                    <PortraitCourse
+                        key={`${course.start}-portrait`}
+                        course={course}
+                        day={this.props.day}
+                        screen={this.props.screen}
+                    />
+                )}
+            </View>
+        );
+    }
+}
+
+class DumbLandscapeDay extends Day {
+
+    headingStyle:Object[] = [
+        ...this.headingStyle,
+        this.styles.landscapeDay,
+    ];
+
+    mainBody() {
+        return (
+            <View style={GlobalStyles.schedule.dayTruePositioning}>
+                {this.courses.map(course =>
+                    <LandscapeCourse
+                        key={`${course.start}-portrait`}
+                        course={course}
+                        day={this.props.day}
+                        screen={this.props.screen}
+                    />
+                )}
+                {getHours(this.props.screen)}
+            </View>
+        );
+    }
+}
+
+const mapStateToProps = (state: any) => ({
+    schedule: selectors.schedule(state),
+    screen: LayoutSelectors.screen(state),
+    orientation: LayoutSelectors.orientation(state),
+});
+
+export const PortraitDay = connect<DayReduxProps, {}, DayPassedProps>(mapStateToProps)(DumbPortraitDay);
+export const LandscapeDay = connect<DayReduxProps, {}, DayPassedProps>(mapStateToProps)(DumbLandscapeDay);
+

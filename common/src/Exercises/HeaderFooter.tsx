@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react';
 const { Text, TouchableOpacity } = require('@shoutem/ui');
 import { connect, Dispatch } from 'react-redux';
 const moment = require('moment');

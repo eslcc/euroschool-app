@@ -1,8 +1,7 @@
-import React, { Component, PropTypes } from 'react';
+import * as React from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { connect, Dispatch } from 'react-redux';
 const moment = require('moment');
-const HTMLView = require('react-native-htmlview');
 const { RichMedia } = require('@shoutem/ui');
 
 import { ExerciseDetail } from '../../lib/msm/exercises';
@@ -19,7 +18,7 @@ interface SingleExerciseState {
 
 }
 
-class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState> {
+class SingleExercise extends React.Component<SingleExerciseProps, SingleExerciseState> {
     static route = {
         navigationBar: {
             title: (params: any) => {
@@ -52,18 +51,6 @@ class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState>
         return details.grade;
     }
 
-    renderSupportingComment(details: ExerciseDetail) {
-        if (details.supportingComment.length > 0) {
-            return (
-                <HTMLView
-                    value={details.supportingComment}
-                    style={styles.exercises.comment}
-                />
-            );
-        }
-        return <View />;
-    }
-
     render() {
         const { details: allDetails } = this.props;
         const item = this.props.route.params.item;
@@ -89,7 +76,7 @@ class SingleExercise extends Component<SingleExerciseProps, SingleExerciseState>
             );
         }
         return (
-            <View style={styles.coreview}>
+            <View>
                 <Text>{JSON.stringify(item)}</Text>
             </View>
         );
