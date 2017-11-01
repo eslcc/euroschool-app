@@ -11,8 +11,8 @@
     "@shoutem/ui": "^0.21.3",
     "@types/cheerio": "^0.22.2",
     "@types/lodash": "^4.14.77",
-    "@types/react": "^16.0.10",
-    "@types/react-native": "^0.49.0",
+    "@types/react": "^16.0.19",
+    "@types/react-native": "^0.49.5",
     "@types/react-native-orientation": "^5.0.1",
     "@types/react-redux": "^5.0.10",
     "autobind-decorator": "^2.1.0",
@@ -30,6 +30,7 @@
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "remote-redux-devtools": "^0.5.12",
+    "tslib": "^1.8.0",
     "typescript": "^2.5.3",
     "uuid-js": "^0.7.5"
   }
